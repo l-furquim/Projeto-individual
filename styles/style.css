@@ -215,3 +215,89 @@ body {
 .conteudoModal h1 {
   font-size: 20px;
 }
+
+#graficoAcertos {
+  background-color: #07140f;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.bodyDashboard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerDashboard{
+  background-color:#113124;
+  display: flex;
+  width: 90%;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.conteudoDashboard {
+  height: 100%;
+  width: 100%;
+  color: #e7c274;
+}
+.conteudoDashboard h1 {
+  font-size: 50px;
+  margin-left: 20px;
+}
+
+.kpis{
+  position: absolute;
+  right: 400px;
+  top: 150px;
+  font-size: 20px;
+}
+
+.acertos {
+  background-color:#07140f;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.frequencia {
+  background-color:#07140f;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.containerGraficoAcertos{
+  display: flex;  
+  justify-items: center;
+  width: 40%;
+  flex-direction: column;
+  margin-left: 40px;
+}
+.containerGraficoVezesJogadas{
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  margin-left: 40px;
+  margin-top: 40px;
+}
+
+#graficoVezesJogadas {
+  background-color: #07140f;
+  color: #e7c274;
+  border-radius: 10px;
+  padding: 10px;
+}
+.containerGraficoErrosAcertos{
+  display: flex;  
+  justify-items: center;
+  width: 40%;
+  position: absolute;
+  right: 200px;
+  bottom: 0;
+}
+#graficoErrosAcertos{
+  background-color: #07140f;
+  color: #e7c274;
+  border-radius: 10px;
+  padding: 10px;
+}

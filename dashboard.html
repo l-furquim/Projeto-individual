@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./dashboard.js"></script>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="bodyDashboard">
+    <div class="containerDashboard">
+      <div class="conteudoDashboard">
+          
+        <h1> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+            Lucas
+          </h1>
+
+          <div class="containerGraficoAcertos">
+            <canvas id="graficoAcertos"></canvas>
+          </div>
+
+          <div class="containerGraficoVezesJogadas">
+            <canvas id="graficoVezesJogadas"></canvas>
+          </div>  
+
+          <div class="containerGraficoErrosAcertos">
+              <canvas id="graficoErrosAcertos"></canvas>
+          </div>
+
+          <div class="kpis">
+              <p class="acertos"> <span>81</span> Acertos totais</p>
+              <p class="frequencia">Frequência de acertos: <span>67%</span></p>
+          </div>
+
+      </div>
+    </div>
+</body>
+</html>
+
+<script>
+  new Chart(graficoAcertos, {
+  type: 'line',
+    data: {
+    labels: ["01","02","03","04", "05", "06", "07", "08", "09", "10"],
+    datasets: [{
+      label: 'Acertos',
+      data: [2, 3, 5, 10, 15,10 ,5 , 19, 20, 30],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: {
+        title: {
+            display: true,        
+            text: 'Acertos nos ultimos 10 dias',
+            color: '#e7c274',       
+            font: {
+                size: 24,          
+                weight: 'bold',   
+            },
+            padding: {
+                top: 10,          
+                bottom: 30       
+            },
+            align: 'center'       
+        }
+    },
+    scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        color: '#e7c274'
+      }
+    },
+    x: {
+        ticks: {
+            color: '#e7c274'
+        }
+    }
+  }
+  }
+});
+
+new Chart(graficoVezesJogadas, {
+        type: 'bar',
+    data: {
+      labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+      datasets: [{
+        label: 'Temperatura média',
+        data: [22, 24, 27, 23, 20, 18],
+        borderWidth: 1
+      }, {
+        label: 'Umidade média',
+        data: [90,89,93,87,88,82],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        plugins: {
+            title: {
+                display: true,         
+                text: 'Vezes jogadas',
+                color: '#e7c274',       
+                font: {
+                    size: 24,         
+                    weight: 'bold',  
+                },
+                padding: {
+                    top: 10,          
+                    bottom: 30         
+                },
+                align: 'center'      
+            }
+        },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#e7c274'
+          }
+        },
+        x: {
+            ticks: {
+                color: '#e7c274'
+            }
+        }
+      }
+    }
+  });
+
+  new Chart(graficoErrosAcertos, {
+  type: 'line',
+    data: {
+    labels: ["01","02","03","04", "05", "06", "07", "08", "09", "10"],
+    datasets: [{
+      label: 'Acertos',
+      data: [2, 3, 5, 10, 15,10 ,5 , 19, 20, 30],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    plugins: {
+        title: {
+            display: true,        
+            text: 'Acertos nos ultimos 10 dias',
+            color: '#e7c274',       
+            font: {
+                size: 24,          
+                weight: 'bold',   
+            },
+            padding: {
+                top: 10,          
+                bottom: 30       
+            },
+            align: 'center'       
+        }
+    },
+    scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        color: '#e7c274'
+      }
+    },
+    x: {
+        ticks: {
+            color: '#e7c274'
+        }
+    }
+  }
+  }
+});
+
+
+</script>
