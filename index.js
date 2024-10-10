@@ -1,6 +1,21 @@
 const express = require('express');
 const mysql = require('mysql2'); 
 
+function abrirSobre () {
+  containerModal.style.display = "block";
+}
+
+function fecharModal(){
+  containerModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == containerModal) {
+      containerModal.style.display = "none";
+  }
+}
+
+
 const start = async() =>{
   const app = express();
 
@@ -28,6 +43,3 @@ const start = async() =>{
 } 
 start();
 
-function cadastrar(){
-  
-}

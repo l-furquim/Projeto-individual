@@ -1,7 +1,7 @@
 body {
   background-image: url("../assets/imagemEldenRing.jpg");
   background-size:cover;
-  height: 40vmax;
+  height: 100%;
   font-family: "fontElden", sans-serif;
 }
 
@@ -90,4 +90,128 @@ body {
   display: flex;
   margin-left: 12%;
   color:#e7c274;
+  font-size: 16px;
+}
+.containerLogin {
+  background-color: #113124;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 15%;
+  color: #e7c274;
+  padding-bottom: 40px;
+}
+.camposLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.bodyLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camposLogin h1 {
+  margin-bottom: 10px;
+}
+
+.camposLogin label{
+  font-size: 20px;
+}
+.camposLogin input {
+  width: 200px;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1f775a;
+  color:white;
+  outline: none;
+  font-size: 15px;
+}
+.camposLogin button {
+  width: 150px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: none;
+  height: 30px;
+  align-self: center;
+  justify-self: center;
+  color: #e7c274;
+  background-color: #1f775a;
+}
+
+.camposLogin button:hover{
+  transition: 10ms;
+  cursor: pointer;
+  background-color: #07140f;
+}
+.direcCadastro{
+  display: flex;
+  justify-self: start;
+  color:#e7c274;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+.verSobre {
+  margin-top: 20px;
+  background-color: #113124;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 30px;
+  right: 60px; 
+  padding: 20px;
+  border-radius: 60%;
+}
+
+.botaoSobre {
+  background-color: #113124;
+  color: white;
+  border: none;
+}
+.botaoSobre:hover {
+  cursor: pointer;
+}
+.containerModal {
+  display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.conteudoModal {
+  background-color: #fff;
+  margin: 15% auto; 
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%; 
+  max-width: 500px;
+  color: #000;
+}
+.fecharModal {
+  color: #000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.fecharModal:hover,
+.fecharModal:focus {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+.conteudoModal a {  
+  color: inherit;
+}
+.conteudoModal h1 {
+  font-size: 20px;
 }
