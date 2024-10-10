@@ -1,17 +1,16 @@
 const express = require('express');
 const mysql = require('mysql2'); 
 
-const app = express();
+const start = async() =>{
+  const app = express();
 
-let db = mysql.createPool({
-      host: 'localhost',
-      user: 'usuario',
-      password: 'usuario@2003',
-      database: 'projeto-individual',
-      port: 3306
-}).promise();
-
-
+/*   let db = mysql.createPool({
+        host: 'localhost',
+        user: 'usuario',
+        password: 'usuario@2003',
+        database: 'projeto-individual',
+        port: 3306
+  }).promise(); */
 
   app.use((request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*');
@@ -26,3 +25,9 @@ let db = mysql.createPool({
   app.get("/", (_, response)=> {
     return response.json("GET REALIZADO")
   });
+} 
+start();
+
+function cadastrar(){
+  
+}

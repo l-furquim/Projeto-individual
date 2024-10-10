@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <script src="./index.js"></script>
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="bodyCadastro">
+    <div class="containerCadastro">
+        <h1>Insira suas informações de cadastro:</h1>
+        <div class="camposCadastro">
+
+            <a href="#" class="direcLogin">
+              <p>ja possui uma conta?</p>
+            </a>
+
+         <div class="linhaNomeEmail">
+          <label for="inputNome">nome: </label>  
+          <input type="text" name="inputNome" id="inputNome">
+        <label for="inputEmail">email: </label>
+          <input type="text" id="inputEmail" name="inputEmail">
+         </div>
+
+         <div class="linhaSenhaConfSenha">
+          <label for="inputSenha">senha: </label>
+          <input type="password" id="inputSenha" name="inputSenha">
+        <label for="inputConfirmarSenha">confirmar a senha: </label>
+          <input type="password" id="inputConfirmarSenha" name="inputConfirmarSenha">
+         </div>
+            <button onclick="cadastrar()">Enviar</button>
+        </div>
+    </div>
+</body>
+</html>

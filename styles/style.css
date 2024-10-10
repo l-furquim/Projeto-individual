@@ -1,0 +1,93 @@
+body {
+  background-image: url("../assets/imagemEldenRing.jpg");
+  background-size:cover;
+  height: 40vmax;
+  font-family: "fontElden", sans-serif;
+}
+
+@font-face {
+  font-family: 'fontElden';
+  src: url('../assets/MantiniaRegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.bodyCadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerCadastro {
+  background-color: #113124;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 15%;
+  color: #e7c274;
+  padding-bottom: 40px;
+}
+.camposCadastro h1 {
+  margin-bottom: 10px;
+}
+
+.camposCadastro label{
+  font-size: 20px;
+}
+.camposCadastro input {
+  width: 200px;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+  background-color: #1f775a;
+  color:white;
+  outline: none;
+  font-size: 15px;
+}
+
+.camposCadastro{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.camposCadastro button {
+  width: 150px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: none;
+  height: 30px;
+  align-self: center;
+  justify-self: center;
+  color: #e7c274;
+  background-color: #1f775a;
+}
+
+.camposCadastro button:hover{
+  transition: 10ms;
+  cursor: pointer;
+  background-color: #07140f;
+}
+
+.linhaNomeEmail {
+  display: flex;
+  flex-direction: row;
+  gap:15px;
+}
+.linhaSenhaConfSenha {
+  display: flex;
+  flex-direction: row ;
+  gap:15px;
+}
+
+.direcLogin {
+  display: flex;
+  margin-left: 12%;
+  color:#e7c274;
+}
