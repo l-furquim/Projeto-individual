@@ -1,45 +1,52 @@
 const express = require('express');
 const mysql = require('mysql2'); 
 
-function abrirSobre () {
-  containerModal.style.display = "block";
-}
-
-function fecharModal(){
-  containerModal.style.display = "none";
-}
-
-window.onclick = function(event) {
-  if (event.target == containerModal) {
-      containerModal.style.display = "none";
-  }
-}
-
 
 const start = async() =>{
   const app = express();
 
-/*   let db = mysql.createPool({
+let db = mysql.createPool({
         host: 'localhost',
-        user: 'usuario',
-        password: 'usuario@2003',
-        database: 'projeto-individual',
+        user: 'root',
+        password: 'root',
+        database: 'projeto_individual',
         port: 3306
-  }).promise(); */
+  }).promise();
 
   app.use((request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*');
-    response.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept');
+    response.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept'),
+    response.header('Access-Control-Allow-Origin', '*'); // Permitir qualquer origem
+    response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Métodos permitidos
+    response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
   });
+
+  app.use(express.json());
+
 
   app.listen(3300, () => {
     console.log(`API iniciada na porta 3300`);
   });
 
-  app.get("/", (_, response)=> {
-    return response.json("GET REALIZADO")
+  app.get("/", async(_, response,)=>{
+    await db.execute("CREATE TABLE teste (id INT PRIMARY KEY, nome VARCHAR(45), idade INT)");
+
+    return response.json("Criacao realizada com sucesso!");
   });
+
+  app.post("/user/register", async(request, response)=> {
+    const {id, nome, idade} = request.body;
+
+     if(id && nome && idade){
+      await db.execute("INSERT INTO teste VALUES (?, ?,?)", 
+        [id, nome,idade]
+      );
+      
+      return response.json("Inserção realizada com sucesso !");
+    };
+  });
+
 } 
 start();
 
