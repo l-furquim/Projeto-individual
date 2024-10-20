@@ -1,9 +1,18 @@
 body {
   background-image: url("../assets/imagemEldenRing.jpg");
   background-size:cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
   height: 100%;
   font-family: "fontElden", sans-serif;
 }
+
+
+body.troca-fundo {
+  background-color: #113124;
+  transition: background-color 1s ease;
+}
+
 
 @font-face {
   font-family: 'fontElden';
@@ -15,8 +24,14 @@ body {
 
 .bodyCadastro {
   display: flex;
+}
+.divCadastro{
+  display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
 }
 
 .containerCadastro {
@@ -218,68 +233,67 @@ body {
 
 #graficoAcertos {
   background-color: #07140f;
+  color: #e7c274;
   border-radius: 10px;
   padding: 10px;
+  align-items: center;
 }
 
 .bodyDashboard{
   display: flex;
+  width: 100%;
+  height: 100%;
   justify-content: center;
-  align-items: center;
 }
 
 .containerDashboard{
+  margin-top: 6%;
   background-color:#113124;
   display: flex;
-  width: 90%;
+  width: 85%;
   border-radius: 10px;
   padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .conteudoDashboard {
   height: 100%;
   width: 100%;
   color: #e7c274;
+  justify-content: center;
+  align-items: center;
 }
 .conteudoDashboard h1 {
   font-size: 50px;
   margin-left: 20px;
 }
 
-.kpis{
-  position: absolute;
-  right: 400px;
-  top: 150px;
+.linhaPrimaria{
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
   font-size: 20px;
+}
+.containerLinhaPrimaria {
+  width: 40%;
 }
 
 .acertos {
   background-color:#07140f;
   padding: 20px;
   border-radius: 10px;
+  align-self: flex-end;
 }
 
 .frequencia {
   background-color:#07140f;
   padding: 20px;
   border-radius: 10px;
+  align-self: flex-end;
 }
 
-
-.containerGraficoAcertos{
-  display: flex;  
-  justify-items: center;
-  width: 40%;
-  flex-direction: column;
-  margin-left: 40px;
-}
-.containerGraficoVezesJogadas{
-  display: flex;
-  justify-content: center;
-  width: 40%;
-  margin-left: 40px;
-  margin-top: 40px;
-}
 
 #graficoVezesJogadas {
   background-color: #07140f;
@@ -287,17 +301,164 @@ body {
   border-radius: 10px;
   padding: 10px;
 }
-.containerGraficoErrosAcertos{
-  display: flex;  
-  justify-items: center;
-  width: 40%;
-  position: absolute;
-  right: 200px;
-  bottom: 0;
-}
+
 #graficoErrosAcertos{
   background-color: #07140f;
   color: #e7c274;
   border-radius: 10px;
   padding: 10px;
+  align-items: center;
+}
+
+.linhaSecundaria {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+}
+.containerGraficoLinhaSecundaria{
+  width: 40%;
+}
+
+
+.containerNav {
+  display: flex;
+  width: 100%;
+  height: 6%;
+  color:#e7c274;
+  flex-direction: row;
+  background-color:#113124;
+  padding: 10px;
+  justify-content: center;
+}
+
+.conteudoNav {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  font-size: 25px;
+  gap: 20px;
+  margin-right: 80px;
+  align-items: center;
+}
+.conteudoNav a {
+  text-decoration: none;
+  color: #e7c274;
+}
+
+.containerInicio {
+  background-color: #113124;
+  color: aliceblue;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin-top: 50%;
+  border-radius: 10px;
+  opacity: 1;
+  padding: 30px;
+  padding-bottom: 10%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bodyInicio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.conteudoInicio{
+  color: #e7c274;
+}
+.conteudoInicio h1 {
+  font-size: 40px;
+}
+
+
+.conteudoDescricao {
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+  gap: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+}
+.conteudoHistoria {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+}
+
+
+.conteudoDescricao img {
+  width: 60%;
+  height: 70%;
+  border-radius: 5px;
+}
+
+.containerRedirect {
+  background-color:transparent;
+  background-image: url("../assets/paisagem2.jpg");
+  background-size: cover;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  border-radius: 10px;
+  opacity: 1;
+  padding: 30px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color: #e7c274;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.5));
+}
+.containerRedirect h1{
+  background-color: #c19d53;
+  color: #ffffff;
+  padding: 10px;
+}
+hr{
+  background-color: #ffffff;
+  width: 100%;
+}
+.conteudoRedirect{
+  margin-top: 10px;
+  font-size: 20px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.conteudoRedirect button {
+  margin-top: 20%;
+  width: 30%;
+  padding: 15px;
+  background-color: #113124;
+  color: #e7c274;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.conteudoRedirect p{
+  background-color: #c19d53;
+  color: #ffffff;
+}
+
+.conteudoRedirect button:hover {
+    background-color: #1f775a;
+    cursor: pointer;
+    transition: 1000ms;
 }

@@ -16,9 +16,7 @@ let db = mysql.createPool({
   app.use((request, response, next) => {
     response.header('Access-Control-Allow-Origin', '*');
     response.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept'),
-    response.header('Access-Control-Allow-Origin', '*'); // Permitir qualquer origem
-    response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Métodos permitidos
-    response.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    
     next();
   });
 

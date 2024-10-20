@@ -10,6 +10,14 @@
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body class="bodyDashboard">
+
+  <div class="containerNav">
+    <div class="conteudoNav">
+          <a href="./index.html">Início</a>
+          <a class="selected" href="./dashboard.html">Dashboard</a>
+    </div>
+  </div>
+
     <div class="containerDashboard">
       <div class="conteudoDashboard">
           
@@ -21,23 +29,26 @@
             Lucas
           </h1>
 
-          <div class="containerGraficoAcertos">
-            <canvas id="graficoAcertos"></canvas>
+          <div class="linhaPrimaria">
+            
+            <div class="containerGraficoLinhaPrimaria">
+              <canvas id="graficoAcertos"></canvas>
+            </div>
+            
+            <p class="acertos"> <span>81</span> Acertos totais</p>
+            <p class="frequencia">Frequência de acertos: <span>67%</span></p>
+          
           </div>
+          
+          <div class="linhaSecundaria">
+            <div class="containerGraficoLinhaSecundaria">
+              <canvas id="graficoVezesJogadas"></canvas>
 
-          <div class="containerGraficoVezesJogadas">
-            <canvas id="graficoVezesJogadas"></canvas>
-          </div>  
-
-          <div class="containerGraficoErrosAcertos">
               <canvas id="graficoErrosAcertos"></canvas>
+            </div>
           </div>
 
-          <div class="kpis">
-              <p class="acertos"> <span>81</span> Acertos totais</p>
-              <p class="frequencia">Frequência de acertos: <span>67%</span></p>
-          </div>
-
+          
       </div>
     </div>
 </body>
