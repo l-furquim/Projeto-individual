@@ -342,7 +342,7 @@ body.troca-fundo {
   flex-direction: row;
   justify-content: end;
   font-size: 25px;
-  gap: 20px;
+  gap: 40px;
   margin-right: 80px;
   align-items: center;
 }
