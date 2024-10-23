@@ -1,0 +1,73 @@
+.bodyHome{
+  background-image: url("../../assets/1356787.jpeg");
+  background-position: center;
+  background-size:cover;
+}
+
+
+.container-inicio {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.container-post {
+  padding: 10px;
+  flex-direction: column;
+  margin-top: 10%;
+  align-items: center;
+  display: flex;
+  width: 60%;
+  height: 100%;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+.cabecalho-post{
+  width: 100%;
+  display: flex;
+  color: #e7c274;;
+  margin-left: 30px;
+  align-self: self-start;
+}
+
+#nome-post {
+  font-size: 25px;
+  font-weight: bolder;
+  color: #e7c274;
+}
+
+#usuario-post {
+  font-size: 20px;
+  font-weight: 300;
+  margin-left:20%;
+  margin-top: 1;
+}
+
+.desc-post{
+  width: 70%;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #d8d8d8;
+}
+
+.botao-contribuir {
+  background-color: #1e1e1e;
+  color: #e7c274;
+  border: none;
+  margin-top: 5%;
+  height: 60px;
+  width: 220px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+.botao-contribuir:hover {
+  background-color: #292828;
+  transition: 10ms;
+  cursor:pointer;
+}
+
+.container-post hr {
+  width: 80%;
+}
