@@ -176,15 +176,15 @@ body.troca-fundo {
   margin-bottom: 12px;
 }
 .verSobre {
-  margin-top: 20px;
   background-color: #182b23;
   display: flex;
-  justify-content: flex-end;
-  position: absolute;
-  bottom: 30px;
-  right: 60px; 
+  margin-top: auto;
   padding: 20px;
   border-radius: 60%;
+  width: 2%;
+  height: 1%;
+  align-items: center;
+  justify-content: center;
 }
 
 .botaoSobre {
@@ -346,6 +346,22 @@ body.troca-fundo {
   margin-right: 80px;
   align-items: center;
 }
+
+.conteudoNav button {
+  display: flex;
+  background: transparent;
+  border:none;
+  align-items: center;
+  color: #e7c274;
+  font-size: 20px;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.conteudoNav button:hover{
+  cursor: pointer;
+}
+
 .conteudoNav a {
   text-decoration: none;
   color: #e7c274;
@@ -503,4 +519,29 @@ hr{
     color: #c19d53;
     cursor: pointer;
     transition: 1000ms;
+}
+.modal-usuario {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  right: 60px;
+  justify-content: center;
+  width: 10%;
+  height: 10%;
+  background-color:#182b23;
+  transform: translateX(-50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 140px;
+  text-decoration: none;
+  color: #EEF7E6;
+  align-items: center;
+  border-radius: 10px;
+}
+.conteudo-usuario {
+  display: flex;
+  align-items: center;
+  background-color:transparent;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
 }
