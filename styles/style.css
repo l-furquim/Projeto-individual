@@ -383,7 +383,7 @@ body.troca-fundo {
 }
 
 
-.conteudoDescricao {
+.container-historia {
   width: 100%;
   display: flex;
   font-size: 20px;
@@ -401,11 +401,45 @@ body.troca-fundo {
 }
 
 
-.conteudoDescricao img {
+.container-historia img {
   width: 60%;
   height: 70%;
   border-radius: 5px;
 }
+
+.container-proposito {
+  margin-top: 70px;
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+  gap: 50px;
+  padding-left: 10px;
+  align-self: center;
+  padding-right: 10px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.container-proposito h1 {
+  display: flex;
+  align-self: center;
+}
+
+
+.conteudo-proposito {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  gap: 110px;
+}
+.conteudo-proposito img {
+  width: 100%;
+  border-radius: 5px;
+}
+
 
 .containerRedirect {
   background-color:transparent;
