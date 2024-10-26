@@ -12,13 +12,51 @@
     <div class="conteudoNav">
       <a href="../inicio/inicio.html">Início</a>
       <a href="../dashboard/dashboard.html">Dashboard</a>
-      <a href="../cadastro/cadastro.html">Cadastrar</a>
-      <a href="../login/login.html">Login</a>
+    </div>
+  </div>
+  <div id="containerNovoPost" class="container-novo-post">
+    <div id="conteudoNovoPost" class="conteudo-novo-post">
+      <span>
+        <button id="botaoFecharModal" onclick="fecharModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+          </svg>
+        </button>
+      </span>
+      
+      <h1>Insira as informações abaixo</h1>
+        <form class="formulario-novo-post">
+          <label for="inputConteudo">Conteudo do post</label>
+          <input id="inputConteudo" type="text">
+
+          <label for="selectTipo">Selecione o tipo do post</label>
+          <select id="selectTipo">
+            <option value="ajuda">Ajuda</option>
+            <option value="celebrar">Celebrar</option>
+          </select>
+
+          <label>Insira uma tag de filtro</label>
+          <div class="container-selects">
+            <select id="categoriaFiltro" name="categoriaFiltro">
+              <option selected value="#">Selecione uma categoria</option>
+              <option value="bosses">Bosses</option>
+              <option value="armas">Armas</option>
+            </select>
+            
+            <select id="opcoes" name="opcoes">
+              <option value="">Selecione uma opção</option>
+            </select>
+          </div>
+          
+          <button>postar</button>
+        </form>
     </div>
   </div>
   <div class="container-inicio">
-    <button class="botao-contribuir">Contribuir</button>
+    <button class="botao-contribuir" onclick="criarPost()">Contribuir</button>
     
+
     <div class="container-post">
       <div class="cabecalho-post">
         <h1 id="nome-post">Dica para enfrentar o Godrick</h1>
@@ -81,5 +119,7 @@
     </div>
     
   </div>
+  
+<script src="./home.js"></script>
 </body>
 </html>
