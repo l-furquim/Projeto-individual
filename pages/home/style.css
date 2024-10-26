@@ -166,3 +166,31 @@
   align-items: center;
   gap: 20px;
 }
+
+.container-tag {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  margin-left: 60px;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+.container-tag p{
+  margin: 0;
+  color: #ffff;
+  background-color:#c19d53;
+  padding: 3px;
+  border-radius: 1px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.interacoes-post {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: end;
+  align-items: center;
+  margin-right: 160px;
+  color: #e7c274;
+  gap: 30px;
+}
