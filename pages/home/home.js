@@ -69,3 +69,12 @@ function fecharModal() {
 
   container.style.display = "none";
 }
+
+function mostrarComentarios(botao){
+  console.log(botao);
+  
+  const container = botao.closest('div').querySelector('#containerComentario');
+
+  container.style.display = "flex"; 
+   
+}
