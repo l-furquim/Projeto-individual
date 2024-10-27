@@ -63,7 +63,7 @@
   border-radius: 10px;
 }
 .botao-contribuir:hover {
-  background-color: #292828;
+  background-color:#182b23;
   transition: 10ms;
   cursor:pointer;
 }
@@ -131,9 +131,12 @@
 
 .formulario-novo-post input {
   width: 60%;
-  height: 30%;
+  height: 40%;
   border-radius: 5px;
   border: none;
+  background-color: #182b23;
+  color:#d8d8d8 ;
+  font-size: 15px;
 }
 
 .formulario-novo-post button {
@@ -143,16 +146,25 @@
   font-size: 15px;
   border-radius: 10px;
   border:none;
+  background-color: #182b23;
   justify-content: center;
   align-items: center;
+  color: #e7c274;
+  padding: 10px;
+  font-weight: bold;
 } 
 .formulario-novo-post button:hover {
   cursor: pointer;
 }
 
 .formulario-novo-post select {
-  height: 30%;
-  width: 35%;
+  height: 40%;
+  width: 40%;
+  background-color: #182b23;
+  color: #d8d8d8;
+  padding: 5px;
+  border:none;
+  border-radius: 5px;
 }
 .formulario-novo-post select:hover {
   cursor: pointer;

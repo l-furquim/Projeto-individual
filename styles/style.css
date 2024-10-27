@@ -330,9 +330,10 @@ body.troca-fundo {
   height: 30%;
   color:#e7c274;
   flex-direction: row;
-  background-color:#182b23;
+  background-color:#1e1e1e;
   padding: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .conteudoNav {
@@ -349,13 +350,14 @@ body.troca-fundo {
 
 .conteudoNav button {
   display: flex;
-  background: transparent;
   border:none;
   align-items: center;
   color: #e7c274;
   font-size: 20px;
-  margin-bottom: 10px;
   gap: 10px;
+  background-color: #182b23;
+  padding: 13px;
+  border-radius: 5px;
 }
 
 .conteudoNav button:hover{
@@ -365,6 +367,9 @@ body.troca-fundo {
 .conteudoNav a {
   text-decoration: none;
   color: #e7c274;
+  background-color: #182b23;
+  padding: 13px;
+  border-radius: 5px;
 }
 
 .containerInicio {
