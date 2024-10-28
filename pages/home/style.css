@@ -131,7 +131,16 @@
   justify-content: center;
   align-items: center;
 }
-
+.formulario-novo-post p {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+ ul{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+ }
 .formulario-novo-post input {
   width: 60%;
   height: 40%;
@@ -205,10 +214,25 @@
   margin-top: 20px;
   justify-content: end;
   align-items: center;
-  margin-right: 160px;
   color: #e7c274;
   gap: 30px;
+  margin-right: 30px;
 }
+#containerSecaoComentario{
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  margin-left: 30px;
+}
+#containerSecaoComentario button {
+  background-color: transparent;
+  color: #e7c274;
+  border:none;
+}
+#containerSecaoComentario button:hover{
+  cursor: pointer;
+}
+
 #containerSeta {
   margin-top: 10px;
 }
@@ -220,10 +244,14 @@
   display: none;
   margin-top: 80px;
   width: 80%;
-  height: 100%;
+  height: max-content;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  flex-direction: column;
+}
+hr {
+  width: 100%;
 }
 .conteudo-comentario{
   display: flex;
@@ -235,24 +263,40 @@
   border-radius: 10px;
   padding: 10px;
   color: #e7c274;
+  font-size: 18px;
+}
+.conteudo-comentario h1 {
+  display: flex;
+  font-size: 21px;
+  text-align: start;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.conteudo-comentario p{
+  color: #d8d8d8;
 }
 
 .container-botao-comentario button {
   background-color: transparent;
   border:none;
   color: #e7c274;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-right: 5px;
 }
 .container-botao-comentario button:hover{
   cursor: pointer;
 }
-.container-secao-comentario {
+
+
+.icone-abrir-comentarios {
   display: flex;
-  flex-direction: column;
   width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
 }
+
 .container-comentar {
   display: none;
   margin-top: 80px;
@@ -298,11 +342,46 @@
   box-shadow: none;
   border:none;
 }
+.conteudo-comentar textarea{
+    display: flex;
+    width: 450px;
+    height: 200px;
+    background-color: #182b23;
+    border:none;
+    color:#d8d8d8;
+    resize: none;
+    font-size: 15px;
+    outline: none;
+}
 
+#botaoAdicionarComentario{
+  background-color:#182b23;
+  color: #e7c274;
+  border: none;
+  margin-top: 5%;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+#botaoAdicionarComentario:hover{
+  cursor: pointer;
+}
 .container-inicio li {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+.container-botao-like button {
+  background-color: transparent;
+  color: #e7c274;
+  border:none;
+}
+.container-botao-like button:hover{
+  cursor: pointer;
+}
+.botao-mostrar-comentarios {
+  
 }

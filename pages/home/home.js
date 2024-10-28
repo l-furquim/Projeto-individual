@@ -1,3 +1,5 @@
+var vezesClicadas = 0;
+
 const opcoesPorCategoria = {
   bosses: [
     { value: "margit-o-pressagio-fel", text: "Margit, o Presságio Fell" },
@@ -70,17 +72,32 @@ function fecharModal() {
   container.style.display = "none";
 }
 
-function mostrarComentarios(botao){
-  console.log(botao);
+function mostrarComentarios(botao, id){
   
-  const container = botao.closest('div').querySelector('#containerComentario');
+  const contribuicao = botao.closest('li');
+  const containerComentario = contribuicao.querySelector('#containerComentario');
+  console.log(contribuicao, containerComentario)
+  if(vezesClicadas == 1){
+    vezesClicadas = 0;
+    containerComentario.style.display = "none";
+    botaoMostrarComentario.innerHTML  = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
+    </svg>`
+  }else{
+  if(containerComentario){
+    vezesClicadas++;
+    containerComentario.style.display = "flex";
+    botaoMostrarComentario.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-down" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
+    </svg>`
+  }
+  }
 
-  container.style.display = "flex"; 
-   
 }
 
 function comentar(botao, id){
-  console.log(id);
   console.log(id.closest('div').querySelector("#containerSecaoComentario"));
   const container = containerComentar;
 
@@ -91,4 +108,18 @@ function fecharModalComentar(){
   const container = containerComentar;
 
   container.style.display = "none";
+}
+function adicionarComentario(conteudo){
+  botaoAdicionarComentario.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+        </svg>
+        `
+  console.log(conteudo);
+  setTimeout(()=> {
+    botaoAdicionarComentario.innerHTML = `Comentario realizado com sucesso ! `
+    setTimeout(()=> {
+      location.reload();
+    }, 1000);
+  }, 1500);
 }
