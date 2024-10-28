@@ -44,25 +44,31 @@ function cadastrar(req, res) {
       res.status(201).json(resultado);
     });
   }else{
-    re.status(401).json({mensagem: "Por favor insira um conteudo valido"});
+    res.status(401).json({mensagem: "Por favor insira um conteudo valido"});
   }
 
 }
 
-function listarPorTipo(req, res){
+function listarPorTipo(req, res) {
   const tipo = req.params.tipo;
 
-  if(tipo.length > 0){
-    contribuicaoModel.buscarPorTipo(tipo).then((resposta) => {
-      res.status(201).json(resposta);
-    });
-  }else{
-    res.status(401).json({
-      mensagem: "Por favor insira um tipo valido"
-    });
-  };
+  if (!tipo || tipo.length === 0) {
+      return res.status(400).json({ mensagem: "Por favor insira um tipo válido" });
+  }
 
+  contribuicaoModel.buscarPorTipo(tipo)
+      .then((resposta) => {
+          if (resposta.length === 0) {
+              return res.status(404).json({ mensagem: "Nenhuma contribuição encontrada para este tipo" });
+          }
+          res.status(200).json(resposta);
+      })
+      .catch((error) => {
+          console.error(error);
+          res.status(500).json({ mensagem: "Erro ao buscar contribuições por tipo." });
+      });
 }
+
 module.exports = {
   buscarPorId,
   cadastrar,

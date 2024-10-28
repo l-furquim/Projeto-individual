@@ -43,8 +43,29 @@ function cadastrar(conteudo, tipo, fkMaculado) {
   return database.executar(instrucaoSql);
 }
 
+function buscarPorTipo(tipo) {
+  const instrucaoSql = `
+                       SELECT c.conteudo AS conteudo_contribuicao, 
+                        c.contribuicaoFechada, 
+                        c.votos, 
+                        c.tipo AS tipo_contribuicao,
+                        r.conteudo AS conteudo_resposta, 
+                        r.contribuicaoFechada AS contribuicaoFechada_resposta, 
+                        r.votos AS votos_resposta, 
+                        r.tipo AS tipo_resposta, 
+                        m.nome
+                        FROM Contribuicao AS c
+                        LEFT JOIN Contribuicao AS r ON c.fkResposta = r.idContribuicao
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado
+                        WHERE c.tipo = ${tipo};
+                      `
+  return database.executar(instrucaoSql);
+} 
+
+
 module.exports = {
   buscarPorId, 
   cadastrar, 
-  listar 
+  listar,
+  buscarPorTipo
 };
