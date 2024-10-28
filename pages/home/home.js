@@ -78,3 +78,17 @@ function mostrarComentarios(botao){
   container.style.display = "flex"; 
    
 }
+
+function comentar(botao, id){
+  console.log(id);
+  console.log(id.closest('div').querySelector("#containerSecaoComentario"));
+  const container = containerComentar;
+
+  container.style.display = "flex";
+}
+
+function fecharModalComentar(){
+  const container = containerComentar;
+
+  container.style.display = "none";
+}

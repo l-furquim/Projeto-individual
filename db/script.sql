@@ -27,10 +27,13 @@ votos INT,
 tipo VARCHAR(20),
 fkMaculado INT,
 fkResposta INT,
+tag VARCHAR(45),
+conteudoTag VARCHAR(45),
 CONSTRAINT FOREIGN KEY (fkMaculado) REFERENCES Maculado(idMaculado),
 CONSTRAINT FOREIGN KEY (fkResposta) REFERENCES Contribuicao(idContribuicao),
-CONSTRAINT PRIMARY KEY(idContribuicao, fkMaculado)
-CONSTRAINT CHECK (tipo IN ("Ajuda", "Celebrar", "Dica"))
+CONSTRAINT PRIMARY KEY(idContribuicao, fkMaculado),
+CONSTRAINT CHECK (tipo IN ("Ajuda", "Celebrar", "Dica")),
+CONSTRAINT CHECK (tag IN ("Bosses", "Armas"))
 );
 
 -- Criação da tabela de votos (likes)

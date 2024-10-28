@@ -212,6 +212,9 @@
 #containerSeta {
   margin-top: 10px;
 }
+#botaoFecharModalComentar:hover{
+  cursor: pointer;
+}
 
 .container-comentario {
   display: none;
@@ -233,16 +236,73 @@
   padding: 10px;
   color: #e7c274;
 }
-.container-comentar button {
+
+.container-botao-comentario button {
   background-color: transparent;
   border:none;
   color: #e7c274;
-  margin-bottom:10px;
 }
-.container-comentar button:hover{
+.container-botao-comentario button:hover{
   cursor: pointer;
 }
 .container-secao-comentario {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.container-comentar {
+  display: none;
+  margin-top: 80px;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  overflow:hidden;
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo com transparência */
+}
+.conteudo-comentar{
+  display: flex;
+  width: 60%;
+  height: 70%;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  background-color:#1e1e1e;
+  color: #e7c274;
+  border-radius: 10px;
+  margin-bottom: 120px;
+  font-size: 22px;
+  padding: 0 10px 30px 10px;
+}
+.conteudo-comentar span {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  margin-top: 10px;
+  margin-right: 10px;
+  color: #e7c274;
+}
+.conteudo-comentar button {
+  background-color: transparent;
+  color: #e7c274;
+  box-shadow: none;
+  border:none;
+}
+
+.container-inicio li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
