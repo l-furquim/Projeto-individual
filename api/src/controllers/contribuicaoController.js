@@ -26,7 +26,8 @@ function cadastrar(req, res) {
   const conteudo = req.body.conteudo;
   const tipo = req.body.tipo;
   const fkMaculado = req.body.fkMaculado;
-
+  const tag = req.body.tag;
+  const conteudoTag = req.body.conteudoTag;
   /* contribuicaoModel.buscarPorCnpj(cnpj).then((resultado) => {
     if (resultado.length > 0) {
       res
@@ -40,7 +41,7 @@ function cadastrar(req, res) {
   }); */
 
   if(conteudo.length > 0){
-    contribuicaoModel.cadastrar(conteudo, tipo, fkMaculado).then((resultado)=> {
+    contribuicaoModel.cadastrar(conteudo, tipo, fkMaculado, tag, conteudoTag).then((resultado)=> {
       res.status(201).json(resultado);
     });
   }else{

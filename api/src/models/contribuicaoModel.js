@@ -13,6 +13,8 @@ function listar() {
                         c.contribuicaoFechada, 
                         c.votos, 
                         c.tipo AS tipo_contribuicao,
+                        c.tag,
+                        c.conteudoTag
                         r.conteudo AS conteudo_resposta, 
                         r.contribuicaoFechada AS contribuicaoFechada_resposta, 
                         r.votos AS votos_resposta, 
@@ -32,13 +34,13 @@ function listar() {
   return database.executar(instrucaoSql);
 } */
 
-function cadastrar(conteudo, tipo, fkMaculado) {
+function cadastrar(conteudo, tipo, fkMaculado, tag, conteudoTag) {
   const data = new Date();
   const dataFormatada = sqlUtils.formatarDataParaSQL(data);
 
   var instrucaoSql = 
-    `INSERT INTO Contribuicao (conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkResposta) VALUES 
-    ('${conteudo}','${dataFormatada}',${false},'${0}', '${tipo}','${fkMaculado}', ${null})`;
+    `INSERT INTO Contribuicao (conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkResposta, tag, conteudoTag) VALUES 
+    ('${conteudo}','${dataFormatada}',${false},'${0}', '${tipo}','${fkMaculado}', ${null}, '${tag}', '${conteudoTag}')`;
 
   return database.executar(instrucaoSql);
 }
@@ -49,6 +51,8 @@ function buscarPorTipo(tipo) {
                         c.contribuicaoFechada, 
                         c.votos, 
                         c.tipo AS tipo_contribuicao,
+                        c.tag,
+                        c.conteudoTag
                         r.conteudo AS conteudo_resposta, 
                         r.contribuicaoFechada AS contribuicaoFechada_resposta, 
                         r.votos AS votos_resposta, 

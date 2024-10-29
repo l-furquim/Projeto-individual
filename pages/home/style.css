@@ -373,6 +373,7 @@ hr {
   align-items: center;
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 .container-botao-like button {
   background-color: transparent;
@@ -381,7 +382,4 @@ hr {
 }
 .container-botao-like button:hover{
   cursor: pointer;
-}
-.botao-mostrar-comentarios {
-  
 }

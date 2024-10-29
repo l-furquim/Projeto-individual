@@ -529,14 +529,14 @@ hr{
   display: none;
   position: absolute;
   z-index: 1;
-  right: 60px;
+  right: 20px;
   justify-content: center;
-  width: 10%;
-  height: 10%;
-  background-color:#182b23;
+  width: 200px;
+  height: 200px;
+  background-color:#1e1e1e;
   transform: translateX(-50%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 170px;
+  margin-top: 300px;
   text-decoration: none;
   color: #EEF7E6;
   align-items: center;
@@ -549,4 +549,12 @@ hr{
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  flex-direction: column;
+  gap: 20px;
+}
+.conteudo-usuario button {
+  display: flex;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
 }

@@ -38,7 +38,7 @@ function buscarMaculadoPorNome(nome){
 }
 
 async function buscarMaculadoPorEmailESenha(email, senha){
-    const instrucaoSql = `SELECT (nome) FROM Maculado WHERE email = '${email}' AND senha = '${senha}`;  
+    const instrucaoSql = `SELECT (nome) FROM Maculado WHERE email = '${email}' AND senha = '${senha}'`;  
     const linhas = await database.executar(instrucaoSql);
     return linhas; 
 }

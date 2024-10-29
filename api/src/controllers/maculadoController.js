@@ -9,24 +9,21 @@ async function autenticar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        try{
+        try {
             const autenticado = await maculadoModel.autenticar(email, senha);
-            if(autenticado){
-                res.stats(201).json({mensagem: "Login efetuado com sucesso"});
-            }else{
-                res.status(401).json({mensagem: "Email ou senha inválidos"});
+            if (autenticado) {
+                res.status(201).json({ mensagem: "Login efetuado com sucesso" });
+            } else {
+                res.status(401).json({ mensagem: "Email ou senha inválidos" });
             }
-
-        }catch(erro){
-                console.log(erro);    
-                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            };
+        } catch (erro) {
+            console.log("Houve um erro ao realizar o login! Erro: ", erro);
+            res.status(500).json(erro);
+        }
     }
-
 }
 
-function cadastrar(req, res) {
+async function cadastrar(req, res) {
     var nome = req.body.nome;
     var email = req.body.email;
     var senha = req.body.senha;
@@ -37,52 +34,28 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    }else{
-        maculadoModel.buscarMaculadoPorEmail(email)
-            .then((resultadoEmail) => {
-                console.log(resultadoEmail);
-                if(resultadoEmail.length > 0){
-                    res.status(401).json({mensagem: "Ja existe um maculado com esse email"})
-                }else{
-                    maculadoModel.buscarMaculadoPorNome(nome)
-                    .then((resultadoNome)=> {
-                        console.log(resultadoNome);
-                        if(resultadoNome.length > 0){
-                            res.status(401).json({mensagem: "Ja existe um maculado com esse nome"})
-                        }else{
-                            maculadoModel.cadastrar(nome, email, senha)
-                            .then(
-                                function (resultado) {
-                                    res.json(resultado);
-                                }
-                            ).catch(
-                                function (erro) {
-                                    console.log(erro);
-                                    console.log(
-                                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                                        erro.sqlMessage
-                                    );
-                                    res.status(500).json(erro.sqlMessage);
-                                }
-                            );   
-                        }
-                    }).catch((erro) => {
-                        console.log(erro);
-                        console.log("\nHouve um erro ao realizar o cadastro! Erro: ", erro.sqlMessage);
-                        res.status(500).json(erro.sqlMessage);
-                    });   
-                }   
-            }).catch((erro) => {
-                console.log(erro);
-                console.log("\nHouve um erro ao realizar o cadastro! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            });   
+    } else {
+        try {
+            const resultadoEmail = await maculadoModel.buscarMaculadoPorEmail(email);
+            if (resultadoEmail.length > 0) {
+                res.status(401).json({ mensagem: "Já existe um maculado com esse email" });
+            } else {
+                const resultadoNome = await maculadoModel.buscarMaculadoPorNome(nome);
+                if (resultadoNome.length > 0) {
+                    res.status(401).json({ mensagem: "Já existe um maculado com esse nome" });
+                } else {
+                    const resultado = await maculadoModel.cadastrar(nome, email, senha);
+                    res.json(resultado);
+                }
+            }
+        } catch (erro) {
+            console.log("Houve um erro ao realizar o cadastro! Erro: ", erro);
+            res.status(500).json(erro);
+        }
     }
 }
-
-
 
 module.exports = {
     autenticar,
     cadastrar
-}
+};
