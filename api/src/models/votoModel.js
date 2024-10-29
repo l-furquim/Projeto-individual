@@ -8,7 +8,7 @@ function criarNovoVoto(fkMaculado, fkContribuicao) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarVotosPeloIdMaculado(fkMaculado) {
 
     var instrucaoSql = `SELECT Votos.fkContribuicao
     FROM Votos
@@ -22,5 +22,5 @@ function buscarMedidasEmTempoReal(idAquario) {
 
 module.exports = {
     criarNovoVoto,
-    buscarMedidasEmTempoReal
+    buscarVotosPeloIdMaculado
 }

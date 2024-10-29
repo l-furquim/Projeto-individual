@@ -3,7 +3,7 @@ var router = express.Router();
 
 var votosController = require("../controllers/votosController");
 
-router.get("/votos/novo/:fkMaculado", function (req, res) {
+router.get("/votos/novo/fkMculado=:fkMaculado&fkContribuicao=:fkContribuicao", function (req, res) {
     votosController.criarNovoVoto(req, res);
 });
 

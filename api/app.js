@@ -18,7 +18,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var maculadoRouter = require("./src/routes/maculados");
 var avisosRouter = require("./src/routes/avisos");
-var medidasRouter = require("./src/routes/medidas");
+var votosRouter = require("./src/routes/votos");
 var aquariosRouter = require("./src/routes/aquarios");
 var contribuicaoRouter = require("./src/routes/contribuicao");
 
@@ -31,7 +31,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/maculados", maculadoRouter);
 app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter);
+app.use("/votos", votosRouter);
 app.use("/aquarios", aquariosRouter);
 app.use("/contribuicao", contribuicaoRouter);
 

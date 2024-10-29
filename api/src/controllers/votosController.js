@@ -6,19 +6,20 @@ function criarNovoVoto(req, res) {
     if(fkMaculado.length == 0 || fkContribuicao == 0){
         return res.status(401).json({mensagem: "Fk invalida!"});
     }
-
+    try{
     votoModel.criarVoto(fkMaculado, fkContribuicao).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }
-    }).catch(function (erro) {
-        console.log(erro);
+    })} catch(error){
+        console.log(error);
         console.log("Houve um erro ao criar o voto.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
+        res.status(500).json(error.sqlMessage);
+    }
+
+};
 
 
 function buscarVotosPeloIdMaculado(req, res) {
