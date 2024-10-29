@@ -4,14 +4,9 @@ async function cadastrar(){
   var senha = inputSenha.value;
   var confSenha = inputConfirmarSenha.value;
 
-  const response = await fetch("http://localhost:3306/user/register", {
-    id: 3,
-    nome: nome,
-    idade: 18
+  const resposta = await fetch("http://localhost:3333/maculados/cadastrar", {
+    method: "POST",
+    body: JSON.stringify({nome, email, senha, confSenha})
   });
-
-  if(response){
-    mensagem.innerHTML = response.body;
-  }
-
+  
 }

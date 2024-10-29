@@ -98,9 +98,11 @@ function mostrarComentarios(botao, id){
 }
 
 function comentar(botao, id){
-  console.log(id.closest('div').querySelector("#containerSecaoComentario"));
+  // console.log(id.closest('div').querySelector("#containerSecaoComentario"));
+
   const container = containerComentar;
 
+  console.log(id);
   container.style.display = "flex";
 }
 
@@ -122,4 +124,8 @@ function adicionarComentario(conteudo){
       location.reload();
     }, 1000);
   }, 1500);
+}
+
+function irContaUsuario(){
+  location.replace("../dashboard/dashboard.html");
 }
