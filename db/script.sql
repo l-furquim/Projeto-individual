@@ -38,9 +38,12 @@ CONSTRAINT CHECK (tag IN ("Bosses", "Armas"))
 
 -- Criação da tabela de votos (likes)
 
-
-CREATE TABLE Voto ( idVoto INT AUTO_INCREMENT, fkContribuicao INT, 
-fkMaculado INT, CONSTRAINT FOREIGN KEY (fkContribuicao) REFERENCES 
-Contribuicao(idContribuicao), CONSTRAINT FOREIGN KEY (fkMaculado) 
-REFERENCES Maculado(idMaculado), CONSTRAINT PRIMARY KEY(idVoto, 
-fkContribuicao, fkMaculado) );
+CREATE TABLE Voto ( 
+idVoto INT AUTO_INCREMENT, 
+fkContribuicao INT, 
+fkMaculado INT, 
+CONSTRAINT FOREIGN KEY (fkContribuicao)
+   REFERENCES Contribuicao(idContribuicao), 
+CONSTRAINT FOREIGN KEY (fkMaculado) 
+  REFERENCES Maculado(idMaculado), 
+CONSTRAINT PRIMARY KEY(idVoto, fkContribuicao, fkMaculado));
