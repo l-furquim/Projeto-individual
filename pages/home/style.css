@@ -91,7 +91,7 @@
 .conteudo-novo-post {
   display: flex;
   width: 60%;
-  height: 70%;
+  height: 80%;
   background-color: white;
   align-items: center;
   justify-content: center;
@@ -100,9 +100,8 @@
   background-color:#1e1e1e;
   color: #e7c274;
   border-radius: 10px;
-  margin-bottom: 120px;
-  font-size: 22px;
-  padding: 0 10px 30px 10px;
+  font-size: 22px; 
+  gap: 30px;
 }
 
 .conteudo-novo-post span {
@@ -121,19 +120,12 @@
 #botaoFecharModal {
   cursor: pointer;
 }
-
-.formulario-novo-post {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  height: 70%;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-}
-.formulario-novo-post p {
+.conteudo-novo-post {
   font-size: 22px;
   margin-bottom: 20px;
+}
+#botaoPostar{
+  background-color: #d8d8d8;
 }
  ul{
   display: flex;
@@ -141,9 +133,10 @@
   width: 100%;
   flex-direction: column;
  }
-.formulario-novo-post input {
-  width: 60%;
-  height: 40%;
+ .conteudo-novo-post textarea {
+  display: flex;
+  width: 40%;
+  height: 50%;
   border-radius: 5px;
   border: none;
   background-color: #182b23;
@@ -151,7 +144,7 @@
   font-size: 15px;
 }
 
-.formulario-novo-post button {
+.conteudo-novo-post button {
   display: flex;
   width: 30%;
   height: 40%;
@@ -165,11 +158,11 @@
   padding: 10px;
   font-weight: bold;
 } 
-.formulario-novo-post button:hover {
+.conteudo-novo-post button:hover {
   cursor: pointer;
 }
 
-.formulario-novo-post select {
+.conteudo-novo-post select {
   height: 40%;
   width: 40%;
   background-color: #182b23;
@@ -178,7 +171,7 @@
   border:none;
   border-radius: 5px;
 }
-.formulario-novo-post select:hover {
+.conteudo-novo-post select:hover {
   cursor: pointer;
 }
 
