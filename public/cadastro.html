@@ -20,11 +20,10 @@
   </div>
 
     <div class="containerCadastro">
-        <h1>Insira suas informações de cadastro:</h1>
+        <h1>Cadastro</h1>
         <div class="camposCadastro">
 
             <a href="../login/login.html" class="direcLogin">
-              <p>ja possui uma conta?</p>
               <i class="bi bi-airplane"></i>
             </a>
 
@@ -55,26 +54,20 @@
   
               </div>
             </div>
-  
-         <div class="linhaNomeEmail">
-          <label for="inputNome">nome: </label>  
-          <input type="text" name="inputNome" id="inputNome">
-        <label for="inputEmail">email: </label>
-          <input type="text" id="inputEmail" name="inputEmail">
-         </div>
+            
+          <input type="text" name="inputNome" id="inputNome" placeholder="Apelido">
+          
+          <input type="text" id="inputEmail" name="inputEmail" placeholder="Email">
 
-         <div class="linhaSenhaConfSenha">
-          <label for="inputSenha">senha: </label>
-          <input type="password" id="inputSenha" name="inputSenha">
-        <label for="inputConfirmarSenha">confirmar a senha: </label>
-          <input type="password" id="inputConfirmarSenha" name="inputConfirmarSenha">
-         </div>
+          <input type="password" id="inputSenha" name="inputSenha" placeholder="Senha">
+       
+          <input type="password" id="inputConfirmarSenha" name="inputConfirmarSenha" placeholder="Confirmar sua senha">
 
-         <div class="mensagem">
-
-         </div>
-
-            <button id="botaoCadastrar" onclick="cadastrar()">Enviar</button>
+         <a href="./login.html">ja possui uma conta?</a>
+         
+         <div id="divMensagem"></div>
+            
+         <button id="botaoCadastrar" onclick="cadastrar()">Enviar</button>
         </div>
     </div>
 
