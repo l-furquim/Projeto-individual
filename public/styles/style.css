@@ -27,6 +27,7 @@ body.troca-fundo {
 .bodyCadastro {
   display: flex;
 }
+
 .divCadastro{
   display: flex;
   justify-content: center;
@@ -104,6 +105,14 @@ body.troca-fundo {
   cursor: pointer;
   background-color: #07140f;
 }
+.divLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  flex-direction: column
+}
 
 .direcLogin {
   display: flex;
@@ -112,35 +121,30 @@ body.troca-fundo {
   font-size: 16px;
 }
 .containerLogin {
-  background-color: #182b23;
+  background-color:#1e1e1e;
   display: flex;
   flex-direction: column;
-  width: 50%;
-  height: 60%;
+  width: 40%;
+  min-height: 60%;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   padding: 20px;
-  margin-top: 15%;
+  margin-top: 5%;
   color: #e7c274;
   padding-bottom: 40px;
-}
-.camposLogin {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  /* border: 1px #e7c274 solid; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .bodyLogin {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.camposLogin h1 {
+.containerLogin h1 {
   margin-bottom: 10px;
 }
 
-.camposLogin label{
+.containerLogin label{
   font-size: 20px;
 }
 
@@ -148,29 +152,32 @@ body.troca-fundo {
   font-size: 16px;
 }
 
-.camposLogin input {
-  width: 200px;
+.containerLogin input {
+  width: 250px;
   height: 25px;
   border: none;
   border-radius: 10px;
-  background-color: #1f775a;
+  background-color:#182b23;
   color:white;
   outline: none;
   font-size: 15px;
+  padding: 10px;
 }
-.camposLogin button {
-  width: 150px;
-  margin-top: 30px;
+.containerLogin button {
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   border: none;
   height: 30px;
   align-self: center;
   justify-self: center;
   color: #e7c274;
-  background-color: #1f775a;
+  background-color:#182b23;
+  padding: 10px;
+  transition: .3s;
 }
 
-.camposLogin button:hover{
+.containerLogin button:hover{
   transition: 10ms;
   cursor: pointer;
   background-color: #07140f;
