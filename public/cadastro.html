@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro</title>
-  <script src="./js/modal.js"></script>
-  <script src="./js/cadastro.js"></script>
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body class="bodyCadastro">
@@ -50,18 +48,21 @@
   
               </div>
             </div>
+
+          <a href="./login.html" class="direcLogin">ja possui uma conta?</a>
+
             
           <input type="text" name="inputNome" id="inputNome" placeholder="Apelido">
-          
+          <p class="p-erro" id="erroNome"></p>
+
           <input type="text" id="inputEmail" name="inputEmail" placeholder="Email">
+          <p class="p-erro" id="erroEmail"></p>
 
           <input type="password" id="inputSenha" name="inputSenha" placeholder="Senha">
-       
+          
           <input type="password" id="inputConfirmarSenha" name="inputConfirmarSenha" placeholder="Confirmar sua senha">
-
-         <a href="./login.html">ja possui uma conta?</a>
-         
-         <div id="divMensagem"></div>
+          <p class="p-erro" id="erroSenha"></p>
+          
             
          <button id="botaoCadastrar" onclick="cadastrar()">Enviar</button>
         </div>
@@ -80,3 +81,5 @@
   </div>
 </body>
 </html>
+<script src="./js/modal.js"></script>
+<script src="./js/cadastro.js"></script>

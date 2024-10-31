@@ -61,19 +61,19 @@ body.troca-fundo {
   font-size: 20px;
 }
 .camposCadastro input {
-  width: 250px;
+  width: 280px;
   height: 25px;
   border: none;
   border-radius: 10px;
   background-color:#182b23;
-  color:white;
+  color:#e7c274;
   outline: none;
   font-size: 15px;
   padding: 10px;
-  
 }
 .camposCadastro input::placeholder {
   color:#e7c274;  
+  font-size: 15px;
 }
 .camposCadastro a {
   color: #e7c274;
@@ -82,22 +82,26 @@ body.troca-fundo {
 
 .camposCadastro{
   display: flex;
+  width: 70%;
+  height: 100%;
   flex-direction: column;
-  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .camposCadastro button {
-  width: 100%;
+  width: 80%;
   height: 100%;
   border-radius: 10px;
   border: none;
-  height: 30px;
   align-self: center;
   justify-self: center;
   color: #e7c274;
   background-color:#182b23;
   padding: 10px;
   transition: .3s;
+  font-size: 15px;
 }
 
 .camposCadastro button:hover{
@@ -105,27 +109,43 @@ body.troca-fundo {
   cursor: pointer;
   background-color: #07140f;
 }
+#divMensagem {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bolder;
+}
 .divLogin {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  flex-direction: column
+  flex-direction: column;
+}
+.p-erro {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .direcLogin {
   display: flex;
-  margin-left: 12%;
+  justify-self: start;
   color:#e7c274;
-  font-size: 16px;
+  font-size: 18px;
+  margin: 10px 0 10px 0;
 }
 .containerLogin {
   background-color:#1e1e1e;
   display: flex;
   flex-direction: column;
   width: 40%;
-  min-height: 60%;
+  min-height: 70%;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
@@ -133,6 +153,7 @@ body.troca-fundo {
   margin-top: 5%;
   color: #e7c274;
   padding-bottom: 40px;
+  gap: 15px;
   /* border: 1px #e7c274 solid; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -150,10 +171,12 @@ body.troca-fundo {
 
 #mensagem {
   font-size: 16px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .containerLogin input {
-  width: 250px;
+  width: 280px;
   height: 25px;
   border: none;
   border-radius: 10px;
@@ -162,23 +185,33 @@ body.troca-fundo {
   outline: none;
   font-size: 15px;
   padding: 10px;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
+
+.containerLogin input::placeholder{
+  color: #e7c274;
+  font-size: 15px;
+
+}
+
 .containerLogin button {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  width: 55%;
+  height: 20%;
   border-radius: 10px;
   border: none;
-  height: 30px;
   align-self: center;
-  justify-self: center;
+  justify-content: center;
   color: #e7c274;
   background-color:#182b23;
   padding: 10px;
   transition: .3s;
+  font-size: 15px;
 }
 
 .containerLogin button:hover{
-  transition: 10ms;
+  transition: 0.3ms;
   cursor: pointer;
   background-color: #07140f;
 }
@@ -186,7 +219,7 @@ body.troca-fundo {
   display: flex;
   justify-self: start;
   color:#e7c274;
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 12px;
 }
 .verSobre {

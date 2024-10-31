@@ -15,9 +15,9 @@
 
     <div class="containerNav">
       <div class="conteudoNav">
-        <a href="./inicio.html">Início</a>
-        <a href="./cadastro.html">Cadastrar</a>
-        <a href="./login.html">Login</a>
+            <a href="./inicio.html">Início</a>
+            <a href="./cadastro.html">Cadastrar</a>
+            <a href="./login.html">Login</a>
       </div>
     </div>
     
@@ -54,18 +54,19 @@
           </a>
         </div>
       </div>
-      
       <h1>Insira as informações de login: </h1>
+        <a href="./cadastro.html" class="direcCadastro">
+          <p>Não possui uma conta?</p>
+        </a>
 
-      <a href="./cadastro.html" class="direcCadastro">
-        <p>Não possui uma conta?</p>
-      </a>
+        <input type="text" id="inputEmail" placeholder="Email">
 
-        <input type="text" name="inputEmail" id="inputEmail" placeholder="Email">
+        <input type="password" id="inputSenha" placeholder="Senha">
 
-        <input type="text" name="inputSenha" id="inputSenha" placeholder="Senha">
+        <button id="botaoLogar" onclick="logar()">Entrar</button>
 
-        <button onclick="logar()">Entrar</button>
+        <div id="divMensagem"></div>
+  
     </div>
   </div>
 
