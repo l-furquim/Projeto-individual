@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 
-<body class="bodyHome">
+<body class="bodyHome" onload="buscarContribuicoes()">
   <div class="containerNav">
     <div class="conteudoNav">
       <a href="../inicio/inicio.html">Início</a>
@@ -145,7 +145,7 @@
 
   <div class="container-inicio">
     <button class="botao-contribuir" onclick="criarPost()">Contribuir</button>
-    <ul>
+    <ul id="listaContribuicoes">
       <li id="contribuicao1">
         <div class="container-post">
           <div class="cabecalho-post">
