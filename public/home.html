@@ -55,7 +55,7 @@
 
       <h1>Nova contribuição !</h1>
         <label for="inputConteudo">Conteudo do post</label>
-        <textarea id="textAreaConteudo"></textarea>
+        <textarea id="textAreaConteudoContribuicao"></textarea>
 
         <label for="selectTipo">Selecione o tipo do post</label>
         <select id="selectTipo">
@@ -77,7 +77,9 @@
           </select>
         </div>
 
-        <button id="botaoPostar">Postar</button>
+        <div id="divMensagem"></div>
+
+        <button onclick="novaContribuicao()" id="botaoPostar">Contribuir</button>
     </div>
   </div>
 
@@ -98,10 +100,10 @@
       <h1>Comente algo abaixo !</h1>
       <p>Seja gentil... ajude ou até celebre com ele!</p>
 
-      <label for="textAreaConteudo">Conteudo do comentario</label>
-      <textarea id="textAreaConteudo"></textarea>
+      <label for="textAreaConteudoComentario">Conteudo do comentario</label>
+      <textarea id="textAreaConteudoComentario"></textarea>
 
-      <button type="submit" onclick="adicionarComentario(textAreaConteudo.value)"
+      <button type="submit" onclick="adicionarComentario(textAreaConteudoComentario.value)"
         id="botaoAdicionarComentario">Comentar</button>
     </div>
   </div>
