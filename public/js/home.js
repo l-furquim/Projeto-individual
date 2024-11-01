@@ -139,11 +139,12 @@ function irContaUsuario(){
 }
 
 async function novaContribuicao(){
+  const titulo = inputTitulo.value;
   const conteudo = textAreaConteudoContribuicao.value;
   const tipoContribuicao = selectTipo.value;
   const filtro = categoriaFiltro.value;
   const conteudoFiltro = opcoes.value;
-  console.log(conteudo);
+  console.log(titulo);
   var icone = "";
 
   if(conteudo != undefined){
@@ -157,6 +158,7 @@ async function novaContribuicao(){
     const resposta = await fetch("http://localhost:3333/contribuicao/cadastrar", {
       method: "POST",
       body: JSON.stringify({
+        titulo: titulo,
         conteudo: conteudo,
         tipo: tipoContribuicao,
         fkMaculado: 1,
@@ -206,13 +208,23 @@ async function buscarContribuicoes(){
   });
 
   if(resposta.ok){
-    const contribuicoes = resposta.json().then((contribuicoes)=> {
-      contribuicoes.map((contribuicao)=> {
-        listaContribuicoes.innerHTML = `<li id=${contribuicoes.idContribuicao}>
+    resposta.json().then((contribuicoes)=> {
+      contribuicoes.forEach((contribuicao)=> {
+/* 
+      idContribuicao: 2,
+    conteudo: null,
+    contribuicaoFechada: null,
+    votos: null,
+    tipo: null,
+    tag: 'Bosses',
+    conteudoTag: 'Raddan',
+    nome: 'lucas' */
+        listaContribuicoes.innerHTML += `
+      <li id=contribuicao${contribuicao.idContribuicao}>
         <div class="container-post">
           <div class="cabecalho-post">
             <a href="">
-              <h1 id="nome-post">Dica para enfrentar o Godrick</h1>
+              <h1 id="nome-post">${contribuicao.titulo}</h1>
             </a>
             <h1 id="usuario-post">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -220,21 +232,21 @@ async function buscarContribuicoes(){
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                 <path fill-rule="evenodd"
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-              </svg> Lucas Hernandes Furquim
+              </svg> ${contribuicao.nome}
             </h1>
           </div>
           <div class="container-tag">
-            <p>Dica</p>
-            <p>Bosses</p>
-            <p>Godrick</p>
+            <p>${contribuicao.tipo}</p>
+            <p>${contribuicao.tag}</p>
+            <p>${contribuicao.conteudoTag}</p>
           </div>
           <hr>
           <div class="desc-post">
-            <p>Fiquem atentos aos golpes de área e usem o escudo. Ele é mais lento do que parece.</p>
+            <p>${contribuicao.conteudo}</p>
           </div>
           <div class="interacoes-post">
             <div id="containerSecaoComentario">
-              <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, contribuicao2)">
+              <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, contribuicao${contribuicao.idContribuicao})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                   class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
@@ -243,14 +255,14 @@ async function buscarContribuicoes(){
               </button>
             </div>
             <div class="container-botao-like">
-              <button onclick="comentar(this,contribuicao1)">
+              <button onclick="comentar(this,contribuicao${contribuicao.idContribuicao})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
                 </svg>
               </button>
             </div>
             <div class="container-botao-comentario">
-              <button onclick="comentar(this,contribuicao1)">
+              <button onclick="comentar(this,contribuicao${contribuicao.idContribuicao})">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat"
                   viewBox="0 0 16 16">
                   <path

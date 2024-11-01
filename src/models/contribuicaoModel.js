@@ -9,16 +9,14 @@ function buscarPorId(id) {
 
 function listar() {
   var instrucaoSql = `
-                    SELECT c.conteudo AS conteudo_contribuicao, 
+                    SELECT c.idContribuicao,
+                        c.titulo,
+                        c.conteudo, 
                         c.contribuicaoFechada, 
                         c.votos, 
-                        c.tipo AS tipo_contribuicao,
+                        c.tipo,
                         c.tag,
-                        c.conteudoTag
-                        r.conteudo AS conteudo_resposta, 
-                        r.contribuicaoFechada AS contribuicaoFechada_resposta, 
-                        r.votos AS votos_resposta, 
-                        r.tipo AS tipo_resposta, 
+                        c.conteudoTag,
                         m.nome
                         FROM Contribuicao AS c
                         LEFT JOIN Contribuicao AS r ON c.fkResposta = r.idContribuicao
@@ -34,20 +32,21 @@ function listar() {
   return database.executar(instrucaoSql);
 } */
 
-function cadastrar(conteudo, tipo, fkMaculado, tag, conteudoTag) {
+function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
   const data = new Date();
   const dataFormatada = sqlUtils.formatarDataParaSQL(data);
 
   var instrucaoSql = 
-    `INSERT INTO Contribuicao (conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkResposta, tag, conteudoTag) VALUES 
-    ('${conteudo}','${dataFormatada}',${false},'${0}', '${tipo}','${fkMaculado}', ${null}, '${tag}', '${conteudoTag}')`;
+    `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkResposta, tag, conteudoTag) VALUES 
+    ('${titulo}','${conteudo}','${dataFormatada}',${false},'${0}', '${tipo}','${fkMaculado}', ${null}, '${tag}', '${conteudoTag}')`;
 
   return database.executar(instrucaoSql);
 }
 
 function buscarPorTipo(tipo) {
   const instrucaoSql = `
-                       SELECT c.conteudo AS conteudo_contribuicao, 
+                       SELECT c.titulo, 
+                        c.conteudo AS conteudo_contribuicao, 
                         c.contribuicaoFechada, 
                         c.votos, 
                         c.tipo AS tipo_contribuicao,

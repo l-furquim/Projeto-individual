@@ -93,7 +93,7 @@
 .conteudo-novo-post {
   display: flex;
   width: 60%;
-  height: 80%;
+  height: 90%;
   background-color: white;
   align-items: center;
   justify-content: center;
@@ -106,7 +106,17 @@
   gap: 15px;
   padding: 20px;
 }
-
+.conteudo-novo-post input{
+  background-color: #182b23;
+  width: 65%;
+  color: #d8d8d8;
+  height: 45%;
+  outline: none;
+  border: none;
+  font-size: 22px;
+  padding: 10px;
+  border-radius: 5px;
+}
 .conteudo-novo-post span {
   display: flex;
   width: 85%;

@@ -23,6 +23,7 @@ function buscarPorId(req, res) {
 }
 
 function cadastrar(req, res) {
+  const titulo = req.body.titulo;
   const conteudo = req.body.conteudo;
   const tipo = req.body.tipo;
   const fkMaculado = req.body.fkMaculado;
@@ -41,7 +42,7 @@ function cadastrar(req, res) {
   }); */
 
   if(conteudo.length > 0){
-    contribuicaoModel.cadastrar(conteudo, tipo, fkMaculado, tag, conteudoTag).then((resultado)=> {
+    contribuicaoModel.cadastrar(titulo,conteudo, tipo, fkMaculado, tag, conteudoTag).then((resultado)=> {
       res.status(201).json(resultado);
     });
   }else{

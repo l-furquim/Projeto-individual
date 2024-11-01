@@ -20,6 +20,7 @@ maculadosAjudados INT
 CREATE TABLE Contribuicao
 (
 idContribuicao INT AUTO_INCREMENT,
+titulo VARCHAR(45),
 conteudo VARCHAR(100),
 dtContribuicao DATE,
 contribuicaoFechada BOOLEAN,
