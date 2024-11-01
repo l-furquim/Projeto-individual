@@ -21,7 +21,7 @@ CREATE TABLE Contribuicao
 (
 idContribuicao INT AUTO_INCREMENT,
 titulo VARCHAR(45),
-conteudo VARCHAR(100),
+conteudo VARCHAR(300),
 dtContribuicao DATE,
 contribuicaoFechada BOOLEAN,
 votos INT,

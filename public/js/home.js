@@ -144,12 +144,40 @@ async function novaContribuicao(){
   const tipoContribuicao = selectTipo.value;
   const filtro = categoriaFiltro.value;
   const conteudoFiltro = opcoes.value;
-  console.log(titulo);
   var icone = "";
+  divMensagem.style.border = "none";
+  textAreaConteudoContribuicao.style.border = "none";
+  inputTitulo.style.border = "none";
+  categoriaFiltro.style.border = "none";
+  opcoes.style.border = "none";
 
-  if(conteudo != undefined){
+  if(conteudo.length == 0){
+    divMensagem.innerHTML = "Conteudo inválido, deve conter no mínimo 1 caractere";
+    divMensagem.style.border = "solid 1px red";
+    textAreaConteudoContribuicao.style.border = "solid 1px red";
+  }else if(titulo.length == 0){
+    divMensagem.innerHTML = "Título inválido, deve conter no mínimo 1 caractere";
+    inputTitulo.style.border = "solid 1px red";
+    divMensagem.style.border = "solid 1px red";
+  }else if(conteudo.length > 300){
+    divMensagem.innerHTML = "Você passou do limite de caracteres permitidos para a contribuição (300).";
+    textAreaConteudoContribuicao.style.border = "solid 1px red";
+    divMensagem.style.border = "solid 1px red";
+  }else if(titulo.length > 30){
+    divMensagem.innerHTML = "Você passou do limite de caracteres permitidos para o titulo (30).";
+    inputTitulo.style.border = "solid 1px red";
+    divMensagem.style.border = "solid 1px red";
+  }else if(filtro == "#"){
+    divMensagem.innerHTML = "Por favor, selecione a tag da contribuição.";
+    categoriaFiltro.style.border = "solid 1px red";
+    divMensagem.style.border = "solid 1px red";
+  }else if(conteudoFiltro == "#"){
+    divMensagem.innerHTML = "Por favor, selecione o conteudo da tag da contribuição.";
+    opcoes.style.border = "solid 1px red";
+    divMensagem.style.border = "solid 1px red";
+  }else{
     var mensagem = "";
-
+    var estilo = "";
     botaoPostar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
           <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
           </svg>`;
@@ -174,6 +202,7 @@ async function novaContribuicao(){
       icone =  `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
       <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
       </svg>`;
+      estilo = "solid 1px #044e049c";
 
     }else{
       resposta.json().then(m => {
@@ -181,12 +210,14 @@ async function novaContribuicao(){
         icone = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
               </svg>`;
+        estilo  = "solid 1px #600404";
       });
 
     }
     setTimeout(()=> {
       divMensagem.innerHTML = mensagem; // Nunca mais fazer isso...
       botaoPostar.innerHTML = icone;
+      divMensagem.style.border = estilo;
       // erroSenha.style.border = estilo;
 
       if(mensagem == "Contribuição criada com sucesso!"){
@@ -220,13 +251,13 @@ async function buscarContribuicoes(){
     conteudoTag: 'Raddan',
     nome: 'lucas' */
         listaContribuicoes.innerHTML += `
-      <li id=contribuicao${contribuicao.idContribuicao}>
+      <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
         <div class="container-post">
           <div class="cabecalho-post">
-            <a href="">
-              <h1 id="nome-post">${contribuicao.titulo}</h1>
-            </a>
-            <h1 id="usuario-post">
+            <h1 id="nome-post">${contribuicao.titulo}</h1>
+            
+            <div class="cabecalho-usuario">
+              <h1 id="usuario-post">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -234,6 +265,7 @@ async function buscarContribuicoes(){
                   d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
               </svg> ${contribuicao.nome}
             </h1>
+            </div>
           </div>
           <div class="container-tag">
             <p>${contribuicao.tipo}</p>

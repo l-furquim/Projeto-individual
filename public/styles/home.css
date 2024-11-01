@@ -7,19 +7,29 @@
 
 .container-inicio {
   height: 100%;
-  width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+.liContribuicao{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .container-post {
-  padding: 10px;
+  padding: 15px;
   flex-direction: column;
   margin-top: 10%;
   align-items: center;
   display: flex;
   width: 60%;
+  justify-content: center;
   height: 100%;
   background-color: #1e1e1e;
   border-radius: 10px;
@@ -27,12 +37,34 @@
 .cabecalho-post{
   width: 100%;
   display: flex;
-  color: #e7c274;;
-  margin-left: 30px;
-  align-self: self-start;
+  color: #e7c274;
+  align-items: center;
 }
+#listaContribuicoes{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cabecalho-post h1{
+  margin-left: 20px;
+  width: 60%;
+}
+
 .cabecalho-post a {
   text-decoration: none;
+}
+.cabecalho-usuario {
+  width: 60%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.cabecalho-usuario h1 {
+  width: fit-content;
+  margin-right: 30px;
 }
 
 #nome-post {
@@ -75,7 +107,12 @@
 .container-post hr {
   width: 80%;
 }
-
+#divMensagem{
+  font-weight: bolder;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
 .container-novo-post {
   display: none;
   position: fixed;
@@ -145,6 +182,7 @@
   transition: 0.3s;
   font-size: 15px;
 }
+
 #botaoPostar:hover{
   background-color:#07140f;
   transition: 0.3s;
@@ -230,6 +268,18 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.p-erro {
+  display: flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .interacoes-post {
   display: flex;
   width: 100%;
