@@ -53,6 +53,19 @@ body.troca-fundo {
   /* border: 1px #e7c274 solid; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+.camposCadastro{
+  display: flex;
+  width: 70%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#inputConfirmarSenha{
+  margin-top: 45px;
+}
+
+
 .camposCadastro h1 {
   margin-bottom: 10px;
 }
@@ -77,19 +90,7 @@ body.troca-fundo {
 }
 .camposCadastro a {
   color: #e7c274;
-
 }
-
-.camposCadastro{
-  display: flex;
-  width: 70%;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-
 .camposCadastro button {
   width: 80%;
   height: 100%;
@@ -124,7 +125,7 @@ body.troca-fundo {
 }
 .p-erro {
   display: flex;
-  width: 100%;
+  width: fit-content;
   justify-content: center;
   align-items: center;
   font-weight: bolder;

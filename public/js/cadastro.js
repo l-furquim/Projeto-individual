@@ -91,10 +91,17 @@ async function cadastrar(){
     setTimeout(()=> {
       erroSenha.innerHTML = resposta; // Nunca mais fazer isso...
       botaoCadastrar.innerHTML = icone;
-      erroSenha.style.border = estilo; // Muito menos isso...
-    }, 2000)  
-  
-  
+      erroSenha.style.border = estilo;
+
+      if(resposta == "Cadastro realizado com sucesso!"){
+        setTimeout(()=> {
+          divMensagem.innerHTML += "<br> redirecionando para a pagina de login..."
+            location.replace("/login.html")
+        }, 1000)
+      }
+
+    }, 2000);
+
     console.log(resposta);
   }
 }
