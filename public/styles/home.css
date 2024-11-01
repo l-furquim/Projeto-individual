@@ -64,10 +64,11 @@
   width: 220px;
   font-size: 20px;
   border-radius: 10px;
+  transition: 0.3s;
 }
 .botao-contribuir:hover {
-  background-color:#182b23;
-  transition: 10ms;
+  background-color:#07140f;
+  transition: 0.3ms;
   cursor:pointer;
 }
 
@@ -79,6 +80,7 @@
   display: none;
   position: fixed;
   z-index: 1;
+  top: 0;
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -101,12 +103,15 @@
   color: #e7c274;
   border-radius: 10px;
   font-size: 22px; 
-  gap: 30px;
+  gap: 15px;
+  padding: 20px;
 }
 
 .conteudo-novo-post span {
   display: flex;
-  width: 100%;
+  width: 85%;
+  position: fixed;
+  top: 20px;
   justify-content: end;
 }
 
@@ -125,8 +130,17 @@
   margin-bottom: 20px;
 }
 #botaoPostar{
-  background-color: #d8d8d8;
+  background-color: #182b23;
+  color: #e7c274;
+  transition: 0.3s;
+  font-size: 15px;
 }
+#botaoPostar:hover{
+  background-color:#07140f;
+  transition: 0.3s;
+}
+
+
  ul{
   display: flex;
   height: 100%;
@@ -135,13 +149,16 @@
  }
  .conteudo-novo-post textarea {
   display: flex;
-  width: 40%;
-  height: 50%;
+  width: 60%;
+  height: 100%;
   border-radius: 5px;
   border: none;
   background-color: #182b23;
   color:#d8d8d8 ;
   font-size: 15px;
+  resize: none;
+  outline: none;
+  padding: 15px;
 }
 
 .conteudo-novo-post button {
@@ -163,13 +180,15 @@
 }
 
 .conteudo-novo-post select {
-  height: 40%;
-  width: 40%;
+  text-align: center;
+  height: 50%;
+  width: 30%;
   background-color: #182b23;
   color: #d8d8d8;
   padding: 5px;
   border:none;
   border-radius: 5px;
+  font-size: 15px;
 }
 .conteudo-novo-post select:hover {
   cursor: pointer;
@@ -292,16 +311,14 @@ hr {
 
 .container-comentar {
   display: none;
-  margin-top: 80px;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
   overflow:hidden;
   background-color: rgba(0, 0, 0, 0.4); /* Fundo com transparência */
 }
@@ -345,6 +362,8 @@ hr {
     resize: none;
     font-size: 15px;
     outline: none;
+    padding: 15px;
+    border-radius:5px;
 }
 
 #botaoAdicionarComentario{
@@ -356,9 +375,12 @@ hr {
   width: 200px;
   font-size: 20px;
   border-radius: 10px;
+  transition: 0.3s;
 }
 #botaoAdicionarComentario:hover{
   cursor: pointer;
+  background-color: #07140f;
+  transition: 0.3s;
 }
 .container-inicio li {
   display: flex;
