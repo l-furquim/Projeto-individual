@@ -19,7 +19,6 @@ function criarNovoVoto(req, res) {
         console.log("Houve um erro ao criar o voto.", error.sqlMessage);
         res.status(500).json(error.sqlMessage);
     }
-
 };
 
 
@@ -43,7 +42,31 @@ function buscarVotosPeloIdMaculado(req, res) {
     });
 }
 
+function desvotar(req,res){
+    const fkMaculado = req.params.fkMaculado;
+    const fkContribuicao = req.params.fkContribuicao;
+    const idVoto = req.params.idVoto
+
+    if(fkMaculado.length == 0 || fkContribuicao == 0 || idVoto == undefined){
+        return res.status(401).json({mensagem: "Fk invalida!"});
+    }
+    try{
+        votoModel.desvotar(fkMaculado, fkContribuicao, idVoto).then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send({message: "Nenhum resultado encontrado!"})
+            }
+        })} catch(error){
+            console.log(error);
+            console.log("Houve um erro ao criar o voto.", error.sqlMessage);
+            res.status(500).json(error.sqlMessage);
+        }
+    
+}
+
 module.exports = {
     criarNovoVoto,
-    buscarVotosPeloIdMaculado
+    buscarVotosPeloIdMaculado,
+    desvotar
 }
