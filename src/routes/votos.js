@@ -7,7 +7,7 @@ router.post("/novo/fkMculado=:fkMaculado&fkContribuicao=:fkContribuicao", functi
     votosController.criarNovoVoto(req, res);
 });
 
-router.get("/maculado=:fkMaculado&contribuicao=:fkContribuicao", function (req, res) {
+router.get("/maculado=:fkMaculado", function (req, res) {
     votosController.buscarVotosPeloIdMaculado(req, res);
 })
 
