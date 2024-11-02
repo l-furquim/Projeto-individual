@@ -4,12 +4,9 @@ var sqlUtils = require("../utils/sql");
 
 async function autenticar(email, senha) {
     const linhas = await buscarMaculadoPorEmailESenha(email,senha);
-
-    if(linhas.length > 0){
-        console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
-        return true;
-    }
-    return false;
+    
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    return linhas
 }
 
 function cadastrar(nome, email, senha) {
@@ -38,7 +35,7 @@ function buscarMaculadoPorNome(nome){
 }
 
 async function buscarMaculadoPorEmailESenha(email, senha){
-    const instrucaoSql = `SELECT (nome) FROM Maculado WHERE email = '${email}' AND senha = '${senha}'`;  
+    const instrucaoSql = `SELECT idMaculado, nome, email, contribuicoes, maculadosAjudados FROM Maculado WHERE email = '${email}' AND senha = '${senha}'`;  
     const linhas = await database.executar(instrucaoSql);
     return linhas; 
 }

@@ -1,3 +1,4 @@
+const { authPlugins } = require("mysql2");
 var maculadoModel = require("../models/maculadoModel");
 
 async function autenticar(req, res) {
@@ -11,8 +12,8 @@ async function autenticar(req, res) {
     } else {
         try {
             const autenticado = await maculadoModel.autenticar(email, senha);
-            if (autenticado) {
-                res.status(201).json({ mensagem: "Login efetuado com sucesso" });
+            if (autenticado.length > 0) {
+                res.status(201).json(autenticado);
             } else {
                 res.status(401).json({ mensagem: "Email ou senha inválidos" });
             }
