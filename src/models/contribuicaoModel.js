@@ -19,7 +19,7 @@ function listar() {
                         c.conteudoTag,
                         m.nome
                         FROM Contribuicao AS c
-                        LEFT JOIN Contribuicao AS r ON c.fkResposta = r.idContribuicao
+                        LEFT JOIN Contribuicao AS r ON c.idContribuicao = r.fkContribuicaoRespondida
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.votos;
                    `;
 
@@ -37,7 +37,7 @@ function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
   const dataFormatada = sqlUtils.formatarDataParaSQL(data);
 
   var instrucaoSql = 
-    `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkResposta, tag, conteudoTag) VALUES 
+    `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,votos,tipo,fkMaculado, fkContribuicaoRespondida, tag, conteudoTag) VALUES 
     ('${titulo}','${conteudo}','${dataFormatada}',${false},'${0}', '${tipo}','${fkMaculado}', ${null}, '${tag}', '${conteudoTag}')`;
 
   return database.executar(instrucaoSql);
@@ -64,11 +64,21 @@ function buscarPorTipo(tipo) {
                       `
   return database.executar(instrucaoSql);
 } 
+function comentar(conteudo, fkContribuicaoRespondida, fkMaculado){
+  const data = new Date();
+
+
+  const instrucaoSql = `INSERT INTO Contribuicao (conteudo, dtContribuicao, fkMaculado,fkContribuicaoRespondida) 
+                        VALUES ('${conteudo}', '${sqlUtils.formatarDataParaSQL(data)}', ${fkMaculado}, ${fkContribuicaoRespondida});`;
+
+  return database.executar(instrucaoSql);
+}
 
 
 module.exports = {
   buscarPorId, 
   cadastrar, 
   listar,
-  buscarPorTipo
+  buscarPorTipo,
+  comentar
 };

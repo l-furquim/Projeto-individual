@@ -19,4 +19,8 @@ router.get("/listar/tag/:tipo", function (req, res){
   contribuicaoController.listarPorTipo(req,res);
 });
 
+router.post("/comentar", function(req, res){
+  contribuicaoController.comentar(req,res);
+})
+
 module.exports = router;

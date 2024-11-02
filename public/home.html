@@ -82,7 +82,7 @@
           </select>
         </div>
 
-        <div id="divMensagem"></div>
+        <div class="div-mensagem" id="divMensagemContribuicao"></div>
 
         <button onclick="novaContribuicao()" id="botaoPostar">Contribuir</button>
     </div>
@@ -106,10 +106,14 @@
       <p>Seja gentil... ajude ou até celebre com ele!</p>
 
       <label for="textAreaConteudoComentario">Conteudo do comentario</label>
-      <textarea id="textAreaConteudoComentario"></textarea>
+      <textarea id="textAreaConteudoComentario"></textarea> 
 
-      <button type="submit" onclick="adicionarComentario(textAreaConteudoComentario.value)"
-        id="botaoAdicionarComentario">Comentar</button>
+      <div class="div-mensagem" id="divMensagemComentario"></div>
+
+
+      <button id="botaoAdicionarComentario">
+       Comentar
+      </button>
     </div>
   </div>
 

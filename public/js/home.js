@@ -40,7 +40,7 @@ const opcoesPorCategoria = {
 const categoriaSelect = document.getElementById("categoriaFiltro");
 const opcoesSelect = document.getElementById("opcoes");
 
-categoriaSelect.addEventListener("change", function() {
+categoriaSelect.addEventListener("change", function () {
   opcoesSelect.innerHTML = '<option value="">Selecione uma opção</option>';
 
   const categoria = categoriaSelect.value;
@@ -57,9 +57,9 @@ categoriaSelect.addEventListener("change", function() {
 
 function criarPost() {
   var container = containerNovoPost;
-  
-  window.onclick = function(event){
-    if(event.target == container){
+
+  window.onclick = function (event) {
+    if (event.target == container) {
       container.style.display = "none";
     }
   }
@@ -72,21 +72,21 @@ function fecharModal() {
   container.style.display = "none";
 }
 
-function mostrarComentarios(botao, id){
+function mostrarComentarios(botao, id) {
 
   const contribuicao = botao.closest('li');
   const containerComentario = contribuicao.querySelector('#containerComentario');
   console.log(contribuicao, containerComentario)
-  
-  if(vezesClicadas == 1){
+
+  if (vezesClicadas == 1) {
     vezesClicadas = 0;
     containerComentario.style.display = "none";
-    botaoMostrarComentario.innerHTML  = `
+    botaoMostrarComentario.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
     <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
     </svg>`
-  }else{
-    if(containerComentario){
+  } else {
+    if (containerComentario) {
       vezesClicadas++;
       containerComentario.style.display = "flex";
       botaoMostrarComentario.innerHTML = `
@@ -97,21 +97,24 @@ function mostrarComentarios(botao, id){
   }
 }
 
-function comentar(botao, id){
-  // console.log(id.closest('div').querySelector("#containerSecaoComentario"));
-
+function comentar(botao, id) {
   const container = containerComentar;
 
   console.log(id);
   container.style.display = "flex";
+
+  // Quando o botao que abre o modal de novo comentario e pressionado, eu coloco o onclick do formulario para executar com ese id específico(id Contribuição)
+  botaoAdicionarComentario.onclick = () => adicionarComentario(id.id);
+
+  console.log(botaoAdicionarComentario.onclick);
 }
 
-function fecharModalComentar(){
+function fecharModalComentar() {
   const container = containerComentar;
 
   container.style.display = "none";
 }
-function fecharNovaContribuicao(){
+function fecharNovaContribuicao() {
   const container = containerNovoPost;
 
   container.style.display = "none";
@@ -119,69 +122,121 @@ function fecharNovaContribuicao(){
 
 
 
-function adicionarComentario(conteudo){
-  botaoAdicionarComentario.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-        </svg>
-        `
-  console.log(conteudo);
-  setTimeout(()=> {
-    botaoAdicionarComentario.innerHTML = `Comentario realizado com sucesso ! `
-    setTimeout(()=> {
-      location.reload();
-    }, 1000);
-  }, 1500);
+async function adicionarComentario(idContribuicao) {
+  const conteudo = textAreaConteudoComentario.value;
+
+  console.log(idContribuicao);
+
+  if (conteudo.length == 0) {
+
+  } else {
+    var mensagem = "";
+    var icone = "";
+    var estilo = "";
+
+    const resposta = await fetch("http://localhost:3333/contribuicao/comentar", {
+      method: "POST",
+      body: JSON.stringify({
+        conteudo: conteudo,
+        fkContribuicaoRespondida: idContribuicao,
+        fkMaculado: 1
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log(resposta);
+
+    botaoAdicionarComentario.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+          <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+          </svg>
+          `
+
+
+    if (resposta.ok) {
+      mensagem = "Comentario realizado com sucesso!";
+      icone = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+            </svg>`;
+
+      estilo = "solid 1px #044e049c";
+
+    } else {
+      resposta.json().then((resposta) => {
+        mensagem = resposta.mensagem;
+      });
+
+      icone = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+              </svg>`;
+      estilo = "solid 1px #600404";
+    }
+
+    setTimeout(() => {
+      divMensagemComentario.innerHTML = mensagem;
+      divMensagemComentario.style.border = estilo;
+      botaoAdicionarComentario.innerHTML = icone;
+
+      setTimeout(()=> {
+        location.reload();
+      }, 1500);
+    }, 1500);
+  };
+
 }
 
-function irContaUsuario(){
+function irContaUsuario() {
   location.replace("../dashboard/dashboard.html");
 }
 
-async function novaContribuicao(){
+async function novaContribuicao() {
   const titulo = inputTitulo.value;
   const conteudo = textAreaConteudoContribuicao.value;
   const tipoContribuicao = selectTipo.value;
   const filtro = categoriaFiltro.value;
   const conteudoFiltro = opcoes.value;
   var icone = "";
-  divMensagem.style.border = "none";
+
+
+  divMensagemContribuicao.innerHTML = "";
+  divMensagemContribuicao.style.border = "none";
   textAreaConteudoContribuicao.style.border = "none";
   inputTitulo.style.border = "none";
   categoriaFiltro.style.border = "none";
   opcoes.style.border = "none";
 
-  if(conteudo.length == 0){
-    divMensagem.innerHTML = "Conteudo inválido, deve conter no mínimo 1 caractere";
-    divMensagem.style.border = "solid 1px red";
+  if (conteudo.length == 0) {
+    divMensagemContribuicao.innerHTML = "Conteudo inválido, deve conter no mínimo 1 caractere";
+    divMensagemContribuicao.style.border = "solid 1px red";
     textAreaConteudoContribuicao.style.border = "solid 1px red";
-  }else if(titulo.length == 0){
-    divMensagem.innerHTML = "Título inválido, deve conter no mínimo 1 caractere";
+  } else if (titulo.length == 0) {
+    divMensagemContribuicao.innerHTML = "Título inválido, deve conter no mínimo 1 caractere";
     inputTitulo.style.border = "solid 1px red";
-    divMensagem.style.border = "solid 1px red";
-  }else if(conteudo.length > 300){
-    divMensagem.innerHTML = "Você passou do limite de caracteres permitidos para a contribuição (300).";
+    divMensagemContribuicao.style.border = "solid 1px red";
+  } else if (conteudo.length > 300) {
+    divMensagemContribuicao.innerHTML = "Você passou do limite de caracteres permitidos para a contribuição (300).";
     textAreaConteudoContribuicao.style.border = "solid 1px red";
-    divMensagem.style.border = "solid 1px red";
-  }else if(titulo.length > 30){
-    divMensagem.innerHTML = "Você passou do limite de caracteres permitidos para o titulo (30).";
+    divMensagemContribuicao.style.border = "solid 1px red";
+  } else if (titulo.length > 30) {
+    divMensagemContribuicao.innerHTML = "Você passou do limite de caracteres permitidos para o titulo (30).";
     inputTitulo.style.border = "solid 1px red";
-    divMensagem.style.border = "solid 1px red";
-  }else if(filtro == "#"){
-    divMensagem.innerHTML = "Por favor, selecione a tag da contribuição.";
+    divMensagemContribuicao.style.border = "solid 1px red";
+  } else if (filtro == "#") {
+    divMensagemContribuicao.innerHTML = "Por favor, selecione a tag da contribuição.";
     categoriaFiltro.style.border = "solid 1px red";
-    divMensagem.style.border = "solid 1px red";
-  }else if(conteudoFiltro == "#"){
-    divMensagem.innerHTML = "Por favor, selecione o conteudo da tag da contribuição.";
+    divMensagemContribuicao.style.border = "solid 1px red";
+  } else if (conteudoFiltro == "#") {
+    divMensagemContribuicao.innerHTML = "Por favor, selecione o conteudo da tag da contribuição.";
     opcoes.style.border = "solid 1px red";
-    divMensagem.style.border = "solid 1px red";
-  }else{
+    divMensagemContribuicao.style.border = "solid 1px red";
+  } else {
     var mensagem = "";
     var estilo = "";
     botaoPostar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
           <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
           </svg>`;
-    
+
 
     const resposta = await fetch("http://localhost:3333/contribuicao/cadastrar", {
       method: "POST",
@@ -197,32 +252,32 @@ async function novaContribuicao(){
         "Content-Type": "application/json",
       }
     });
-    if(resposta.ok){
+    if (resposta.ok) {
       mensagem = "Contribuição criada com sucesso!"
-      icone =  `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+      icone = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
       <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
       </svg>`;
       estilo = "solid 1px #044e049c";
 
-    }else{
+    } else {
       resposta.json().then(m => {
         mensagem = m.mensagem;
         icone = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
               </svg>`;
-        estilo  = "solid 1px #600404";
+        estilo = "solid 1px #600404";
       });
 
     }
-    setTimeout(()=> {
-      divMensagem.innerHTML = mensagem; // Nunca mais fazer isso...
+    setTimeout(() => {
+      divMensagemContribuicao.innerHTML = mensagem; // Nunca mais fazer isso...
       botaoPostar.innerHTML = icone;
-      divMensagem.style.border = estilo;
+      divMensagemContribuicao.style.border = estilo;
       // erroSenha.style.border = estilo;
 
-      if(mensagem == "Contribuição criada com sucesso!"){
-        setTimeout(()=> {
-            location.reload();
+      if (mensagem == "Contribuição criada com sucesso!") {
+        setTimeout(() => {
+          location.reload();
         }, 1000)
       }
 
@@ -230,7 +285,7 @@ async function novaContribuicao(){
   }
 }
 
-async function buscarContribuicoes(){
+async function buscarContribuicoes() {
   const resposta = await fetch("http://localhost:3333/contribuicao/listar", {
     method: "GET",
     headers: {
@@ -238,18 +293,18 @@ async function buscarContribuicoes(){
     }
   });
 
-  if(resposta.ok){
-    resposta.json().then((contribuicoes)=> {
-      contribuicoes.forEach((contribuicao)=> {
-/* 
-      idContribuicao: 2,
-    conteudo: null,
-    contribuicaoFechada: null,
-    votos: null,
-    tipo: null,
-    tag: 'Bosses',
-    conteudoTag: 'Raddan',
-    nome: 'lucas' */
+  if (resposta.ok) {
+    resposta.json().then((contribuicoes) => {
+      contribuicoes.forEach((contribuicao) => {
+        /* 
+              idContribuicao: 2,
+            conteudo: null,
+            contribuicaoFechada: null,
+            votos: null,
+            tipo: null,
+            tag: 'Bosses',
+            conteudoTag: 'Raddan',
+            nome: 'lucas' */
         listaContribuicoes.innerHTML += `
       <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
         <div class="container-post">

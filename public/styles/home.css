@@ -107,12 +107,17 @@
 .container-post hr {
   width: 80%;
 }
-#divMensagem{
+.div-mensagem{
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 20px;
   padding: 10px;
   border-radius: 5px;
 }
+
+#divMensagemComentario{
+  margin-top: 22px;
+}
+
 .container-novo-post {
   display: none;
   position: fixed;
