@@ -29,6 +29,7 @@ function cadastrar(req, res) {
   const fkMaculado = req.body.fkMaculado;
   const tag = req.body.tag;
   const conteudoTag = req.body.conteudoTag;
+  
   /* contribuicaoModel.buscarPorCnpj(cnpj).then((resultado) => {
     if (resultado.length > 0) {
       res
@@ -71,36 +72,9 @@ function listarPorTipo(req, res) {
       });
 }
 
-function comentar(req, res){
-  const conteudo  = req.body.conteudo;
-  const fkContribuicaoRespondida = req.body.fkContribuicaoRespondida; 
-  const fkMaculado = req.body.fkMaculado;
-
-  const fkString = fkContribuicaoRespondida.toString().split("contribuicao")[1];
-
-
-  if(conteudo == undefined){
-    res.status(401).json({ mensagem: "Por favor insira um conteudo valido" });
-  }else if(fkContribuicaoRespondida == undefined){
-    res.status(401).json({ mensagem: "Por favor uma contribuicao valida" });
-  }else if(fkMaculado == undefined){
-    res.status(401).json({ mensagem: "Por favor um maculado valido"});
-  }else{
-    contribuicaoModel.comentar(conteudo, fkString, fkMaculado).then((resp)=> {
-      
-    res.status(200).json(resp);
-    
-    }).catch((error) => {
-          console.error(error);
-          res.status(500).json({ mensagem: "Erro ao comentar contribuição." });
-      });
-  }
-}
-
 module.exports = {
   buscarPorId,
   cadastrar,
   listar,
-  listarPorTipo,
-  comentar
+  listarPorTipo
 };

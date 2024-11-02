@@ -19,7 +19,7 @@ var indexRouter = require("./src/routes/index");
 var maculadoRouter = require("./src/routes/maculados");
 var avisosRouter = require("./src/routes/avisos");
 var votosRouter = require("./src/routes/votos");
-var aquariosRouter = require("./src/routes/aquarios");
+var comentariosRouter = require("./src/routes/comentarios");
 var contribuicaoRouter = require("./src/routes/contribuicao");
 
 app.use(express.json());
@@ -32,7 +32,7 @@ app.use("/", indexRouter);
 app.use("/maculados", maculadoRouter);
 app.use("/avisos", avisosRouter);
 app.use("/votos", votosRouter);
-app.use("/aquarios", aquariosRouter);
+app.use("/comentarios", comentariosRouter);
 app.use("/contribuicao", contribuicaoRouter);
 
 app.listen(PORTA_APP, function () {
