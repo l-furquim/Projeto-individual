@@ -1,7 +1,8 @@
 .bodyHome{
-  background-image: url("../../assets/1356787.jpeg");
+  background-image: url("../../assets/imagemArvore.png");
   background-position: center;
   background-size:cover;
+  background-attachment: fixed;
 }
 
 

@@ -25,7 +25,12 @@ body.troca-fundo {
 
 
 .bodyCadastro {
-  display: flex;
+  background-image: url("../assets/imagemEldenRing.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0% 40%;
+  padding: 0;
+  margin: 0;
 }
 
 .divCadastro{
@@ -38,7 +43,7 @@ body.troca-fundo {
 }
 
 .containerCadastro {
-  background-color:#1e1e1e;
+  background-color:#07140f;
   display: flex;
   flex-direction: column;
   width: 40%;
@@ -47,7 +52,6 @@ body.troca-fundo {
   align-items: center;
   border-radius: 20px;
   padding: 20px;
-  margin-top: 5%;
   color: #e7c274;
   padding-bottom: 40px;
   /* border: 1px #e7c274 solid; */
@@ -79,13 +83,13 @@ body.troca-fundo {
   border: none;
   border-radius: 10px;
   background-color:#182b23;
-  color:#e7c274;
+  color:#EEF7E6;
   outline: none;
   font-size: 15px;
   padding: 10px;
 }
 .camposCadastro input::placeholder {
-  color:#e7c274;  
+  color:#EEF7E6;  
   font-size: 15px;
 }
 .camposCadastro a {
@@ -98,19 +102,21 @@ body.troca-fundo {
   border: none;
   align-self: center;
   justify-self: center;
-  color: #e7c274;
-  background-color:#182b23;
+  color :#EEF7E6;
+  background-color:#c19d53;
   padding: 10px;
   transition: .3s;
   font-size: 15px;
+  border: solid 1px #c19d53;
 }
 
 .camposCadastro button:hover{
   transition: .3s;
+  background-color: transparent;
+  border: solid 1px #c19d53;
   cursor: pointer;
-  background-color: #07140f;
 }
-#divMensagem {
+  #divMensagem {
   margin-top: 15px;
   font-size: 18px;
   font-weight: bolder;
@@ -142,7 +148,7 @@ body.troca-fundo {
   margin: 10px 0 10px 0;
 }
 .containerLogin {
-  background-color:#1e1e1e;
+  background-color:#07140f;
   display: flex;
   flex-direction: column;
   width: 40%;
@@ -151,7 +157,6 @@ body.troca-fundo {
   align-items: center;
   border-radius: 20px;
   padding: 20px;
-  margin-top: 5%;
   color: #e7c274;
   padding-bottom: 40px;
   gap: 15px;
@@ -159,7 +164,12 @@ body.troca-fundo {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .bodyLogin {
-  display: flex;
+  background-image: url("../assets/imagemEldenRing.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: 0% 40%;
+  padding: 0;
+  margin: 0;
 }
 
 .containerLogin h1 {
@@ -182,7 +192,7 @@ body.troca-fundo {
   border: none;
   border-radius: 10px;
   background-color:#182b23;
-  color:white;
+  color:#EEF7E6;
   outline: none;
   font-size: 15px;
   padding: 10px;
@@ -191,7 +201,7 @@ body.troca-fundo {
 }
 
 .containerLogin input::placeholder{
-  color: #e7c274;
+  color: #EEF7E6;
   font-size: 15px;
 
 }
@@ -204,17 +214,18 @@ body.troca-fundo {
   border: none;
   align-self: center;
   justify-content: center;
-  color: #e7c274;
-  background-color:#182b23;
+  color: #EEF7E6;
+  background-color:#c19d53;
   padding: 10px;
-  transition: .3s;
+  transition: 0.3s;
   font-size: 15px;
+  border: solid 1px #c19d53;
 }
 
 .containerLogin button:hover{
   transition: 0.3ms;
   cursor: pointer;
-  background-color: #07140f;
+  background-color: transparent;
 }
 .direcCadastro{
   display: flex;

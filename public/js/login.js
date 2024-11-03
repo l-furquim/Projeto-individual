@@ -42,9 +42,9 @@ async function logar(){
       divMensagem.innerHTML = resposta;
       botaoLogar.innerHTML = icone;
   
-      /* setTimeout(()=> {
+       setTimeout(()=> {
         location.replace("/home.html");
-      }, 1000); */
+      }, 1000); 
     }, 2000);
 
     
