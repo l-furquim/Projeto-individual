@@ -294,6 +294,18 @@ body.troca-fundo {
   justify-content: center;
   align-items: center;
 }
+.logo{
+  margin-left: 50px;
+  margin-top: 10px;
+  display: flex;
+  width: 150px;
+  height: 200px;
+  justify-self: flex-start;
+  justify-content: flex-start;
+}
+.logo:hover{
+  cursor: pointer;
+}
 
 .conteudoNav {
   height: 100%;
