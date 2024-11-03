@@ -75,21 +75,21 @@ function fecharModal() {
 function mostrarComentarios(botao, id) {
 
   const contribuicao = botao.closest('li');
-  const containerComentario = contribuicao.querySelector('#containerComentario');
-  console.log(contribuicao, containerComentario)
+  
+  const containerComentario = contribuicao.closest("div").querySelector("#containerSecaoComentario");
+  console.log(contribuicao, containerComentario);
 
   if (vezesClicadas == 1) {
     vezesClicadas = 0;
     containerComentario.style.display = "none";
-    botaoMostrarComentario.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
-    <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
-    </svg>`
+    botao.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-down" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
+                    </svg>`;  
   } else {
     if (containerComentario) {
       vezesClicadas++;
       containerComentario.style.display = "flex";
-      botaoMostrarComentario.innerHTML = `
+      botao.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-down" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
       </svg>`
@@ -127,7 +127,12 @@ async function adicionarComentario(idContribuicao) {
 
   console.log(idContribuicao);
 
+    divMensagemComentario.innerHTML = "";
+    textAreaConteudoComentario.style.border = "none";
+
   if (conteudo.length == 0) {
+    divMensagemComentario.innerHTML = "Por favor insira um conteudo válido.";
+    textAreaConteudoComentario.style.border = "solid 1px #600404";
 
   } else {
     var mensagem = "";
@@ -329,7 +334,7 @@ async function buscarContribuicoes() {
           
           listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post">
+              <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado": ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   
@@ -365,10 +370,12 @@ async function buscarContribuicoes() {
                   </div>
                   ${contribuicaoDoUsuario ?
                 `<div id="containerSecaoFecharContribuicao">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
-                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                    </svg>
-                  </div>`
+                    <button id="botaoFecharContribuicao${contribuicao.idContribuicao}" onclick="fecharContribuicao(${contribuicao.idContribuicao})">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                      </svg>
+                    </button>
+                </div>`
                 : ""}
                   <div class="container-botao-like">
                     <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar( ${contribuicaoCurtidaPeloUsuario}, ${contribuicao.idContribuicao}, ${idAtual}, ${idMaculado} , ${contribuicao.votos} )">
@@ -401,7 +408,7 @@ async function buscarContribuicoes() {
 
           listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post">
+              <div class="container-post ${contribuicao.contribuicaoFechada == 0 ? "container-post-fechado" : ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   
@@ -485,7 +492,7 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto,idMaculado,qtdVo
       document.getElementById(`botaoVotar${idContribuicao}`).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
                       </svg> ${qtdVotos -1 }`;
-                      
+
     console.log(resposta);
     
   }else{

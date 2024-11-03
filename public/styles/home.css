@@ -33,6 +33,21 @@
   background-color: #1e1e1e;
   border-radius: 10px;
 }
+.container-post-fechado {
+  padding: 15px;
+  flex-direction: column;
+  margin-top: 10%;
+  align-items: center;
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  height: 90%;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+
 .cabecalho-post{
   width: 100%;
   display: flex;
@@ -129,6 +144,14 @@
 
 #divMensagemComentario{
   margin-top: 22px;
+}
+
+.containerSecaoFecharContribuicao button:hover{
+    cursor: pointer;
+}
+.containerSecaoFecharContribuicao button {
+  background-color: transparent;
+  color: #e7c274;
 }
 
 .container-novo-post {
