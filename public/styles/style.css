@@ -22,7 +22,12 @@ body.troca-fundo {
   font-weight: normal;
   font-style: normal;
 }
-
+/* ::placeholder{
+  font-family: "fontElden", sans-serif;
+}
+input{
+  font-family: "fontElden", sans-serif;
+} */
 
 .bodyCadastro {
   background-image: url("../assets/imagemEldenRing.png");

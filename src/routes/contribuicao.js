@@ -7,7 +7,7 @@ router.post("/cadastrar", function (req, res) {
     contribuicaoController.cadastrar(req, res);
 });
 
-router.get("/buscar/:id", function (req, res) {
+router.get("/buscarId/:id", function (req, res) {
   contribuicaoController.buscarPorId(req, res);
 });
 
@@ -21,6 +21,11 @@ router.get("/listar/tag/:tipo", function (req, res){
 
 router.post("/comentar", function(req, res){
   contribuicaoController.comentar(req,res);
-})
+});
+
+router.post("/buscar/tipo=:tipo&tag=:tag&conteudoTag=:conteudoTag", function(req,res){
+  contribuicaoController.buscar(req,res);
+});
+
 
 module.exports = router;

@@ -1,3 +1,4 @@
+const { query } = require("express");
 var database = require("../database/config");
 var sqlUtils = require("../utils/sql");
 
@@ -61,9 +62,142 @@ function buscarPorTipo(tipo) {
   return database.executar(instrucaoSql);
 } 
 
+function buscarApenasPorConteudo(palavras){
+
+  let queryInicial = `SELECT c.titulo, 
+                        c.conteudo, 
+                        c.contribuicaoFechada, 
+                        c.votos, 
+                        c.comentarios,
+                        c.tipo,
+                        c.tag,
+                        c.conteudoTag,
+                        m.nome
+                        FROM Contribuicao AS c
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
+
+  queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
+  
+  return database.executar(queryInicial + "COLLATE utf8mb4_general_ci;")
+};
+
+function buscarPorConteudoETag(palavras, tag){
+
+  console.log("Buscando por tag e conteudo !")
+
+  let queryInicial = `SELECT c.titulo, 
+                        c.conteudo, 
+                        c.contribuicaoFechada, 
+                        c.votos, 
+                        c.comentarios,
+                        c.tipo,
+                        c.tag,
+                        c.conteudoTag,
+                        m.nome
+                        FROM Contribuicao AS c
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
+
+  queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
+  
+  return database.executar(queryInicial + `AND c.tag = '${tag}' COLLATE utf8mb4_general_ci;`);
+
+}
+function buscarPorConteudoTagETipo(palavras, tag, tipo){
+  console.log("Buscando por tag, conteudo e tipo !")
+
+  let queryInicial = `SELECT c.titulo, 
+                        c.conteudo, 
+                        c.contribuicaoFechada, 
+                        c.votos, 
+                        c.comentarios,
+                        c.tipo,
+                        c.tag,
+                        c.conteudoTag,
+                        m.nome
+                        FROM Contribuicao AS c
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
+
+  queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
+  
+  return database.executar(queryInicial + `AND c.tag = '${tag}' AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;`);
+}
+function buscarPorConteudoETipo(palavras, tipo){
+  console.log("Buscando por tipo e conteudo !")
+
+  let queryInicial = `SELECT c.titulo, 
+                        c.conteudo, 
+                        c.contribuicaoFechada, 
+                        c.votos, 
+                        c.comentarios,
+                        c.tipo,
+                        c.tag,
+                        c.conteudoTag,
+                        m.nome
+                        FROM Contribuicao AS c
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
+
+  queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
+  
+  return database.executar(queryInicial + `AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;`);
+}
+function buscarApenasPorTipo(tipo){
+    let instrucaoSql = `SELECT c.titulo, 
+    c.conteudo, 
+    c.contribuicaoFechada, 
+    c.votos, 
+    c.comentarios,
+    c.tipo,
+    c.tag,
+    c.conteudoTag,
+    m.nome
+    FROM Contribuicao AS c
+    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tipo = '${tipo}'`;
+
+    return database.executar(instrucaoSql);
+}
+
+function buscarApenasPorTag(tag){
+  let instrucaoSql = `SELECT c.titulo, 
+    c.conteudo, 
+    c.contribuicaoFechada, 
+    c.votos, 
+    c.comentarios,
+    c.tipo,
+    c.tag,
+    c.conteudoTag,
+    m.nome
+    FROM Contribuicao AS c
+    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}'`;
+
+    return database.executar(instrucaoSql);
+}
+function buscarApenasPorTagETipo(tag, tipo){
+  let instrucaoSql = `SELECT c.titulo, 
+  c.conteudo, 
+  c.contribuicaoFechada, 
+  c.votos, 
+  c.comentarios,
+  c.tipo,
+  c.tag,
+  c.conteudoTag,
+  m.nome
+  FROM Contribuicao AS c
+  JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}'`;
+
+  return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
   buscarPorId, 
   cadastrar, 
   listar,
-  buscarPorTipo
+  buscarPorTipo,
+  buscarApenasPorConteudo,
+  buscarPorConteudoETag,
+  buscarPorConteudoTagETipo,
+  buscarPorConteudoETipo,
+  buscarApenasPorTipo,
+  buscarApenasPorTag,
+  buscarApenasPorTagETipo
 };

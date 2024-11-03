@@ -73,9 +73,104 @@ function listarPorTipo(req, res) {
       });
 }
 
+function buscar(req, res){
+  const conteudo = req.body.conteudo.split(" ");
+  const tipo = req.params.tipo;
+  const tag = req.params.tag;
+  const conteudoTag = req.params.conteudoTag;
+
+/*   if(conteudo == undefined){
+    res.status(401).json({mensagem: "Por favor procure por um conteudo válido"});
+  } */
+
+  if(conteudo == "" && tipo != 0 && tag == 0){
+    contribuicaoModel.buscarApenasPorTipo(tipo).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+
+  }else if(conteudo == "" && tipo == 0 && tag != 0){
+    contribuicaoModel.buscarApenasPorTag(tag).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }else if(conteudo == "" && tipo != 0 && tag != 0){
+    contribuicaoModel.buscarApenasPorTagETipo(tag, tipo).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }else if(tipo == 0 && tag == 0){
+    contribuicaoModel.buscarApenasPorConteudo(conteudo).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }else if(tipo == 0 && tag != 1){
+    contribuicaoModel.buscarPorConteudoETag(conteudo, tag).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }else if(tipo != 0 && tag != 0){
+    contribuicaoModel.buscarPorConteudoTagETipo(conteudo, tag,tipo).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }else if(tipo != 0 && tag == 0){
+    contribuicaoModel.buscarPorConteudoETipo(conteudo, tipo).then((resposta)=>{
+      if(resposta.length != 0){
+        return res.status(200).json(resposta);
+      }
+      return res.status(404).json({contribuicoes: []});
+
+    }).catch((error) => {
+      console.error(error);
+      res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
+    })
+  }
+
+  
+}
+
+
 module.exports = {
   buscarPorId,
   cadastrar,
   listar,
-  listarPorTipo
+  listarPorTipo,
+  buscar
 };

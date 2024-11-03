@@ -147,14 +147,36 @@
   margin-top: 22px;
 }
 
-.containerSecaoFecharContribuicao button:hover{
-    cursor: pointer;
-}
-.containerSecaoFecharContribuicao button {
-  background-color: transparent;
-  color: #e7c274;
+.container-pesquisa{
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
+.barra-pesquisa{
+  display: flex;
+  width: 60%;
+  height: 38px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+
+.containerSecaoFecharContribuicao{
+  display: flex;  
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+.botao-fechar-contribuicao{
+  background-color: transparent;
+  color: #e7c274;
+  width: 100%;
+  height: 100%;
+}
 .container-novo-post {
   display: none;
   position: fixed;
