@@ -9,40 +9,93 @@
 
 
 .bodyDashboard{
+  background-image: url("../assets/imagemArvore.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
   display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
+  background-attachment: fixed;
 }
 
 .containerDashboard{
-  margin-top: 6%;
-  background-color:#1e1e1e;
+  justify-self: center;
+  align-self: center;
   display: flex;
   width: 85%;
   border-radius: 10px;
   padding: 20px;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 120vh;
 }
 
 .conteudoDashboard {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  width: 100%;
+  height: 100%;
   color: #e7c274;
+  background-color: #07140f;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  border-radius: 5px;
 }
 .conteudoDashboard h1 {
+  margin-left: 100px;
+  display: flex;
+  flex-direction: row;
   font-size: 50px;
-  margin-left: 20px;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 100px;
+}
+.container-dash-usuario{
+  display: flex;
+  flex-direction: row;
+  font-size: 50px;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
 }
 
+.container-select-periodo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.container-select-periodo label {
+  font-size: 20px;
+}
+
+
+#selectPeriodo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  height: 50px;
+  width: 220px;
+  margin-bottom: 10px;
+  margin-left: 100px;
+  background-color: #182b23;
+  color: #e7c274;
+  border:none;
+}
+
+
 .container-kpis{
-  width: 100%;
+  width: 85%;
   justify-content: center;
   gap: 30px;
   display: flex;
@@ -50,7 +103,7 @@
   font-size: 20px;
 }
 .container-kpis p{
-  background-color: #144e3b;
+  background-color: #182b23;
   padding: 10px;
   border-radius: 10px;
 }
@@ -58,10 +111,10 @@
 .container-graficos{
   margin-top: 100px;
   display: flex;
-  width: 100%;
+  width: 80%;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 100px;
   flex-direction: column;
   height: 100%;
 }
@@ -72,15 +125,37 @@
   justify-content: center;
   align-items: center;
   gap:50px;
-  height: 50%;
+  height: 40%;
 }
+#graficoContribuicoesTotaisPorMeses{
+  background-color: #182b23;
+  border-radius: 5px;
+  padding: 10px;
+}
+#graficoPerguntasFechadasPorMeses{
+  background-color: #182b23;
+  border-radius: 5px;
+  padding: 10px;
+}
+#graficoContribuicoesMaisVotadas{
+  background-color: #182b23;
+  border-radius: 5px;
+  padding: 10px;
+}
+#graficoComentariosPorMeses{
+  background-color: #182b23;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
 .segunda-linha{
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   gap:50px;
-  height: 50%;
+  height: 40%;
 }
 .container-terceiro-grafico{
   margin-bottom: 50px;
