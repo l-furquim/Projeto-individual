@@ -27,6 +27,7 @@ function cadastrar(req, res) {
   const conteudo = req.body.conteudo;
   const tipo = req.body.tipo;
   const fkMaculado = req.body.fkMaculado;
+  console.log(`Fk do maculado : ` + fkMaculado);
   const tag = req.body.tag;
   const conteudoTag = req.body.conteudoTag;
   

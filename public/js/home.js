@@ -125,7 +125,7 @@ function fecharNovaContribuicao() {
 async function adicionarComentario(idContribuicao) {
   const conteudo = textAreaConteudoComentario.value;
 
-  console.log(idContribuicao);
+    console.log(idContribuicao);
 
     divMensagemComentario.innerHTML = "";
     textAreaConteudoComentario.style.border = "none";
@@ -139,18 +139,21 @@ async function adicionarComentario(idContribuicao) {
     var icone = "";
     var estilo = "";
 
+    const idMaculado = JSON.parse(sessionStorage.getItem("id"));
+
+
+
     const resposta = await fetch("http://localhost:3333/comentarios/comentar", {
       method: "POST",
       body: JSON.stringify({
         conteudo: conteudo,
         fkContribuicao: idContribuicao,
-        fkMaculado: 1
+        fkMaculado: idMaculado
       }),
       headers: {
         "Content-Type": "application/json"
       }
     });
-    console.log(resposta);
 
     botaoAdicionarComentario.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
@@ -201,6 +204,7 @@ async function novaContribuicao() {
   const tipoContribuicao = selectTipo.value;
   const filtro = categoriaFiltro.value;
   const conteudoFiltro = opcoes.value;
+  
   var icone = "";
 
 
@@ -241,7 +245,7 @@ async function novaContribuicao() {
     botaoPostar.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
           <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
           </svg>`;
-
+    const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
     const resposta = await fetch("http://localhost:3333/contribuicao/cadastrar", {
       method: "POST",
@@ -249,7 +253,7 @@ async function novaContribuicao() {
         titulo: titulo,
         conteudo: conteudo,
         tipo: tipoContribuicao,
-        fkMaculado: 1,
+        fkMaculado: idMaculado,
         tag: filtro,
         conteudoTag: conteudoFiltro
       }),
@@ -292,7 +296,6 @@ async function novaContribuicao() {
 
 async function buscarContribuicoes() {
   const nome = JSON.parse(sessionStorage.getItem("nome"));
-  const idMaculado = JSON.parse(sessionStorage.getItem("id"));
   abaUsuario.innerHTML += nome;
 
 
@@ -370,7 +373,7 @@ async function buscarContribuicoes() {
                   </div>
                   ${contribuicaoDoUsuario ?
                 `<div id="containerSecaoFecharContribuicao">
-                    <button id="botaoFecharContribuicao${contribuicao.idContribuicao}" onclick="fecharContribuicao(${contribuicao.idContribuicao})">
+                   <button id="botaoFecharContribuicao${contribuicao.idContribuicao}" onclick="fecharContribuicao(${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                       </svg>
@@ -405,10 +408,12 @@ async function buscarContribuicoes() {
       }else{
         arrayContribuicao.forEach((contribuicao) => {
           const contribuicaoDoUsuario = contribuicao.nome == nome;
+          console.log(contribuicaoDoUsuario);
+          console.log("Nome do usuario: " + nome);
 
           listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post ${contribuicao.contribuicaoFechada == 0 ? "container-post-fechado" : ""}">
+              <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   

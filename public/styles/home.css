@@ -117,9 +117,9 @@
 }
 
 .botao-contribuir {
-  background-color: #1e1e1e;
-  color: #e7c274;
-  border: none;
+  background-color:#c19d53;
+  color:#d8d8d8;
+  border: 1px solid #c19d53;
   margin-top: 5%;
   height: 60px;
   width: 220px;
@@ -128,8 +128,8 @@
   transition: 0.3s;
 }
 .botao-contribuir:hover {
-  background-color:#07140f;
-  transition: 0.3ms;
+  background-color:transparent;
+  transition: 0.3s;
   cursor:pointer;
 }
 
