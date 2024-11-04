@@ -3,6 +3,7 @@
   background-position: center;
   background-size:cover;
   background-attachment: fixed;
+  opacity: 1;
 }
 
 
@@ -48,6 +49,48 @@
   opacity: 0.8;
 }
 
+
+.div-buscando-contribuicoes{
+  display: flex;
+  font-weight: bolder;
+  font-size: 30px;
+  margin-top: 150px;
+  color: #e7c274;
+  align-items: center;
+  gap: 20px;
+}
+
+.roda-carregamento {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #e7c274;  
+  border-radius: 50%;
+  width: 12px; 
+  height: 12px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.container-pesquisa{
+  display: flex;
+  flex-direction: column;
+}
+
+.conteudo-filtro{
+  margin-top: 10px;
+  display: none;
+  position: absolute;
+  z-index: 1;
+  flex-direction: column;
+  gap:20px;
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+}
 
 .cabecalho-post{
   width: 100%;
@@ -117,9 +160,9 @@
 }
 
 .botao-contribuir {
-  background-color:#c19d53;
+  background-color:#e7c274;
   color:#d8d8d8;
-  border: 1px solid #c19d53;
+  border: 1px solid #e7c274;
   margin-top: 5%;
   height: 60px;
   width: 220px;
@@ -149,6 +192,7 @@
 
 .container-pesquisa{
   display: flex;
+  flex-direction: row;
   width: 80%;
   align-items: center;
   justify-content: center;

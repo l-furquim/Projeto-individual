@@ -78,6 +78,7 @@ function buscar(req, res){
   const tipo = req.params.tipo;
   const tag = req.params.tag;
   const conteudoTag = req.params.conteudoTag;
+  console.log("Executando pesquisa...");
 
 /*   if(conteudo == undefined){
     res.status(401).json({mensagem: "Por favor procure por um conteudo válido"});
@@ -119,10 +120,11 @@ function buscar(req, res){
     })
   }else if(tipo == 0 && tag == 0){
     contribuicaoModel.buscarApenasPorConteudo(conteudo).then((resposta)=>{
+      console.log("Executando pesquisa apenas por conteudo");
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);

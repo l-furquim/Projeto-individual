@@ -557,11 +557,11 @@ input{
   gap: 20px;
 }
 .conteudoRedirect button {
+  border: 1px solid #c19d53;
   width: 100%;
   padding: 15px;
   background-color:#c19d53;
   color:#EEF7E6;
-  border: none;
   border-radius: 10px;
   font-size: 20px;
   transition: 500ms;
@@ -577,7 +577,7 @@ input{
 
 .conteudoRedirect button:hover {
   background-color:transparent;
-  border: solid 1px #c19d53;
+
   cursor: pointer;
   transition: 500ms;
 }
