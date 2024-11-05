@@ -1,5 +1,5 @@
 body {
-  background-image: url("../assets/imagemEldenRing.png");
+  background-image: url("../assets/images/imagemEldenRing.png");
   background-size:contain;
   background-repeat: no-repeat;
   background-size: auto;
@@ -30,7 +30,7 @@ input{
 } */
 
 .bodyCadastro {
-  background-image: url("../assets/imagemEldenRing.png");
+  background-image: url("../assets/images/imagemEldenRing.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: 0% 40%;
@@ -169,7 +169,7 @@ input{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .bodyLogin {
-  background-image: url("../assets/imagemEldenRing.png");
+  background-image: url("../assets/images/imagemEldenRing.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: 0% 40%;
@@ -389,7 +389,7 @@ input{
 }
 
 .bodyInicio{
-  background-image: url("../assets/imagemEldenRing.png");
+  background-image: url("../assets/images/imagemEldenRing.png");
   background-size:contain;
   background-repeat: no-repeat;
   background-size: cover;
@@ -451,14 +451,14 @@ input{
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-image: url("../../assets/paisagem2.png");
+  background-image: url("../../assets/images/paisagem2.png");
   background-size:cover;
   background-repeat: no-repeat;
   margin-bottom: 70px;
 }
 
 .fundo-jogadores{
-  background-image: url("../../assets/paisagem2.png");
+  background-image: url("../../assets/images/paisagem2.png");
   background-size:100%;
   background-repeat: no-repeat;
   transition: 0.3s;
@@ -524,7 +524,7 @@ input{
 
 
 .containerRedirect {
-  background-image: url("../assets/paisagem2.jpg");
+  background-image: url("../assets/images/paisagem2.jpg");
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
