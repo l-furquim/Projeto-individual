@@ -22,7 +22,6 @@
   align-items: center;
 }
 
-
 .container-post {
   padding: 15px;
   flex-direction: column;
@@ -79,6 +78,7 @@
 }
 
 .conteudo-filtro{
+  font-size: 22px;
   margin-top: 10px;
   display: none;
   position: absolute;
@@ -90,6 +90,67 @@
   border-radius: 5px;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 0.5s ease-in-out;
+  transform: scale(0.5); 
+  animation: scaleUp 0.3s forwards; 
+}
+.conteudo-filtro p {
+  font-weight: bolder;
+}
+
+.select-filtro{
+  display: none;
+}
+.container-opcao-filtro{
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 60px;
+  height: 200px;
+  width: 500px;
+}
+
+.conteudo-opcao-filtro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100px;
+}
+.conteudo-opcao-filtro p{
+  margin: 0 0 15px 0;
+}
+.conteudo-opcao-filtro input{
+  transform: scale(2); /* Aumenta o tamanho em 150% */
+  -webkit-transform: scale(2); /* Suporte para navegadores baseados em WebKit */
+  margin: 10px;
+}
+.conteudo-opcao-filtro select{
+  margin-top: 10px;
+  width: 120px;
+  height: 30px;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.5);
+    opacity: 0;
+  }
 }
 
 .cabecalho-post{
@@ -209,18 +270,27 @@
 }
 
 
-.containerSecaoFecharContribuicao{
-  display: flex;  
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
+.container-secao-fechar-contribuicao{
+  display: flex;
+  width: 60px;
+  height: 40px;
+  margin-bottom: 10px;
+  justify-content: center;
 }
-.botao-fechar-contribuicao{
-  background-color: transparent;
+
+#botaoFecharContribuicao{
+  margin-top: 7px;
   color: #e7c274;
-  width: 100%;
-  height: 100%;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border:none;
 }
+
+#botaoFecharContribuicao:hover{
+  cursor: pointer;
+}
+
 .container-novo-post {
   display: none;
   position: fixed;
@@ -580,4 +650,20 @@ hr {
 }
 .container-botao-like button:hover{
   cursor: pointer;
+}
+
+.container-modal-fechar{
+  display: none;
+  background-color: #1e1e1e;
+  color: #e7c274;
+  position: fixed;
+  z-index: 1;
+  margin-top: 10px;
+  height: 200px;
+  width: 250px;
+}
+.conteudo-modal-fechar {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
