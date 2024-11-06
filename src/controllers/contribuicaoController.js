@@ -1,5 +1,5 @@
 var contribuicaoModel = require("../models/contribuicaoModel");
-
+var maculadoModel = require("../models/maculadoModel");
 /* function buscarPorCnpj(req, res) {
   var cnpj = req.query.cnpj;
 
@@ -164,8 +164,28 @@ function buscar(req, res){
       res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
     })
   }
+};
 
-  
+function fechar(req, res){
+  const idContribuicao = req.params.idContribuicao;
+  const idComentario = req.params.idComentario;
+
+  console.log(idContribuicao, idComentario);
+
+  if(idContribuicao == undefined){
+    res.status(401).json({mensagem: "O id da contribuição esta undefined"});
+  }
+  if(idComentario == undefined){
+    res.status(401).json({mensagem: "O id do comentario por fechar a contribuição esta undefined"});
+  }
+
+    contribuicaoModel.fechar(idContribuicao, idComentario)
+            .then(()=> {  
+              res.status(200).json({mensagem: "Contribuição fechada com sucesso"});
+              }).catch((erro)=> {
+              consosle.error(erro);
+              res.status(500).json({ mensagem: `Erro ao fechar contribuição ${erro}` });
+            });
 }
 
 
@@ -174,5 +194,6 @@ module.exports = {
   cadastrar,
   listar,
   listarPorTipo,
-  buscar
+  buscar,
+  fechar
 };

@@ -27,5 +27,9 @@ router.post("/buscar/tipo=:tipo&tag=:tag&conteudoTag=:conteudoTag", function(req
   contribuicaoController.buscar(req,res);
 });
 
+router.put("/fechar/contribuicao=:idContribuicao&comentario=:idComentario", function(req, res){
+  contribuicaoController.fechar(req,res);
+});
+
 
 module.exports = router;

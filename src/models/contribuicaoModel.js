@@ -12,7 +12,8 @@ function listar() {
   var instrucaoSql = `
                     SELECT c.idContribuicao,
                         c.titulo,
-                        c.conteudo, 
+                        c.conteudo,
+                        c.fkComentarioResponsavel,
                         c.contribuicaoFechada, 
                         (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
                         (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
@@ -38,8 +39,8 @@ function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
   const dataFormatada = sqlUtils.formatarDataParaSQL(data);
 
   var instrucaoSql = 
-    `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,votos,comentarios,tipo,fkMaculado, tag, conteudoTag) VALUES 
-    ('${titulo}','${conteudo}','${dataFormatada}',${false},${0},${0},'${tipo}','${fkMaculado}','${tag}','${conteudoTag}')`;
+    `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,fkComentarioResponsavel,votos,comentarios,tipo,fkMaculado, tag, conteudoTag) VALUES 
+    ('${titulo}','${conteudo}','${dataFormatada}',${false},${null},${0},${0},'${tipo}','${fkMaculado}','${tag}','${conteudoTag}')`;
 
   return database.executar(instrucaoSql);
 }
@@ -48,7 +49,8 @@ function buscarPorTipo(tipo) {
   const instrucaoSql = `
                        SELECT c.titulo, 
                         c.conteudo, 
-                        c.contribuicaoFechada, 
+                        c.contribuicaoFechada,
+                        c.fkComentarioResponsavel,
                         c.votos, 
                         c.comentarios,
                         c.tipo,
@@ -66,7 +68,8 @@ function buscarApenasPorConteudo(palavras){
 
   let queryInicial = `SELECT c.titulo, 
                         c.conteudo, 
-                        c.contribuicaoFechada, 
+                        c.contribuicaoFechada,
+                        c.fkComentarioResponsavel,
                         c.votos, 
                         c.comentarios,
                         c.tipo,
@@ -87,7 +90,8 @@ function buscarPorConteudoETag(palavras, tag){
 
   let queryInicial = `SELECT c.titulo, 
                         c.conteudo, 
-                        c.contribuicaoFechada, 
+                        c.contribuicaoFechada,
+                        c.fkComentarioResponsavel,
                         c.votos, 
                         c.comentarios,
                         c.tipo,
@@ -107,7 +111,8 @@ function buscarPorConteudoTagETipo(palavras, tag, tipo){
 
   let queryInicial = `SELECT c.titulo, 
                         c.conteudo, 
-                        c.contribuicaoFechada, 
+                        c.contribuicaoFechada,
+                        c.fkComentarioResponsavel,
                         c.votos, 
                         c.comentarios,
                         c.tipo,
@@ -126,7 +131,8 @@ function buscarPorConteudoETipo(palavras, tipo){
 
   let queryInicial = `SELECT c.titulo, 
                         c.conteudo, 
-                        c.contribuicaoFechada, 
+                        c.contribuicaoFechada,
+                        c.fkComentarioResponsavel,
                         c.votos, 
                         c.comentarios,
                         c.tipo,
@@ -143,7 +149,8 @@ function buscarPorConteudoETipo(palavras, tipo){
 function buscarApenasPorTipo(tipo){
     let instrucaoSql = `SELECT c.titulo, 
     c.conteudo, 
-    c.contribuicaoFechada, 
+    c.contribuicaoFechada,
+    c.fkComentarioResponsavel,
     c.votos, 
     c.comentarios,
     c.tipo,
@@ -159,7 +166,8 @@ function buscarApenasPorTipo(tipo){
 function buscarApenasPorTag(tag){
   let instrucaoSql = `SELECT c.titulo, 
     c.conteudo, 
-    c.contribuicaoFechada, 
+    c.contribuicaoFechada,
+    c.fkComentarioResponsavel,
     c.votos, 
     c.comentarios,
     c.tipo,
@@ -174,7 +182,8 @@ function buscarApenasPorTag(tag){
 function buscarApenasPorTagETipo(tag, tipo){
   let instrucaoSql = `SELECT c.titulo, 
   c.conteudo, 
-  c.contribuicaoFechada, 
+  c.contribuicaoFechada,
+  c.fkComentarioResponsavel,
   c.votos, 
   c.comentarios,
   c.tipo,
@@ -183,6 +192,13 @@ function buscarApenasPorTagETipo(tag, tipo){
   m.nome
   FROM Contribuicao AS c
   JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}'`;
+
+  return database.executar(instrucaoSql);
+}
+
+function fechar(idContribuicao, idComentario){
+  const instrucaoSql = 
+  `UPDATE Contribuicao SET contribuicaoFechada = ${true}, fkComentarioResponsavel = ${idComentario} WHERE idContribuicao = ${idContribuicao}`
 
   return database.executar(instrucaoSql);
 }
@@ -199,5 +215,6 @@ module.exports = {
   buscarPorConteudoETipo,
   buscarApenasPorTipo,
   buscarApenasPorTag,
-  buscarApenasPorTagETipo
+  buscarApenasPorTagETipo,
+  fechar
 };

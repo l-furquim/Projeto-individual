@@ -276,6 +276,8 @@
   height: 40px;
   margin-bottom: 10px;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #botaoFecharContribuicao{
@@ -654,16 +656,17 @@ hr {
 
 .container-modal-fechar{
   display: none;
-  background-color: #1e1e1e;
+  background-color:black;
   color: #e7c274;
-  position: fixed;
-  z-index: 1;
   margin-top: 10px;
-  height: 200px;
+  height: 300px;
   width: 250px;
 }
 .conteudo-modal-fechar {
   display: flex;
   height: 100%;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

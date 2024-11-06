@@ -1,3 +1,14 @@
+document.querySelector('#inputSenha').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    logar();
+  }
+});
+document.querySelector('#inputEmail').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    logar();
+  }
+});
+
 async function logar(){
   const emailVar  = inputEmail.value;
   const senhaVar = inputSenha.value;

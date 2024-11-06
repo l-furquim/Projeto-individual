@@ -4,6 +4,8 @@ function comentar(req, res) {
   const conteudo = req.body.conteudo;
   const fkContribuicao = req.body.fkContribuicao;
   const fkMaculado = req.body.fkMaculado; 
+  const dataJs = new Date(); 
+  const dataFormatada = sqlUtils.formatarDataParaSQL(dataJs);
 
   // Conversão para o tipo string para remover o termo contribuicao utilizado para mapear, e após isso busca pelo indice um que por padrao eh o numero da contribuicao
   const fkContribuicaoString = fkContribuicao.toString().split("contribuicao")[1];
@@ -16,7 +18,7 @@ function comentar(req, res) {
     res.status(401).json({mensagem: "Por favor insira um id de maculado válido para o comentario"})
   }
 
-  comentarioModel.comentar(conteudo, fkContribuicaoString, fkMaculado).then((resultado) => {
+  comentarioModel.comentar(conteudo, fkContribuicaoString, fkMaculado, dataFormatada).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
