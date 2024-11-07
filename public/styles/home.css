@@ -77,14 +77,15 @@
   flex-direction: column;
 }
 
+
 .conteudo-filtro{
   font-size: 22px;
   margin-top: 10px;
   display: none;
   position: absolute;
   z-index: 1;
+  left: 500px;
   flex-direction: column;
-  gap:20px;
   background-color: #1e1e1e;
   padding: 10px;
   border-radius: 5px;
@@ -92,7 +93,9 @@
   justify-content: center;
   animation: fadeIn 0.5s ease-in-out;
   transform: scale(0.5); 
-  animation: scaleUp 0.3s forwards; 
+  animation: scaleUp 0.3s forwards;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  width: 300px;
 }
 .conteudo-filtro p {
   font-weight: bolder;
@@ -103,19 +106,22 @@
 }
 .container-opcao-filtro{
   display: flex;
-  align-items: start;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: 60px;
-  height: 200px;
+  height: 250px;
   width: 500px;
+  
 }
 
 .conteudo-opcao-filtro {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  width: 100px;
+  width: 200px;
+  gap: 10px ;
+  font-size: 16px;
 }
 .conteudo-opcao-filtro p{
   margin: 0 0 15px 0;

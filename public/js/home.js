@@ -205,6 +205,8 @@ async function novaContribuicao() {
   const filtro = categoriaFiltro.value;
   const conteudoFiltro = opcoes.value;
 
+  console.log(tipoContribuicao);
+
   var icone = "";
 
 
@@ -411,7 +413,7 @@ async function buscarContribuicoes() {
                   `
                 : ""}
                   </div>
-                  <div class="container-botao-like">
+                  <div class="container-botao-like"> 
                     <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar( ${contribuicaoCurtidaPeloUsuario}, ${contribuicao.idContribuicao}, ${idAtual}, ${idMaculado} , ${contribuicao.votos} )">
                       ${contribuicaoCurtidaPeloUsuario ?
               `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
@@ -498,8 +500,8 @@ async function buscarContribuicoes() {
                   </div>
 
                   </div>
-                  <div class="container-botao-like">
-                    <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(${false}, ${contribuicao.idContribuicao},${undefined},${idMaculado},${contribuicao.votos})">
+                  <div class="container-botao-like"> 
+                    <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(${false}, ${contribuicao.idContribuicao},${null},${idMaculado},${contribuicao.votos})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
                       </svg>
@@ -554,6 +556,7 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
         "Content-Type": "application/json"
       }
     });
+    console.log("Votando no pesquisar sem voto")
     document.getElementById(`botaoVotar${idContribuicao}`).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0"/>
                           </svg> ${qtdVotos + 1}`;
@@ -565,8 +568,21 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
 async function pesquisarContribuicao(conteudoPesquisa) {
   const nome = JSON.parse(sessionStorage.getItem("nome")); ''
 
+  const selects = document.querySelectorAll(".select-filtro");
+  const filtros = [];
+
+   selects.forEach(select=> {
+    if(select.value != "#"){
+      filtros.push(select.value);
+    }else{
+      filtros.push(0);
+    }
+  });
+  console.log(filtros);
+  
+
   const contribuicoes = await fetch(
-    `http://localhost:3333/contribuicao//buscar/tipo=0&tag=0&conteudoTag=0`, {
+    `http://localhost:3333/contribuicao//buscar/tipo=${filtros[0]}&tag=${filtros[1]}&conteudoTag=${filtros[2]}`, {
 
     method: "POST",
     headers: {
@@ -608,6 +624,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
             const idAtual = votoAtual ? votoAtual.idVoto : null;
 
             var contribuicaoCurtidaPeloUsuario = votosFks.includes(contribuicao.idContribuicao);
+            console.log("Contribuicao curtida pelo usuario? " + contribuicaoCurtidaPeloUsuario);
 
             listaContribuicoes.innerHTML += `
               <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
@@ -663,7 +680,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                   `
                 : ""}
                   </div>
-                    <div class="container-botao-like">
+                    <div class="container-botao-like"> 
                       <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar( ${contribuicaoCurtidaPeloUsuario}, ${contribuicao.idContribuicao}, ${idAtual}, ${idMaculado} , ${contribuicao.votos} )">
                         ${contribuicaoCurtidaPeloUsuario ?
                 `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
@@ -751,7 +768,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                 : ""}
                   </div>
                     <div class="container-botao-like">
-                      <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(${false}, ${contribuicao.idContribuicao},${undefined},${idMaculado},${contribuicao.votos})">
+                      <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(${false}, ${contribuicao.idContribuicao},${null},${idMaculado},${contribuicao.votos})">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
                         </svg>
@@ -791,12 +808,26 @@ function abrirFiltro() {
     container.style.display = "flex";
   }
 }
-function validarCheckBox(check) {
-  if (check.checked) {
-    console.log("CHACKADO");
-    selectTag.style.display = "flex";
-  } else {
-    selectTag.style.display = "none";
+function validarCheckBox(check, valor) {
+  if (check.id == "checkTipo") {
+    if(check.checked){
+      selectTipoFiltro.style.display = "flex";
+    }else{
+      selectTipoFiltro.style.display = "none";
+    }
+   
+  } else if(check.id == "checkTag"){
+    if(check.checked){
+      selectTagFiltro.style.display = "flex";
+    }else{
+      selectTagFiltro.style.display = "none";
+    }
+  }else{
+    if(check.checked){
+      selectConteudoTagFiltro.style.display = "flex";
+    }else{
+      selectConteudoTagFiltro.style.display = "none";
+    }
   }
 
 

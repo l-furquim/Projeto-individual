@@ -26,13 +26,14 @@
           </button>
 
           <div id="conteudoFiltro" class="conteudo-filtro">
-            <p>Selecione os filtros que deseja utilizar</p>
+            <p>Filtros</p>
             
             <div class="container-opcao-filtro">
               <div class="conteudo-opcao-filtro">
                 <p>Tipo</p>
                 <input id="checkTipo" type="checkbox" onchange="validarCheckBox(this, checkTipo.value)">
-                <select class="select-filtro" id="selectTipo">
+                <select class="select-filtro" id="selectTipoFiltro">
+                  <option value="#">Tipo</option>
                   <option value="ajuda">Ajuda</option>
                   <option value="celebrar">Celebrar</option>
                   <option value="dica">Dica</option>
@@ -41,15 +42,17 @@
               <div class="conteudo-opcao-filtro">
                 <p>Tag</p>
                 <input id="checkTag" type="checkbox" onchange="validarCheckBox(this, checkTag.value)">
-                <select class="select-filtro" id="selectTag">
+                <select class="select-filtro" id="selectTagFiltro">
+                  <option value="#">Tag</option>
                   <option value="ajuda">Bosses</option>
                   <option value="celebrar">Armas</option>
                 </select>
               </div>
               <div class="conteudo-opcao-filtro">
                 <p>Conteúdo da tag</p>
-              <input id="checkTag" type="checkbox" onchange="validarCheckBox(this, checkTag.value)">
-                <select class="select-filtro" id="selectTag">
+              <input id="checkConteudoTag" type="checkbox" onchange="validarCheckBox(this, checkTag.value)">
+                <select class="select-filtro" id="selectConteudoTagFiltro">
+                  <option value="#">Conteudo</option>
                   <option value="ajuda">Bosses</option>
                   <option value="celebrar">Armas</option>
                 </select>
@@ -115,7 +118,7 @@
 
       <textarea id="textAreaConteudoContribuicao"></textarea>
 
-        <label for="selectTipo">Selecione o tipo da contribuição</label>
+        <label>Selecione o tipo da contribuição</label>
         <select id="selectTipo">
           <option value="ajuda">Ajuda</option>
           <option value="celebrar">Celebrar</option>

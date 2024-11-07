@@ -34,7 +34,7 @@ fkMaculado INT,
 CONSTRAINT FOREIGN KEY (fkMaculado) REFERENCES Maculado(idMaculado),
 /* CONSTRAINT FOREIGN KEY (fkComentarioResponsavel) REFERENCES Comentario(idComentario), */
 CONSTRAINT PRIMARY KEY(idContribuicao, fkMaculado),
-CONSTRAINT CHECK (tipo IN ("Ajuda", "Celebrar", "Dica")),
+CONSTRAINT CHECK (tipo IN ("ajuda", "celebrar", "dica")),
 CONSTRAINT CHECK (tag IN ("Bosses", "Armas"))
 );
 
