@@ -40,7 +40,7 @@ function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
 
   var instrucaoSql = 
     `INSERT INTO Contribuicao (titulo,conteudo, dtContribuicao,contribuicaoFechada,fkComentarioResponsavel,votos,comentarios,tipo,fkMaculado, tag, conteudoTag) VALUES 
-    ('${titulo}','${conteudo}','${dataFormatada}',${false},${null},${0},${0},'${tipo}','${fkMaculado}','${tag}','${conteudoTag}')`;
+    ('${titulo}','${conteudo}','${dataFormatada}',${false},${null},${0},${0},'${tipo}',${fkMaculado},'${tag}','${conteudoTag}')`;
 
   return database.executar(instrucaoSql);
 }

@@ -11,7 +11,17 @@ function comentar(conteudo, fkContribuicao, fkMaculado, data) {
 
 function listar() {
   
-  var instrucaoSql = `SELECT * FROM Comentario;`;
+  var instrucaoSql = `SELECT 
+                        c.idComentario,
+                        c.conteudo,
+                        c.fkContribuicao,
+                        m.nome as nome,
+                        c.responsavelPorFechar,
+                        c.qtdVotos,
+                        c.dtComentario
+                          FROM Comentario as c
+                              JOIN Maculado as m 
+                                ON c.fkMaculado = m.idMaculado;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

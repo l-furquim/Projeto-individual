@@ -317,19 +317,42 @@ async function buscarContribuicoes() {
         "Content-Type": "application/json"
       }
     });
+    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application.json"
+      }
+    });
 
-    if (votos.ok) {
+
+
+    if (votos.ok && comentarios.ok) {
       const arrayContribuicao = await contribuicoes.json();
+      const arrayComentario = await comentarios.json();
 
       if (votos.status != 204) {
         const arrayVotos = await votos.json();
         const votosFks = arrayVotos.map((voto) => voto.fkContribuicao);
-
+        const comentariosFks = arrayComentario.map((comentario)=> comentario.fkContribuicao);
         arrayContribuicao.forEach((contribuicao) => {
 
           const contribuicaoDoUsuario = contribuicao.nome == nome;
 
           const votoAtual = arrayVotos.find(v => v.fkContribuicao === contribuicao.idContribuicao);
+
+          const comentarioAtual = arrayComentario
+                    .filter((c) => c.fkContribuicao == contribuicao.idContribuicao)
+                    .map((comentario) => 
+                      `
+                            <div class="container-comentarios-fechar">
+                              <input class="check-comentario" onchange="mudancaCheck(this)" type="checkbox" id="checkComentario${comentario.idComentario}">
+                              <h3>${comentario.nome}</h3>
+                              <p>${comentario.conteudo.length > 40 ? comentario.conteudo.slice(0,30) + "..." : comentario.conteudo}</p>
+                            </div>
+                            `
+                      )
+                    .join("");
+
 
           const idAtual = votoAtual ? votoAtual.idVoto : null;
 
@@ -372,18 +395,16 @@ async function buscarContribuicoes() {
                     </button>
                   </div>
                  <div class="container-secao-fechar-contribuicao">
-                  ${contribuicaoDoUsuario ?
+                  ${contribuicaoDoUsuario && !contribuicao.contribuicaoFechada ?
                 ` <button id="botaoFecharContribuicao" onclick="abrirModalContribuicao(this,${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                       </svg>
                   </button>
-                  
                   <div id="containerModalFechar${contribuicao.idContribuicao}" class="container-modal-fechar">
                   <div id="conteudoModalFechar" class="conteudo-modal-fechar">
-                  <h1> Quem ajudou sua contribuição </h1>
-                      <input type="checkbox" id="checkComentario">
-                      <p>Comentario que ajudoou o cara</p>
+                  <h1> Quem ajudou sua contribuição ?</h1>
+                      ${comentarioAtual}
                       <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
@@ -458,7 +479,7 @@ async function buscarContribuicoes() {
                     </button>
                   </div>
                   <div class="container-secao-fechar-contribuicao">
-                  ${contribuicaoDoUsuario ?
+                  ${contribuicaoDoUsuario && !contribuicao.contribuicaoFechada ?
                 ` <button id="botaoFecharContribuicao" onclick="abrirModalContribuicao(this,${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
@@ -466,11 +487,9 @@ async function buscarContribuicoes() {
                   </button>
                   
                   <div id="containerModalFechar${contribuicao.idContribuicao}" class="container-modal-fechar">
-                    <div id="conteudoModalFechar" class="conteudo-modal-fechar">
-                      <p>Quem te ajudou nessa contribuição ?</p>
-                      <select id="">
-                        <option value="">ROGERIO</option>
-                      </select>
+                  <div id="conteudoModalFechar" class="conteudo-modal-fechar">
+                  <h1> Quem ajudou sua contribuição ?</h1>
+                      ${comentarioAtual}
                       <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
@@ -503,7 +522,8 @@ async function buscarContribuicoes() {
       }
 
     } else {
-      mensagem = resposta
+      console.log(votos);
+      console.log(comentarios);
     }
 
   }
@@ -626,7 +646,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                       </button>
                     </div>
                   <div class="container-secao-fechar-contribuicao">
-                  ${contribuicaoDoUsuario ?
+                  ${contribuicaoDoUsuario && !contribuicao.contribuicaoFechada ?
                 ` <button id="botaoFecharContribuicao" onclick="abrirModalContribuicao(this,${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
@@ -634,18 +654,14 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                   </button>
                   
                   <div id="containerModalFechar${contribuicao.idContribuicao}" class="container-modal-fechar">
-                    <div id="conteudoModalFechar" class="conteudo-modal-fechar">
-                      <p>Quem te ajudou nessa contribuição ?</p>
-                      <select id="">
-                        <option value="">ROGERIO</option>
-                      </select>
+                  <div id="conteudoModalFechar" class="conteudo-modal-fechar">
+                  <h1> Quem ajudou sua contribuição ?</h1>
+                      ${comentarioAtual}
                       <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
                   `
                 : ""}
-                  </div>
-
                   </div>
                     <div class="container-botao-like">
                       <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar( ${contribuicaoCurtidaPeloUsuario}, ${contribuicao.idContribuicao}, ${idAtual}, ${idMaculado} , ${contribuicao.votos} )">
@@ -718,26 +734,21 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                       </button>
                     </div>
                   <div class="container-secao-fechar-contribuicao">
-                  ${contribuicaoDoUsuario ?
+                  ${contribuicaoDoUsuario && !contribuicao.contribuicaoFechada ?
                 ` <button id="botaoFecharContribuicao" onclick="abrirModalContribuicao(this,${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                         <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                       </svg>
                   </button>
-                  
                   <div id="containerModalFechar${contribuicao.idContribuicao}" class="container-modal-fechar">
-                    <div id="conteudoModalFechar" class="conteudo-modal-fechar">
-                      <p>Quem te ajudou nessa contribuição ?</p>
-                      <select id="">
-                        <option value="">ROGERIO</option>
-                      </select>
+                  <div id="conteudoModalFechar" class="conteudo-modal-fechar">
+                  <h1> Quem ajudou sua contribuição ?</h1>
+                      ${comentarioAtual}
                       <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
                   `
                 : ""}
-                  </div>
-
                   </div>
                     <div class="container-botao-like">
                       <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(${false}, ${contribuicao.idContribuicao},${undefined},${idMaculado},${contribuicao.votos})">
@@ -792,12 +803,47 @@ function validarCheckBox(check) {
 }
 function abrirModalContribuicao(botao, idContribuicao){
   const container =  document.getElementById(`containerModalFechar${idContribuicao}`);
-
-  container.style.display = "flex";
+  const estilo = window.getComputedStyle(container);
+  
+  if(estilo.display == "flex"){
+    container.style.display = "none";
+  }else{
+    container.style.display = "flex";
+  }
   
   console.log(container);
 }
 
 async function fecharContribuicao(idContribuicao){
+  const checkboxMarcado = document.querySelector('input[type="checkbox"]:checked');
+
+  const idComentario = checkboxMarcado.id.replace("checkComentario", "");
+
+  fetch(`http://localhost:3333/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((resposta)=> {
+    if(resposta.ok){
+      console.log("Contribuicao fechada")
+    }
+  });
+}
+
+function mudancaCheck(input){
+  console.log(input);
+  const checkboxes = document.querySelectorAll(".check-comentario");
+  
+  if (input.checked) {
+    checkboxes.forEach(cb => {
+      if (input !== cb){
+        cb.disabled = true; 
+        cb.classList.add("check-desabilitado");
+      } 
+    });
+  } else {
+    checkboxes.forEach(cb => {cb.disabled = false; cb.classList.remove("check-desabilitado")});
+  }
 
 }

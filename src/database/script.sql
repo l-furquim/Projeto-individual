@@ -32,11 +32,13 @@ tag VARCHAR(45),
 conteudoTag VARCHAR(45),
 fkMaculado INT,
 CONSTRAINT FOREIGN KEY (fkMaculado) REFERENCES Maculado(idMaculado),
-CONSTRAINT FOREIGN KEY (fkComentarioResponsavel) REFERENCES Comentario(idComentario),
+/* CONSTRAINT FOREIGN KEY (fkComentarioResponsavel) REFERENCES Comentario(idComentario), */
 CONSTRAINT PRIMARY KEY(idContribuicao, fkMaculado),
 CONSTRAINT CHECK (tipo IN ("Ajuda", "Celebrar", "Dica")),
 CONSTRAINT CHECK (tag IN ("Bosses", "Armas"))
 );
+
+
 
 -- Criação da tabela de Comentario
 

@@ -1,4 +1,5 @@
 var comentarioModel = require("../models/comentarioModel");
+var sqlUtils = require("../utils/sql");
 
 function comentar(req, res) {
   const conteudo = req.body.conteudo;
