@@ -47,12 +47,13 @@ function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
 
 function buscarPorTipo(tipo) {
   const instrucaoSql = `
-                       SELECT c.titulo, 
+                       SELECT c.idContribuicao,
+                        c.titulo, 
                         c.conteudo, 
                         c.contribuicaoFechada,
+                        (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+                        (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
                         c.fkComentarioResponsavel,
-                        c.votos, 
-                        c.comentarios,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
@@ -66,12 +67,14 @@ function buscarPorTipo(tipo) {
 
 function buscarApenasPorConteudo(palavras){
 
-  let queryInicial = `SELECT c.titulo, 
+  let queryInicial = `SELECT
+                        c.idContribuicao,
+                        c.titulo, 
                         c.conteudo, 
                         c.contribuicaoFechada,
+                        (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+                        (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
                         c.fkComentarioResponsavel,
-                        c.votos, 
-                        c.comentarios,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
@@ -88,12 +91,14 @@ function buscarPorConteudoETag(palavras, tag){
 
   console.log("Buscando por tag e conteudo !")
 
-  let queryInicial = `SELECT c.titulo, 
+  let queryInicial = `SELECT 
+                        c.idContribuicao,
+                        c.titulo, 
                         c.conteudo, 
                         c.contribuicaoFechada,
+                        (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+                        (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
                         c.fkComentarioResponsavel,
-                        c.votos, 
-                        c.comentarios,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
@@ -109,12 +114,14 @@ function buscarPorConteudoETag(palavras, tag){
 function buscarPorConteudoTagETipo(palavras, tag, tipo){
   console.log("Buscando por tag, conteudo e tipo !")
 
-  let queryInicial = `SELECT c.titulo, 
+  let queryInicial = `SELECT 
+                        c.idContribuicao,
+                        c.titulo, 
                         c.conteudo, 
                         c.contribuicaoFechada,
+                        (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+                        (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
                         c.fkComentarioResponsavel,
-                        c.votos, 
-                        c.comentarios,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
@@ -129,12 +136,14 @@ function buscarPorConteudoTagETipo(palavras, tag, tipo){
 function buscarPorConteudoETipo(palavras, tipo){
   console.log("Buscando por tipo e conteudo !")
 
-  let queryInicial = `SELECT c.titulo, 
+  let queryInicial = `SELECT 
+                        c.idContribuicao,
+                        c.titulo, 
                         c.conteudo, 
                         c.contribuicaoFechada,
+                        (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+                        (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
                         c.fkComentarioResponsavel,
-                        c.votos, 
-                        c.comentarios,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
@@ -147,12 +156,14 @@ function buscarPorConteudoETipo(palavras, tipo){
   return database.executar(queryInicial + `AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;`);
 }
 function buscarApenasPorTipo(tipo){
-    let instrucaoSql = `SELECT c.titulo, 
+    let instrucaoSql = `SELECT 
+    c.idContribuicao,
+    c.titulo, 
     c.conteudo, 
     c.contribuicaoFechada,
+    (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+    (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
     c.fkComentarioResponsavel,
-    c.votos, 
-    c.comentarios,
     c.tipo,
     c.tag,
     c.conteudoTag,
@@ -164,12 +175,14 @@ function buscarApenasPorTipo(tipo){
 }
 
 function buscarApenasPorTag(tag){
-  let instrucaoSql = `SELECT c.titulo, 
+  let instrucaoSql = `SELECT 
+    c.idContribuicao,
+    c.titulo, 
     c.conteudo, 
     c.contribuicaoFechada,
+    (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+    (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
     c.fkComentarioResponsavel,
-    c.votos, 
-    c.comentarios,
     c.tipo,
     c.tag,
     c.conteudoTag,
@@ -180,12 +193,14 @@ function buscarApenasPorTag(tag){
     return database.executar(instrucaoSql);
 }
 function buscarApenasPorTagETipo(tag, tipo){
-  let instrucaoSql = `SELECT c.titulo, 
+  let instrucaoSql = `SELECT 
+  c.idContribuicao,
+  c.titulo, 
   c.conteudo, 
   c.contribuicaoFechada,
+  (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
+  (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
   c.fkComentarioResponsavel,
-  c.votos, 
-  c.comentarios,
   c.tipo,
   c.tag,
   c.conteudoTag,
