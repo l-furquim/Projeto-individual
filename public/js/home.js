@@ -55,6 +55,21 @@ categoriaSelect.addEventListener("change", function () {
   });
 });
 
+selectTagFiltro.addEventListener("change", function(){
+  selectConteudoTagFiltro.innerHTML = '<option value="#">Selecione uma opção</option>';
+
+  const categoria = selectTagFiltro.value;
+  const opcoes = opcoesPorCategoria[categoria] || [];
+
+  opcoes.forEach(opcao => {
+    const optionElement = document.createElement("option");
+    optionElement.value = opcao.value;
+    optionElement.textContent = opcao.text;
+    selectConteudoTagFiltro.appendChild(optionElement);
+  });
+
+});
+
 function criarPost() {
   var container = containerNovoPost;
 

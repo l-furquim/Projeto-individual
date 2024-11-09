@@ -108,6 +108,7 @@ function buscar(req, res){
       res.status(500).json({ mensagem: "Erro ao buscar contribuições pelo conteudo." });
     })
   }else if(conteudo == "" && tipo != 0 && tag != 0){
+    console.log("Buscando por apenas tag e filtro...")
     contribuicaoModel.buscarApenasPorTagETipo(tag, tipo).then((resposta)=>{
       if(resposta.length != 0){
         return res.status(200).json(resposta);
