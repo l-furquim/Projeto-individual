@@ -55,8 +55,28 @@ async function cadastrar(req, res) {
         }
     }
 }
+function buscarDados(req, res){
+    const idMaculado = req.params.idMaculado;
+
+    if(idMaculado == undefined){
+        res.status(401).json({mensagem: "Id do maculado esta undefined"});
+    }
+
+    maculadoModel.buscarDados(idMaculado).then((resposta)=> {
+        if(resposta.length > 0){
+            res.status(201).json(resposta);
+        }else{
+            res.status(204).json([]);
+        }
+    }).catch((erro)=> {
+        console.log("Houve um erro ao buscar os dados do maculado! Erro: ", erro);
+        res.status(500).json(erro);
+    })
+}
+
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    buscarDados
 };

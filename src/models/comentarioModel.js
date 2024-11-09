@@ -27,8 +27,15 @@ function listar() {
   return database.executar(instrucaoSql);
 }
 
+function fechar(idComentario){
+  const instrucaoSql = `UPDATE Comentario SET responsavelPorFechar = true WHERE idComentario = ${idComentario};`;
+
+  return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
   comentar,
-  listar
+  listar,
+  fechar
 }

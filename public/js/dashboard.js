@@ -1,8 +1,23 @@
 async function carregarDashboard() {
-  const nome = JSON.parse(sessionStorage.getItem("nome"));
+  const id = JSON.parse(sessionStorage.getItem("id"));
 
-  abaUsuario.innerHTML = nome;
-  containerNome.innerHTML = nome;
+  const parametros = new URLSearchParams(window.location.search);
+  const idUsuario = parametros.get('id');
+
+  console.log(idUsuario)
+
+  const dashDoUsuario = idUsuario == id;
+
+  const dadosMaculado = await fetch(`http://localhost:3333/maculados/buscarDados/${idUsuario}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if(dadosMaculado.ok){
+    abaUsuario.innerHTML = nome;
+    containerNome.innerHTML = nome;
 
   new Chart(graficoContribuicoesTotaisPorMeses, {
     type: 'line',
@@ -178,4 +193,5 @@ async function carregarDashboard() {
       }
     }
   });
+  }
 }

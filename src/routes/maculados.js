@@ -11,4 +11,10 @@ router.post("/autenticar", function (req, res) {
     maculadoController.autenticar(req, res);
 });
 
+router.get("/buscarDados/:idMaculado", function(req,res){
+    maculadoController.buscarDados(req,res);
+});
+
+
+
 module.exports = router;

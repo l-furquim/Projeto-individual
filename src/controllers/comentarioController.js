@@ -49,7 +49,24 @@ function listar(req, res) {
       });
   }
 
+function fechar(req, res){
+  const idComentario = req.params.idComentario;
+
+  if(idComentario == undefined){
+    res.status(401).json({mensagem: "O id do comentario por fechar a contribuição esta undefined"});
+  }
+
+    comentarioModel.fechar(idComentario)
+            .then(()=> {  
+              res.status(201).json({mensagem: "Contribuição fechada com sucesso!"});
+              }).catch((erro)=> {
+              consosle.error(erro);
+              res.status(500).json({ mensagem: `Erro ao fechar contribuição ${erro}` });
+            });
+}
+
 module.exports = {
   comentar,
-  listar
+  listar,
+  fechar
 }

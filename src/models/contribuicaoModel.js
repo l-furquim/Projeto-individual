@@ -20,7 +20,8 @@ function listar() {
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.votos;
                    `;
@@ -47,20 +48,20 @@ function cadastrar(titulo, conteudo, tipo, fkMaculado, tag, conteudoTag) {
 
 function buscarPorTipo(tipo) {
   const instrucaoSql = `
-                       SELECT c.idContribuicao,
-                        c.titulo, 
-                        c.conteudo, 
-                        c.contribuicaoFechada,
+                      SELECT c.idContribuicao,
+                        c.titulo,
+                        c.conteudo,
+                        c.fkComentarioResponsavel,
+                        c.contribuicaoFechada, 
                         (SELECT COUNT(*) FROM Voto WHERE fkContribuicao = idContribuicao) as votos,
                         (SELECT COUNT(*) FROM Comentario WHERE fkContribuicao = idContribuicao) as comentarios,
-                        c.fkComentarioResponsavel,
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
-                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado
-                        WHERE c.tipo = ${tipo} AND c.fkContribuicaoRespondida = 0;
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.votos;
                       `
   return database.executar(instrucaoSql);
 } 
@@ -78,7 +79,8 @@ function buscarApenasPorConteudo(palavras){
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
 
@@ -102,7 +104,8 @@ function buscarPorConteudoETag(palavras, tag){
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
 
@@ -125,7 +128,8 @@ function buscarPorConteudoTagETipo(palavras, tag, tipo){
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
 
@@ -147,7 +151,8 @@ function buscarPorConteudoETipo(palavras, tipo){
                         c.tipo,
                         c.tag,
                         c.conteudoTag,
-                        m.nome
+                        m.nome,
+                        m.idMaculado
                         FROM Contribuicao AS c
                         JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE `;
 
@@ -167,7 +172,8 @@ function buscarApenasPorTipo(tipo){
     c.tipo,
     c.tag,
     c.conteudoTag,
-    m.nome
+    m.nome,
+    m.idMaculado
     FROM Contribuicao AS c
     JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tipo = '${tipo}'`;
 
@@ -186,7 +192,8 @@ function buscarApenasPorTag(tag){
     c.tipo,
     c.tag,
     c.conteudoTag,
-    m.nome
+    m.nome,
+    m.idMaculado
     FROM Contribuicao AS c
     JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}'`;
 
@@ -204,7 +211,8 @@ function buscarApenasPorTagETipo(tag, tipo){
   c.tipo,
   c.tag,
   c.conteudoTag,
-  m.nome
+  m.nome,
+  m.idMaculado
   FROM Contribuicao AS c
   JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}'`;
 

@@ -181,13 +181,12 @@ function fechar(req, res){
 
     contribuicaoModel.fechar(idContribuicao, idComentario)
             .then(()=> {  
-              res.status(200).json({mensagem: "Contribuição fechada com sucesso"});
+              res.status(201).json({mensagem: "Contribuição fechada com sucesso!"});
               }).catch((erro)=> {
               consosle.error(erro);
               res.status(500).json({ mensagem: `Erro ao fechar contribuição ${erro}` });
             });
 }
-
 
 module.exports = {
   buscarPorId,

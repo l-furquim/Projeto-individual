@@ -9,6 +9,10 @@ router.post("/comentar", function (req, res) {
 
 router.get("/listar", function (req, res) {
   comentarioController.listar(req, res);
-})
+});
+
+router.put(`/fechar/comentario=:idComentario`, function (req, res){
+  comentarioController.fechar(req,res);
+});
 
 module.exports = router;

@@ -40,10 +40,27 @@ async function buscarMaculadoPorEmailESenha(email, senha){
     return linhas; 
 }
 
+function buscarDados(idMaculado){
+    const instrucaoSql = `SELECT 
+                            m.nome,
+                            (SELECT COUNT(*)
+                            FROM Comentario
+                            WHERE fkMaculado = ${idMaculado}
+                            AND responsavelPorFechar = 1) as contribuicoesFechadas',
+                            (SELECT COUNT(*) FROM Contribuicao WHERE fkMaculado = ${idMaculado}) as contribuicoes,
+                            (SELECT COUNT(v.idVoto) 
+                            FROM Voto v
+                            JOIN Contribuicao as c ON v.fkContribuicao = c.idContribuicao
+                            WHERE c.fkMaculado = 2;) as votos 
+                            FROM maculado as m;`
+                            
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     buscarMaculadoPorEmail,
     buscarMaculadoPorNome,
-    buscarMaculadoPorEmailESenha
+    buscarMaculadoPorEmailESenha,
+    buscarDados
 };

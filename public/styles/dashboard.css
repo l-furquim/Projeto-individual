@@ -38,7 +38,7 @@
   height: 100%;
   height: 100%;
   color: #e7c274;
-  background-color: #07140f;
+  background-color:#1e1e1e;
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -159,4 +159,15 @@
 }
 .container-terceiro-grafico{
   margin-bottom: 50px;
+}
+
+.container-nivel{
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  gap: 8px;
+}
+
+#spanNumeroNivel{
+  display: flex;
 }
