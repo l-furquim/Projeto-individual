@@ -733,3 +733,28 @@ hr {
 .conteudo-modal-fechar button:hover{
   cursor: pointer;
 }
+
+.container-comentarios{
+  align-self: center;
+  justify-self: center;
+  display: none; 
+  margin-top: 100px; 
+  height: fit-content;
+  width: 70%;
+  color: #e7c274;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 200px;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.comentario{
+  background-color: #ffff;
+  display: flex;
+  height: 300px;
+  width: 80%;
+}

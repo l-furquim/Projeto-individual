@@ -1,4 +1,4 @@
-var vezesClicadas = 0;
+var vezesClicadasComentario = 0;
 var vezesClicadasFiltro = 0;
 const opcoesPorCategoria = {
   bosses: [
@@ -91,23 +91,24 @@ function mostrarComentarios(botao, id) {
 
   const contribuicao = botao.closest('li');
 
-  const containerComentario = contribuicao.closest("div").querySelector("#containerSecaoComentario");
+  const containerComentario = contribuicao.closest("div").querySelector(`#dropdownComentarios${id}`);
   console.log(contribuicao, containerComentario);
 
-  if (vezesClicadas == 1) {
-    vezesClicadas = 0;
+  if (vezesClicadasComentario == 1) {
+    vezesClicadasComentario = 0;
     containerComentario.style.display = "none";
-    botao.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-down" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
-                    </svg>`;
+    botao.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708z"/>
+                      </svg>`;
   } else {
     if (containerComentario) {
-      vezesClicadas++;
+      vezesClicadasComentario++;
       containerComentario.style.display = "flex";
       botao.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-90deg-down" viewBox="0 0 16 16">
-      <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
-      </svg>`
+          <path fill-rule="evenodd" d="M4.854 14.854a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V3.5A2.5 2.5 0 0 1 6.5 1h8a.5.5 0 0 1 0 1h-8A1.5 1.5 0 0 0 5 3.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708z"/>
+      </svg>
+      `
     }
   }
 }
@@ -313,6 +314,9 @@ async function novaContribuicao() {
 
 async function buscarContribuicoes() {
   const nome = JSON.parse(sessionStorage.getItem("nome"));
+  const idMaculado = JSON.parse(sessionStorage.getItem("id"));
+  ancoraDash.href = `./dashboard.html?id=${idMaculado}`;
+
   abaUsuario.innerHTML += nome;
 
 
@@ -326,7 +330,6 @@ async function buscarContribuicoes() {
 
 
   if (contribuicoes.ok) {
-    const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
     const votos = await fetch(`http://localhost:3333/votos/maculado=${idMaculado}`, {
       method: "GET",
@@ -350,13 +353,15 @@ async function buscarContribuicoes() {
       if (votos.status != 204) {
         const arrayVotos = await votos.json();
         const votosFks = arrayVotos.map((voto) => voto.fkContribuicao);
-        const comentariosFks = arrayComentario.map((comentario)=> comentario.fkContribuicao);
+
+        const comentariosFks = [];
+
         arrayContribuicao.forEach((contribuicao) => {
 
           const contribuicaoDoUsuario = contribuicao.nome == nome;
 
           const votoAtual = arrayVotos.find(v => v.fkContribuicao === contribuicao.idContribuicao);
-
+          
           const comentarioAtual = arrayComentario
                     .filter((c) => c.fkContribuicao == contribuicao.idContribuicao)
                     .map((comentario) => 
@@ -369,7 +374,16 @@ async function buscarContribuicoes() {
                             `
                       )
                     .join("");
-
+          const comentarios =
+            `<div id="dropdownComentarios${contribuicao.idContribuicao}" class="container-comentarios">
+                ${arrayComentario.filter((c)=> c.fkContribuicao == contribuicao.idContribuicao).map((c)=> 
+                  `<div class="comentario">
+                      <p>${c.conteudo}</p>
+                  </div>
+                  `).join("")}
+            </div>`
+                  
+          console.log(arrayComentario);
 
           const idAtual = votoAtual ? votoAtual.idVoto : null;
 
@@ -405,7 +419,7 @@ async function buscarContribuicoes() {
                 </div>
                 <div class="interacoes-post">
                   <div id="containerSecaoComentario">
-                    <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, contribuicao${contribuicao.idContribuicao})">
+                    <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, ${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -452,14 +466,39 @@ async function buscarContribuicoes() {
                       ${contribuicao.comentarios}
                     </button>
                   </div>
-                </div>`;
-
-        });
+                </div>
+                ${comentarios} 
+                `;
+        
+            }
+      );
       } else {
         arrayContribuicao.forEach((contribuicao) => {
           const contribuicaoDoUsuario = contribuicao.nome == nome;
           console.log(contribuicaoDoUsuario);
           console.log("Nome do usuario: " + nome);
+
+          const comentarioAtual = arrayComentario
+          .filter((c) => c.fkContribuicao == contribuicao.idContribuicao)
+          .map((comentario) => 
+            `
+                  <div class="container-comentarios-fechar">
+                    <input class="check-comentario" onchange="mudancaCheck(this)" type="checkbox" id="checkComentario${comentario.idComentario}">
+                    <h3>${comentario.nome}</h3>
+                    <p>${comentario.conteudo.length > 40 ? comentario.conteudo.slice(0,30) + "..." : comentario.conteudo}</p>
+                  </div>
+                  `
+            )
+          .join("");
+
+          const comentarios =
+            `<div id="dropdownComentarios${contribuicao.idContribuicao}" class="container-comentarios">
+                ${arrayComentario.filter((c)=> c.fkContribuicao == contribuicao.idContribuicao).map((c)=> 
+                  `<div class="comentario">
+                      <p>${c.conteudo}</p>
+                  </div>
+                  `).join("")}
+            </div>`
 
           listaContribuicoes.innerHTML += `
           <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
@@ -538,7 +577,9 @@ async function buscarContribuicoes() {
                     ${contribuicao.comentarios}
                   </button>
                 </div>
-              </div>`;
+              </div>
+              ${comentarios}
+              `;
         })
       }
 
@@ -725,7 +766,27 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                       ${contribuicao.comentarios}
                     </button>
                   </div>
-                </div>`;
+                </div>
+                <div id="dropdownComentarios" class="container-comentarios">
+                    <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  </div>`;
 
           });
         }, 1500)
@@ -815,7 +876,27 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                       ${contribuicao.comentarios}
                     </button>
                   </div>
-                </div>`;
+                </div>
+                <div id="dropdownComentarios" class="container-comentarios">
+                    <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  <div class="conteudo-comentario">
+                      <h1>Comentários</h1>
+                      <p>Comentário 1</p>
+                      <p>Comentário 2</p>
+                      <p>Comentário 3</p>
+                    </div>
+                  </div>`;
           })
         }, 1500)
 

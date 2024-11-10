@@ -30,6 +30,7 @@ comentarios INT,
 tipo VARCHAR(20),
 tag VARCHAR(45),
 conteudoTag VARCHAR(45),
+dtFechamento DATETIME,
 fkMaculado INT,
 CONSTRAINT FOREIGN KEY (fkMaculado) REFERENCES Maculado(idMaculado),
 /* CONSTRAINT FOREIGN KEY (fkComentarioResponsavel) REFERENCES Comentario(idComentario), */

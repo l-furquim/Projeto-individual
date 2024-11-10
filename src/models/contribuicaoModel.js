@@ -219,9 +219,9 @@ function buscarApenasPorTagETipo(tag, tipo){
   return database.executar(instrucaoSql);
 }
 
-function fechar(idContribuicao, idComentario){
+function fechar(idContribuicao, idComentario, dtFechamento){
   const instrucaoSql = 
-  `UPDATE Contribuicao SET contribuicaoFechada = ${true}, fkComentarioResponsavel = ${idComentario} WHERE idContribuicao = ${idContribuicao}`
+  `UPDATE Contribuicao SET contribuicaoFechada = ${true}, fkComentarioResponsavel = ${idComentario}, dtFechamento = '${dtFechamento}' WHERE idContribuicao = ${idContribuicao}`
 
   return database.executar(instrucaoSql);
 }

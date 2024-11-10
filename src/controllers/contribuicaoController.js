@@ -1,5 +1,6 @@
 var contribuicaoModel = require("../models/contribuicaoModel");
-var maculadoModel = require("../models/maculadoModel");
+const { formatarDataParaSQL } = require("../utils/sql");
+
 /* function buscarPorCnpj(req, res) {
   var cnpj = req.query.cnpj;
 
@@ -170,6 +171,8 @@ function buscar(req, res){
 function fechar(req, res){
   const idContribuicao = req.params.idContribuicao;
   const idComentario = req.params.idComentario;
+  const dtFechamento = formatarDataParaSQL(new Date());
+
 
   console.log(idContribuicao, idComentario);
 
@@ -180,11 +183,11 @@ function fechar(req, res){
     res.status(401).json({mensagem: "O id do comentario por fechar a contribuição esta undefined"});
   }
 
-    contribuicaoModel.fechar(idContribuicao, idComentario)
+    contribuicaoModel.fechar(idContribuicao, idComentario,dtFechamento)
             .then(()=> {  
               res.status(201).json({mensagem: "Contribuição fechada com sucesso!"});
               }).catch((erro)=> {
-              consosle.error(erro);
+              console.error(erro);
               res.status(500).json({ mensagem: `Erro ao fechar contribuição ${erro}` });
             });
 }

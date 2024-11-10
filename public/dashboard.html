@@ -18,7 +18,7 @@
     <div class="conteudoNav">
       <a href="./inicio.html">Início</a>
       <a href="./home.html">Home</a>
-      <a href="./dashboard.html" class="selected">Dashboard</a>
+      <a id="ancoraDash" href="./dashboard.html?id=" class="selected">Dashboard</a>
       <button onclick="mostrarPerfil()">
         <p id="abaUsuario"></p>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle"
@@ -74,11 +74,31 @@
           </h1>
 
           <div class="container-kpis">
-            <p class="acertos"> <span>42 </span>Contribuições totais!</p>
-            <p class="frequencia">12 <span>Perguntas fechadas</span></p>
-            <p class="acertos"> <span>Menor tempo para fechar uma pegunta: <span>12.40</span></p>
-            <p class="frequencia">Votos acumulados : <span>190</span></p>
+            <p class="kpi">
+               <span class="valorKpi" id="spanContribuicoesTotais">
+
+               </span>Contribuições totais!
+            </p>
+            <p class="kpi">
+              <span class="valorKpi" id="spanPerguntasFechadas">
+
+              </span>
+              Perguntas fechadas
+            </p>
+            <p class="kpi">
+              <span class="valorKpi" id="spanMenorTempo">
+
+              </span>
+              Menor tempo para fechar uma pegunta: 
+            </p>
+            <p class="kpi">
+              <span class="valorKpi" id="spanVotosAcumulados">
+
+              </span>
+              Votos acumulados 
+            </p>
           </div>
+
           <div class="container-graficos">
             <div class="primeira-linha">
                 <canvas id="graficoContribuicoesTotaisPorMeses"></canvas>

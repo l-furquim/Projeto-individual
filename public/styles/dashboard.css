@@ -107,6 +107,15 @@
   padding: 10px;
   border-radius: 10px;
 }
+.kpi{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.valorKpi{
+  font-weight: bolder;
+}
 
 .container-graficos{
   margin-top: 100px;

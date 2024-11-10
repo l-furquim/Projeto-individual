@@ -1,12 +1,12 @@
 async function carregarDashboard() {
   const id = JSON.parse(sessionStorage.getItem("id"));
-
   const parametros = new URLSearchParams(window.location.search);
   const idUsuario = parametros.get('id');
 
   console.log(idUsuario)
 
-  const dashDoUsuario = idUsuario == id;
+  // abaUsuario.innerHTML = nome;
+  // containerNome.innerHTML = nome;
 
   const dadosMaculado = await fetch(`http://localhost:3333/maculados/buscarDados/${idUsuario}`, {
     method: "GET",
@@ -16,8 +16,15 @@ async function carregarDashboard() {
   });
 
   if(dadosMaculado.ok){
-    abaUsuario.innerHTML = nome;
-    containerNome.innerHTML = nome;
+    const dados = await dadosMaculado.json();
+    console.log(dados)
+    if(dados.length > 0){
+      containerNome.innerHTML = dados[0].nome;
+      spanContribuicoesTotais.innerHTML = dados[0].contribuicoes;
+      spanPerguntasFechadas.innerHTML = dados[0].contribuicoesFechadas;
+      spanMenorTempo.innerHTML = "12";
+      spanVotosAcumulados.innerHTML = dados[0].votos;
+    }
 
   new Chart(graficoContribuicoesTotaisPorMeses, {
     type: 'line',
