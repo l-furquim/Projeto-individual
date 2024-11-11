@@ -639,6 +639,10 @@ async function pesquisarContribuicao(conteudoPesquisa) {
   const selects = document.querySelectorAll(".select-filtro");
   const filtros = [];
 
+  listaContribuicoes.innerHTML = `<div class="div-buscando-contribuicoes">Buscando contribuições <div class="roda-carregamento"></div></div>`;
+
+   setTimeout(async () => {
+
    selects.forEach(select=> {
     if(select.value != "#"){
       filtros.push(select.value);
@@ -683,13 +687,11 @@ async function pesquisarContribuicao(conteudoPesquisa) {
       const arrayContribuicao = await contribuicoes.json();
       const arrayComentario = await comentarios.json();
 
-      listaContribuicoes.innerHTML = `<div class="div-buscando-contribuicoes">Buscando contribuições <div class="roda-carregamento"></div></div>`;
-
       if (votos.status != 204) {
         const arrayVotos = await votos.json();
         const votosFks = arrayVotos.map((voto) => voto.fkContribuicao);
 
-        setTimeout(() => {
+        
           listaContribuicoes.innerHTML = "";
           arrayContribuicao.forEach((contribuicao) => {
 
@@ -819,9 +821,8 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                 `;
 
           });
-        }, 1500)
+        
       } else {
-        setTimeout(() => {
           listaContribuicoes.innerHTML = "";
           arrayContribuicao.forEach((contribuicao) => {
             const contribuicaoDoUsuario = contribuicao.nome == nome;
@@ -928,16 +929,16 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                     </div>
                   </div>`;
           })
-        }, 1500)
+        
 
       }
-
+      
     }
-
   } else {
-    listaContribuicoes.innerHTML = "";
+    listaContribuicoes.innerHTML = "<div class='div-buscando-contribuicoes'> Nenhuma contribuição encontrada... </div>";
 
   }
+  }, 1500)
 }
 function abrirFiltro() {
   const container = conteudoFiltro;

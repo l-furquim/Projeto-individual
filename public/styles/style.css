@@ -586,18 +586,18 @@ input{
   display: none;
   position: absolute;
   z-index: 1;
-  right: 20px;
+  right: -50px;
   justify-content: center;
   width: 200px;
-  height: 200px;
+  height: 100px;
   background-color:#1e1e1e;
   transform: translateX(-50%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 300px;
+  margin-top: 200px;
   text-decoration: none;
   color: #EEF7E6;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .conteudo-usuario {
   display: flex;
@@ -614,4 +614,31 @@ input{
   width: 150px;
   align-items: center;
   justify-content: center;
+  background-color: #e7c274;
+  color: #EEF7E6;
+  transition: 0.5s;
 }
+.conteudo-usuario button:hover{
+  color: #9b1c1c;
+  transition: 0.5s;
+}
+
+.botao-mostrar-perfil{
+  display: flex;
+  width: 300px;
+  height: 50px;
+  gap: 5px;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e7c274 !important;
+  border-radius: 5px;
+}
+.botao-mostrar-perfil p {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
