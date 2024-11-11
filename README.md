@@ -28,3 +28,41 @@ O objetivo é facilitar a interação entre jogadores, permitindo que todos se a
 1. Clone este repositório:
    ```bash
    git clone https://github.com/l-furquim/Tarnisheds-Help.git
+
+2. Instale as dependências do projeto: 
+   ```bash
+   cd Tarnisheds-Help
+   npm install
+
+3. Mude o arquivo app.js para o ambiente que deseja (Tire o comentário da primeira linha e comente a segunda para desenvolvimento de vice versa):
+   ```javascript
+   // var ambiente_processo = 'producao';
+   var ambiente_processo = 'desenvolvimento';
+   
+   var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
+
+4. Configure seu banco de dados baseado no ambiente escolhido:
+   ```dotenv
+   AMBIENTE_PROCESSO=producao
+
+   # Configurações de conexão com o banco de dados
+   DB_HOST='seusDadosAqui'
+   DB_DATABASE='seusDadosAqui'
+   DB_USER='seusDadosAqui'
+   DB_PASSWORD='seusDadosAqui'
+   DB_PORT='seusDadosAqui'
+   
+   # Configurações do servidor de aplicação
+   APP_PORT=8080
+   APP_HOST=localhost
+   
+   # importante: caso sua senha contenha caracteres especiais, insira-a entre 'aspas'
+
+5. Inicie a aplicação e faça proveito dela !
+   ```bash
+   npm start
+   
+   
+
+
+
