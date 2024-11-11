@@ -708,6 +708,9 @@ hr {
   border-radius: 5px;
   padding: 10px;
   font-size: 15px;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
 }
 .container-comentarios-fechar h3{
   font-size: 22px;
@@ -758,18 +761,17 @@ hr {
   height: 300px;
   width: 100%;
   opacity: 1 !important;
-  align-items: start;
-  justify-content: center;
   flex-direction: column;
   gap: 10px;
   border-radius: 5px;
 }
+
 .comentario p{
   display: flex;
   margin-left: 20px;
   margin-right: auto;
   color: #d8d8d8;
-  font-size: 14px;
+  font-size: 20px;
   width: 100%;
   word-wrap: break-word;
   word-break: break-all;
@@ -782,18 +784,26 @@ hr {
 
 .cabecalho-comentario {
   display: flex;
+  flex-direction: row;
   width: 100%;
-  margin-top: 0;
+  align-self: flex-start;
+  margin-top: 35px;
+  margin-left: 20px;
 }
 
 .cabecalho-comentario h2{
   display: flex;
   margin-right: 20px;
-  align-self: flex-end;
-  justify-content: flex-end;
+  align-self: flex-start;
+  justify-content: flex-start;
   font-size: 20px;
   align-items: center;
   gap: 5px;
   font-weight: normal;
   margin-top: 0;
+}
+
+.comentario.comentario-responsavel{
+  border: 1px solid #e7c274;
+  background-color: #181717;
 }

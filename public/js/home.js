@@ -354,8 +354,6 @@ async function buscarContribuicoes() {
         const arrayVotos = await votos.json();
         const votosFks = arrayVotos.map((voto) => voto.fkContribuicao);
 
-        const comentariosFks = [];
-
         arrayContribuicao.forEach((contribuicao) => {
 
           const contribuicaoDoUsuario = contribuicao.nome == nome;
@@ -377,7 +375,7 @@ async function buscarContribuicoes() {
           const comentarios =
             `<div id="dropdownComentarios${contribuicao.idContribuicao}" class="container-comentarios">
                 ${arrayComentario.filter((c)=> c.fkContribuicao == contribuicao.idContribuicao).map((c)=> 
-                  `<div class="comentario">
+                  `<div class="comentario ${c.responsavelPorFechar ? " comentario-responsavel" : ""}" id="comentario${c.idComentario}">
                       <div class="cabecalho-comentario">
                       <h2>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -674,9 +672,17 @@ async function pesquisarContribuicao(conteudoPesquisa) {
         "Content-Type": "application/json"
       }
     });
+    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application.json"
+      }
+    });
 
     if (votos.ok) {
       const arrayContribuicao = await contribuicoes.json();
+      const arrayComentario = await comentarios.json();
+
       listaContribuicoes.innerHTML = `<div class="div-buscando-contribuicoes">Buscando contribuições <div class="roda-carregamento"></div></div>`;
 
       if (votos.status != 204) {
@@ -693,6 +699,38 @@ async function pesquisarContribuicao(conteudoPesquisa) {
             const contribuicaoDoUsuario = contribuicao.nome == nome;
 
             const votoAtual = arrayVotos.find(v => v.fkContribuicao === contribuicao.idContribuicao);
+
+            const comentarioAtual = arrayComentario
+            .filter((c) => c.fkContribuicao == contribuicao.idContribuicao)
+            .map((comentario) => 
+              `
+                  <div class="container-comentarios-fechar">
+                    <input class="check-comentario" onchange="mudancaCheck(this)" type="checkbox" id="checkComentario${comentario.idComentario}">
+                    <h3>${comentario.nome}</h3>
+                    <p>${comentario.conteudo.length > 40 ? comentario.conteudo.slice(0,30) + "..." : comentario.conteudo}</p>
+                  </div>
+                  `
+            )
+          .join("");
+
+            const comentarios =
+            `<div id="dropdownComentarios${contribuicao.idContribuicao}" class="container-comentarios">
+                ${arrayComentario.filter((c)=> c.fkContribuicao == contribuicao.idContribuicao).map((c)=> 
+                  `<div class="comentario">
+                      <div class="cabecalho-comentario">
+                      <h2>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                      </svg>
+                      ${c.nome}
+                      </h2>
+                      </div>
+                      <hr>
+                      <p>${c.conteudo}</p>
+                  </div>
+                  `).join("")}
+            </div>`
 
             const idAtual = votoAtual ? votoAtual.idVoto : null;
 
@@ -729,7 +767,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                 </div>
                 <div class="interacoes-post">
                   <div id="containerSecaoComentario">
-                    <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, contribuicao${contribuicao.idContribuicao})">
+                    <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, ${contribuicao.idContribuicao})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -777,26 +815,8 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                     </button>
                   </div>
                 </div>
-                <div id="dropdownComentarios" class="container-comentarios">
-                    <div class="conteudo-comentario">
-                      <h1>Comentários</h1>
-                      <p>Comentário 1</p>
-                      <p>Comentário 2</p>
-                      <p>Comentário 3</p>
-                    </div>
-                  <div class="conteudo-comentario">
-                      <h1>Comentários</h1>
-                      <p>Comentário 1</p>
-                      <p>Comentário 2</p>
-                      <p>Comentário 3</p>
-                    </div>
-                  <div class="conteudo-comentario">
-                      <h1>Comentários</h1>
-                      <p>Comentário 1</p>
-                      <p>Comentário 2</p>
-                      <p>Comentário 3</p>
-                    </div>
-                  </div>`;
+                ${comentarios}
+                `;
 
           });
         }, 1500)
@@ -971,6 +991,8 @@ async function fecharContribuicao(idContribuicao){
 
   const idComentario = checkboxMarcado.id.replace("checkComentario", "");
 
+  document.getElementById(`comentario${idComentario}`).classList.add("comentario-responsavel");
+
   fetch(`http://localhost:3333/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
     method: "PUT",
     headers: {
@@ -985,7 +1007,9 @@ async function fecharContribuicao(idContribuicao){
           "Content-Type": "application/json"
         }
       }).then((resposta)=> {
-          console.log(resposta);
+          if(resposta.ok){
+
+          }
       });
     }
   });

@@ -23,7 +23,7 @@ function listar() {
                         m.nome,
                         m.idMaculado
                         FROM Contribuicao AS c
-                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.votos;
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC;
                    `;
 
   return database.executar(instrucaoSql);
@@ -61,7 +61,7 @@ function buscarPorTipo(tipo) {
                         m.nome,
                         m.idMaculado
                         FROM Contribuicao AS c
-                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.votos;
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC;
                       `
   return database.executar(instrucaoSql);
 } 
@@ -86,7 +86,7 @@ function buscarApenasPorConteudo(palavras){
 
   queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
   
-  return database.executar(queryInicial + "COLLATE utf8mb4_general_ci;")
+  return database.executar(queryInicial + "COLLATE utf8mb4_general_ci" + " ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC" )
 };
 
 function buscarPorConteudoETag(palavras, tag){
@@ -111,7 +111,7 @@ function buscarPorConteudoETag(palavras, tag){
 
   queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
   
-  return database.executar(queryInicial + `AND c.tag = '${tag}' COLLATE utf8mb4_general_ci;`);
+  return database.executar(queryInicial + `AND c.tag = '${tag}' COLLATE utf8mb4_general_ci;`+ "  ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC");
 
 }
 function buscarPorConteudoTagETipo(palavras, tag, tipo){
@@ -135,7 +135,7 @@ function buscarPorConteudoTagETipo(palavras, tag, tipo){
 
   queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
   
-  return database.executar(queryInicial + `AND c.tag = '${tag}' AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;`);
+  return database.executar(queryInicial + `AND c.tag = '${tag}' AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;` + "  ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC");
 }
 function buscarPorConteudoETipo(palavras, tipo){
   console.log("Buscando por tipo e conteudo !")
@@ -158,7 +158,7 @@ function buscarPorConteudoETipo(palavras, tipo){
 
   queryInicial += palavras.map(palavra => `c.conteudo LIKE '%${palavra}%'`).join(' OR ');
   
-  return database.executar(queryInicial + `AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;`);
+  return database.executar(queryInicial + `AND c.tipo = '${tipo}' COLLATE utf8mb4_general_ci;` + "  ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC");
 }
 function buscarApenasPorTipo(tipo){
     let instrucaoSql = `SELECT 
@@ -175,7 +175,7 @@ function buscarApenasPorTipo(tipo){
     m.nome,
     m.idMaculado
     FROM Contribuicao AS c
-    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tipo = '${tipo}'`;
+    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tipo = '${tipo}' ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC`;
 
     return database.executar(instrucaoSql);
 }
@@ -195,7 +195,7 @@ function buscarApenasPorTag(tag){
     m.nome,
     m.idMaculado
     FROM Contribuicao AS c
-    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}'`;
+    JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' ORDER BY c.contribuicaoFechada ASC, c.votos DESC, comentarios DESC`;
 
     return database.executar(instrucaoSql);
 }
@@ -214,7 +214,7 @@ function buscarApenasPorTagETipo(tag, tipo){
   m.nome,
   m.idMaculado
   FROM Contribuicao AS c
-  JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}'`;
+  JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}  ORDER BY c.contribuicaoFechada, ASC c.votos DESC, comentarios DESC'`;
 
   return database.executar(instrucaoSql);
 }

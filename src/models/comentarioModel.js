@@ -21,7 +21,7 @@ function listar() {
                         c.dtComentario
                           FROM Comentario as c
                               JOIN Maculado as m 
-                                ON c.fkMaculado = m.idMaculado;`;
+                                ON c.fkMaculado = m.idMaculado ORDER BY c.responsavelPorFechar DESC;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
