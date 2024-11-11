@@ -30,11 +30,12 @@ input{
 } */
 
 .bodyCadastro {
-  background-image: url("../assets/images/imagemEldenRing.png");
+  background-image: url("../assets/images/imagemArvore.png");
   background-repeat: no-repeat;
-  background-size: auto;
-  background-position: 0% 40%;
+  background-size: cover;
+  background-position: 20% 40%;
   padding: 0;
+  background-attachment: fixed;
   margin: 0;
 }
 
