@@ -220,7 +220,7 @@
   font-size: 20px;
   color: #d8d8d8;
   word-wrap: break-word;
-  word-break: break-all; /* ou use `break-word` */
+  word-break: break-all;
   white-space: normal;
   overflow: hidden;
 }
@@ -740,12 +740,12 @@ hr {
   display: none; 
   margin-top: 100px; 
   height: fit-content;
-  width: 70%;
+  width: 85%;
   color: #e7c274;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 200px;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -753,8 +753,47 @@ hr {
 
 
 .comentario{
-  background-color: #ffff;
+  background-color:#181717;
   display: flex;
   height: 300px;
-  width: 80%;
+  width: 100%;
+  opacity: 1 !important;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 5px;
+}
+.comentario p{
+  display: flex;
+  margin-left: 20px;
+  margin-right: auto;
+  color: #d8d8d8;
+  font-size: 14px;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: normal;
+}
+.comentario hr {
+  color: #d8d8d8;
+  border: solid 1px #d8d8d8;
+}
+
+.cabecalho-comentario {
+  display: flex;
+  width: 100%;
+  margin-top: 0;
+}
+
+.cabecalho-comentario h2{
+  display: flex;
+  margin-right: 20px;
+  align-self: flex-end;
+  justify-content: flex-end;
+  font-size: 20px;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+  margin-top: 0;
 }
