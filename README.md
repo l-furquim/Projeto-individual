@@ -61,8 +61,3 @@ O objetivo é facilitar a interação entre jogadores, permitindo que todos se a
 5. Inicie a aplicação e faça proveito dela !
    ```bash
    npm start
-   
-   
-
-
-
