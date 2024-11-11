@@ -25,6 +25,7 @@ O objetivo é facilitar a interação entre jogadores, permitindo que todos se a
 - **Backend:** *Node.js*, *Express*
 - **Banco de Dados:** *MySQL*
 
+<img src="public/assets/images/diagramaSolucao.png" alt="Diagrama de solução técnica" width="1150" height="830" >
 
 ## Instalação e Execução Local
 
