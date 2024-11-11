@@ -10,7 +10,7 @@ Este site oferece um espaço para a comunidade de *Elden Ring* colaborar, com fu
 
 O objetivo é facilitar a interação entre jogadores, permitindo que todos se ajudem mutuamente e compartilhem suas experiências de jogo.
 
-<img src="public/assets/images/primeiraPrint.png" alt="Inicio do site" width="300" height="800">
+<img src="public/assets/images/primeiraPrint.png" alt="Inicio do site" width="300" height="1400">
 
 ## Funcionalidades
 
