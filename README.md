@@ -1,4 +1,4 @@
-# Tarnished's Help <img src="public/assets/images/logo3.svg.svg" alt="Logo do Projeto" width="200" height="200">
+# <div style="display: flex; align-items: center;"> Tarnished's Help <img src="public/assets/images/logo3.svg.svg" alt="Logo do Projeto" width="200" height="200"> </div>
 
 
 **Tarnished's Help** é um projeto dedicado à comunidade de *Elden Ring*, um RPG de mundo aberto lançado em fevereiro de 2022. O jogo conquistou rapidamente o título de *Jogo do Ano* e continua extremamente popular entre os jogadores. O objetivo do projeto é criar uma plataforma onde os jogadores possam se unir, compartilhar experiências, pedir ajuda e celebrar conquistas.
@@ -10,7 +10,7 @@ Este site oferece um espaço para a comunidade de *Elden Ring* colaborar, com fu
 
 O objetivo é facilitar a interação entre jogadores, permitindo que todos se ajudem mutuamente e compartilhem suas experiências de jogo.
 
-<img src="public/assets/images/primeiraPrint.png" alt="Inicio do site" width="300" height="1400">
+<img src="public/assets/images/primeiraPrint.png" alt="Inicio do site" width="1400" height="600">
 
 ## Funcionalidades
 
