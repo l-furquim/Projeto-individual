@@ -6,6 +6,7 @@ body {
   font-family: "fontElden", sans-serif;
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   padding: 0;
 }
 
@@ -30,10 +31,9 @@ input{
 } */
 
 .bodyCadastro {
-  background-image: url("../assets/images/imagemArvore.png");
+  background-image: url("../assets/images/image.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 20% 40%;
   padding: 0;
   background-attachment: fixed;
   margin: 0;
@@ -170,12 +170,13 @@ input{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .bodyLogin {
-  background-image: url("../assets/images/imagemEldenRing.png");
+  background-image: url("../assets/images/image.png");
   background-repeat: no-repeat;
-  background-size: auto;
-  background-position: 0% 40%;
+  background-size:cover;
+  background-position: 10% 0;
   padding: 0;
   margin: 0;
+  overflow-y: hidden !important;
 }
 
 .containerLogin h1 {
@@ -241,14 +242,16 @@ input{
   margin-bottom: 12px;
 }
 .verSobre {
-  position: fixed;
+  position: absolute;
   z-index: 1;
   background-color: #182b23;
   display: flex;
   padding: 20px;
-  border-radius: 60%;
+  border-radius: 100%;
   width: 2%;
-  height: 1%;
+  height: 3%;
+  bottom: 0%;
+  right: 30px;
   align-items: center;
   justify-content: center;
 }

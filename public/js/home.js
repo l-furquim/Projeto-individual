@@ -78,6 +78,11 @@ function criarPost() {
       container.style.display = "none";
     }
   }
+  document.onscroll = function ( event ) {
+      if(container.style.display != "none"){
+      container.style.display = "none";
+      }
+    }
 
   container.style.display = "flex"
 }

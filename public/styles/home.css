@@ -8,7 +8,9 @@
   background-attachment: fixed;
   opacity: 1;
 }
-
+select, input, textarea {
+  font-family: 'fontElden', sans-serif;
+}
 
 .container-inicio {
   height: 100%;
@@ -333,7 +335,6 @@
   display: flex;
   width: 60%;
   height: 90%;
-  background-color: white;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -349,12 +350,14 @@
   background-color: #182b23;
   width: 65%;
   color: #d8d8d8;
-  height: 45%;
+  height: 30%;
   outline: none;
   border: none;
   font-size: 22px;
-  padding: 10px;
+  padding: 5px  ;
   border-radius: 5px;
+  display: flex;
+  align-self: flex-start;
 }
 .conteudo-novo-post span {
   display: flex;
@@ -378,17 +381,7 @@
   font-size: 22px;
   margin-bottom: 20px;
 }
-#botaoPostar{
-  background-color: #182b23;
-  color: #e7c274;
-  transition: 0.3s;
-  font-size: 15px;
-}
 
-#botaoPostar:hover{
-  background-color:#07140f;
-  transition: 0.3s;
-}
 
 
  ul{
@@ -402,7 +395,7 @@
 
  .conteudo-novo-post textarea {
   display: flex;
-  width: 60%;
+  width: 85%;
   height: 100%;
   border-radius: 5px;
   border: none;
@@ -412,13 +405,13 @@
   resize: none;
   outline: none;
   padding: 15px;
+  align-self: flex-start;
 }
 
 .conteudo-novo-post button {
   display: flex;
   width: 30%;
-  height: 40%;
-  font-size: 15px;
+  height: 20%;
   border-radius: 10px;
   border:none;
   background-color: #182b23;
@@ -426,10 +419,12 @@
   align-items: center;
   color: #e7c274;
   padding: 10px;
-  font-weight: bold;
+  transition: 0.3s;
 } 
 .conteudo-novo-post button:hover {
   cursor: pointer;
+  background-color:#07140f;
+  transition: 0.3s;
 }
 
 .conteudo-novo-post select {
@@ -442,6 +437,9 @@
   border:none;
   border-radius: 5px;
   font-size: 15px;
+  -webkit-appearance: none; /* For Chrome and Safari */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none;
 }
 .conteudo-novo-post select:hover {
   cursor: pointer;
@@ -449,11 +447,15 @@
 
 .container-selects {
   display: flex;
-  height: 100%;
+  height: 150px;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+  align-self: flex-start;
+  gap: 10px;
+  margin: 0 !important;
+}
+.container-selects select{
+  display: flex;
+  height: 100%;
 }
 
 .container-tag {

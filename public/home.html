@@ -107,33 +107,51 @@
       </span>
 
       <h1>Nova contribuição !</h1>
-      <label for="inputTitulo">Titulo da contribuição</label>
+      <!-- <label for="inputTitulo">Titulo da contribuição</label> -->
 
-      <input id="inputTitulo" type="text">
-      
-      <label for="inputConteudo">Conteudo da contribuição</label>
+      <input id="inputTitulo" type="text" placeholder="Titulo">
 
-      <textarea id="textAreaConteudoContribuicao"></textarea>
-
-        <label>Selecione o tipo da contribuição</label>
+      <div class="container-selects">
         <select id="selectTipo">
+          <option value="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+          </option>
           <option value="ajuda">Ajuda</option>
           <option value="celebrar">Celebrar</option>
           <option value="dica">Dica</option>
         </select>
+        <select id="categoriaFiltro" name="categoriaFiltro">
+          <option selected value="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+          </option>
+          <option value="bosses">Bosses</option>
+          <option value="armas">Armas</option>
+        </select>
 
-        <label>Insira uma tag de filtro</label>
-        <div class="container-selects">
-          <select id="categoriaFiltro" name="categoriaFiltro">
-            <option selected value="#">Selecione uma categoria</option>
-            <option value="bosses">Bosses</option>
-            <option value="armas">Armas</option>
-          </select>
+        <select id="opcoes" name="opcoes">
+          <option value="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+          </option>
+        </select>
+      </div>
 
-          <select id="opcoes" name="opcoes">
-            <option value="#">Selecione uma opção</option>
-          </select>
-        </div>
+      <!-- <label for="inputConteudo">Conteudo da contribuição</label> -->
+
+      <textarea placeholder="Digite o conteudo da contribuição aqui..." id="textAreaConteudoContribuicao"></textarea>
+
+        <!-- <label>Selecione o tipo da contribuição</label> -->
+       
+
+        <!-- <label>Insira uma tag de filtro</label> -->
 
         <div class="div-mensagem" id="divMensagemContribuicao"></div>
 
