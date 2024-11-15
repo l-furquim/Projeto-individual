@@ -73,3 +73,6 @@ CONSTRAINT FOREIGN KEY (fkMaculado)
   REFERENCES Maculado(idMaculado), 
 CONSTRAINT PRIMARY KEY(idVoto, fkContribuicao, fkMaculado)
 );
+
+ALTER  TABLE Contribuicao ADD CONSTRAINT FOREIGN KEY (fkComentarioResponsavel) REFERENCES
+    Comentario(idComentario);

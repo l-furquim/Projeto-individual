@@ -41,17 +41,32 @@ async function buscarMaculadoPorEmailESenha(email, senha){
 }
 
 function buscarDados(idMaculado){
-    const instrucaoSql = `SELECT m.nome,
-                            (SELECT COUNT(idComentario)
-                            FROM Comentario
-                            WHERE fkMaculado = ${idMaculado}
-                            AND responsavelPorFechar = 1) as contribuicoesFechadas,
-                            (SELECT COUNT(*) FROM Contribuicao WHERE fkMaculado = ${idMaculado}) as contribuicoes,
-                            (SELECT COUNT(v.idVoto)
-                            FROM Voto v
-                            JOIN Contribuicao as c ON v.fkContribuicao = c.idContribuicao
-                            WHERE c.fkMaculado = ${idMaculado}) as votos 
-                            FROM maculado as m WHERE m.idMaculado =${idMaculado};`
+    const instrucaoSql = `SELECT
+                                m.nome,
+                                (SELECT COUNT(idComentario)
+                                FROM Comentario
+                                WHERE fkMaculado = m.idMaculado
+                                AND responsavelPorFechar = 1) AS contribuicoesFechadas,
+                                (SELECT COUNT(*) 
+                                FROM Contribuicao 
+                                WHERE fkMaculado = m.idMaculado) AS contribuicoes,
+                                (SELECT COUNT(v.idVoto)
+                                FROM Voto v
+                                JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
+                                WHERE c.fkMaculado = m.idMaculado) AS votos,
+
+                                DATE_FORMAT(c.dtContribuicao, '%Y-%m') AS mesContribuicao, 
+                                COUNT(*) AS qtdContribuicaoMes
+                            FROM 
+                                Maculado m
+                            JOIN 
+                                Contribuicao c ON c.fkMaculado = m.idMaculado
+                            WHERE 
+                                m.idMaculado = ${idMaculado}
+                            GROUP BY 
+                                m.idMaculado, mesContribuicao
+                            ORDER BY 
+                                mesContribuicao;`
     return database.executar(instrucaoSql);
                             
 }
