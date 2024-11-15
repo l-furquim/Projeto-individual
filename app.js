@@ -35,7 +35,7 @@ app.use("/votos", votosRouter);
 app.use("/comentarios", comentariosRouter);
 app.use("/contribuicao", contribuicaoRouter);
 
-app.listen(PORTA_APP,function () {
+app.listen(PORTA_APP,"10.0.2.255",function () {
     console.log(`
       ##       ##     ######   ##   ##   ####     #####   ##   ##  #######  #####                ##     #####            ###      #######  ####     ######
    ##      ####     ##  ##  ###  ##    ##     ##   ##  ##   ##   ##   #   ## ##   ##          ##    ##   ##            ##       ##   #   ##       ##  ##
