@@ -1,5 +1,9 @@
+var contribuicaoCurtidaPeloUsuario = false
 var vezesClicadasComentario = 0;
 var vezesClicadasFiltro = 0;
+
+console.log(contribuicaoCurtidaPeloUsuario);
+
 const opcoesPorCategoria = {
   bosses: [
     { value: "margit-o-pressagio-fel", text: "Margit, o Presságio Fell" },
@@ -95,7 +99,7 @@ function fecharModal() {
 function mostrarComentarios(botao, id) {
 
   const contribuicao = botao.closest('li');
-
+  console.log(id);
   const containerComentario = contribuicao.closest("div").querySelector(`#dropdownComentarios${id}`);
   console.log(contribuicao, containerComentario);
 
@@ -164,7 +168,7 @@ async function adicionarComentario(idContribuicao) {
 
 
 
-    const resposta = await fetch("http://localhost:3333/comentarios/comentar", {
+    const resposta = await fetch("http://192.168.0.7:3333/comentarios/comentar", {
       method: "POST",
       body: JSON.stringify({
         conteudo: conteudo,
@@ -270,7 +274,7 @@ async function novaContribuicao() {
           </svg>`;
     const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
-    const resposta = await fetch("http://localhost:3333/contribuicao/cadastrar", {
+    const resposta = await fetch("http://192.168.0.7:3333/contribuicao/cadastrar", {
       method: "POST",
       body: JSON.stringify({
         titulo: titulo,
@@ -325,7 +329,7 @@ async function buscarContribuicoes() {
   abaUsuario.innerHTML += nome;
 
 
-  const contribuicoes = await fetch("http://localhost:3333/contribuicao/listar", {
+  const contribuicoes = await fetch("http://192.168.0.7:3333/contribuicao/listar", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -336,13 +340,13 @@ async function buscarContribuicoes() {
 
   if (contribuicoes.ok) {
 
-    const votos = await fetch(`http://localhost:3333/votos/maculado=${idMaculado}`, {
+    const votos = await fetch(`http://192.168.0.7:3333/votos/maculado=${idMaculado}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+    const comentarios = await fetch("http://192.168.0.7:3333/comentarios/listar", {
       method: "GET",
       headers: {
         "Content-Type": "application.json"
@@ -400,7 +404,7 @@ async function buscarContribuicoes() {
 
           const idAtual = votoAtual ? votoAtual.idVoto : null;
 
-          var contribuicaoCurtidaPeloUsuario = votosFks.includes(contribuicao.idContribuicao);
+          contribuicaoCurtidaPeloUsuario = votosFks.includes(contribuicao.idContribuicao);
 
           listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
@@ -488,7 +492,6 @@ async function buscarContribuicoes() {
       } else {
         arrayContribuicao.forEach((contribuicao) => {
           const contribuicaoDoUsuario = contribuicao.nome == nome;
-          console.log(contribuicaoDoUsuario);
           console.log("Nome do usuario: " + nome);
 
           const comentarioAtual = arrayComentario
@@ -507,12 +510,22 @@ async function buscarContribuicoes() {
           const comentarios =
             `<div id="dropdownComentarios${contribuicao.idContribuicao}" class="container-comentarios">
                 ${arrayComentario.filter((c)=> c.fkContribuicao == contribuicao.idContribuicao).map((c)=> 
-                  `<div class="comentario">
+                  `<div class="comentario ${c.responsavelPorFechar ? " comentario-responsavel" : ""}" id="comentario${c.idComentario}">
+                      <div class="cabecalho-comentario">
+                      <h2>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                      </svg>
+                      ${c.nome}
+                      </h2>
+                      </div>
+                      <hr>
                       <p>${c.conteudo}</p>
                   </div>
                   `).join("")}
             </div>`
-
+            
           listaContribuicoes.innerHTML += `
           <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
             <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
@@ -543,7 +556,7 @@ async function buscarContribuicoes() {
               </div>
               <div class="interacoes-post">
                 <div id="containerSecaoComentario">
-                  <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, contribuicao${contribuicao.idContribuicao})">
+                  <button id="botaoMostrarComentario" onclick="mostrarComentarios(this, ${contribuicao.idContribuicao})">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                       class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
                       <path fill-rule="evenodd"
@@ -569,14 +582,10 @@ async function buscarContribuicoes() {
               : ""}
                 </div>
                 <div class="container-botao-like"> 
-                  <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar( ${contribuicaoCurtidaPeloUsuario}, ${contribuicao.idContribuicao}, ${idAtual}, ${idMaculado} , ${contribuicao.votos} )">
-                    ${contribuicaoCurtidaPeloUsuario ?
-            `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
-                      <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0"/>
-                    </svg>`
-            : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                    </svg>`}
+                  <button id="botaoVotar${contribuicao.idContribuicao}" onclick="votar(false, ${contribuicao.idContribuicao}, null, ${idMaculado} , ${contribuicao.votos} )">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                  </svg>
                     ${contribuicao.votos}
                   </button>
                 </div>
@@ -608,8 +617,10 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
   console.log("votando");
   console.log(`Id do maculado: ${idMaculado}, ${idVoto}`);
 
+  console.log(contribuicaoCurtidaPeloUsuario);
+
   if (curtidoPeloUsuario) {
-    const resposta = await fetch(`http://localhost:3333/votos/desvotar/idVoto=${idVoto}&fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
+    const resposta = await fetch(`http://192.168.0.7:3333/votos/desvotar/idVoto=${idVoto}&fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -618,18 +629,18 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
 
     document.getElementById(`botaoVotar${idContribuicao}`).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-                      </svg> ${qtdVotos - 1}`;
-
+                      </svg> ${qtdVotos == 1 ? qtdVotos = 0 : qtdVotos - 1}`;
+    contribuicaoCurtidaPeloUsuario = false;
     console.log(resposta);
 
   } else {
-    const resposta = await fetch(`http://localhost:3333/votos/votar/fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
+    const resposta = await fetch(`http://192.168.0.7:3333/votos/votar/fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    console.log("Votando no pesquisar sem voto")
+    contribuicaoCurtidaPeloUsuario = true;
     document.getElementById(`botaoVotar${idContribuicao}`).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                             <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0"/>
                           </svg> ${qtdVotos + 1}`;
@@ -659,7 +670,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
   
 
   const contribuicoes = await fetch(
-    `http://localhost:3333/contribuicao/buscar/tipo=${filtros[0]}&tag=${filtros[1]}&conteudoTag=${filtros[2]}`, {
+    `http://192.168.0.7:3333/contribuicao/buscar/tipo=${filtros[0]}&tag=${filtros[1]}&conteudoTag=${filtros[2]}`, {
 
     method: "POST",
     headers: {
@@ -675,13 +686,13 @@ async function pesquisarContribuicao(conteudoPesquisa) {
   if (contribuicoes.ok && contribuicoes.status != 204) {
     const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
-    const votos = await fetch(`http://localhost:3333/votos/maculado=${idMaculado}`, {
+    const votos = await fetch(`http://192.168.0.7:3333/votos/maculado=${idMaculado}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+    const comentarios = await fetch("http://192.168.0.7:3333/comentarios/listar", {
       method: "GET",
       headers: {
         "Content-Type": "application.json"
@@ -741,7 +752,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
 
             const idAtual = votoAtual ? votoAtual.idVoto : null;
 
-            var contribuicaoCurtidaPeloUsuario = votosFks.includes(contribuicao.idContribuicao);
+            contribuicaoCurtidaPeloUsuario = votosFks.includes(contribuicao.idContribuicao);
             console.log("Contribuicao curtida pelo usuario? " + contribuicaoCurtidaPeloUsuario);
 
             listaContribuicoes.innerHTML += `
@@ -996,10 +1007,10 @@ async function fecharContribuicao(idContribuicao){
   const checkboxMarcado = document.querySelector('input[type="checkbox"]:checked');
 
   const idComentario = checkboxMarcado.id.replace("checkComentario", "");
-
+  console.log(idComentario);
   document.getElementById(`comentario${idComentario}`).classList.add("comentario-responsavel");
 
-  fetch(`http://localhost:3333/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
+  fetch(`http://192.168.0.7:3333/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1007,7 +1018,7 @@ async function fecharContribuicao(idContribuicao){
   }).then((resposta)=> {
     if(resposta.ok){
       console.log("Contribuicao fechada");
-      fetch(`http://localhost:3333/comentarios/fechar/comentario=${idComentario}`, {
+      fetch(`http://192.168.0.7:3333/comentarios/fechar/comentario=${idComentario}`, {
         method : "PUT",
         headers: {
           "Content-Type": "application/json"
