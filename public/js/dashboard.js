@@ -1,5 +1,10 @@
 async function carregarDashboard() {
   const id = JSON.parse(sessionStorage.getItem("id"));
+  const nomeUsuario = JSON.parse(sessionStorage.getItem("nome"));
+
+
+  abaUsuario.innerHTML = nomeUsuario;  
+
   const parametros = new URLSearchParams(window.location.search);
   const idUsuario = parametros.get('id');
 
@@ -17,16 +22,21 @@ async function carregarDashboard() {
 
   if(dadosMaculado.ok){
     const dados = await dadosMaculado.json();
-    console.log(dados)
-    if(dados.length > 0){
-      containerNome.innerHTML = dados[0].nome;
-      spanContribuicoesTotais.innerHTML = dados[0].contribuicoes;
-      spanPerguntasFechadas.innerHTML = dados[0].contribuicoesFechadas;
-      spanMenorTempo.innerHTML = "12";
-      spanVotosAcumulados.innerHTML = dados[0].votos;
+      
+      console.log(dados);
+    
+      containerNome.innerHTML = dados.respostaUm[0].nome;
+      
+      spanContribuicoesTotais.innerHTML = dados.respostaUm[0].contribuicoes;
 
-      const dadosMeses = dados.map(d => d.mesContribuicao); 
-      const dadosContribuicoes = dados.map(d => d.qtdContribuicaoMes);
+      spanNumeroNivel.innerHTML =  (Number(dados.respostaUm[0].contribuicoes) * 0.25).toFixed(0);
+      
+      spanPerguntasFechadas.innerHTML = dados.respostaUm[0].contribuicoesFechadas;
+      spanMenorTempo.innerHTML = "12";
+      spanVotosAcumulados.innerHTML = dados.respostaUm[0].votos;
+
+      const dadosMeses = dados.respostaUm.map(d => d.mesContribuicao);
+      const dadosContribuicoes = dados.respostaUm.map(d => d.qtdContribuicaoMes);
       
       const dadosGraficoContribuicoesMeses = dadosMeses.map((m, index) => ({
         mes: m,
@@ -36,7 +46,8 @@ async function carregarDashboard() {
       const labelsMeses = dadosGraficoContribuicoesMeses.map(d => d.mes); 
       const quantidadeContribuicoes = dadosGraficoContribuicoesMeses.map(d => d.quantidadeContribuicoes);
 
-
+      const labelsContribuicoes = dados.respostaDois.map((contribuicao) => contribuicao.titulo);
+      const quantidadeVotos = dados.respostaDois.map((contribuicao) => contribuicao.totalVotos);
 
 
       console.log(labelsMeses, quantidadeContribuicoes);
@@ -85,12 +96,12 @@ async function carregarDashboard() {
       });
 
       new Chart(graficoContribuicoesMaisVotadas, {
-        type: 'line',
+        type: 'bar',
         data: {
-          labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+          labels: labelsContribuicoes,
           datasets: [{
-            label: 'Acertos',
-            data: [2, 3, 5, 10, 15, 10, 5, 19, 20, 30],
+            label: 'Votos',
+            data: quantidadeVotos,
             borderWidth: 1
           }]
         },
@@ -222,4 +233,3 @@ async function carregarDashboard() {
     }
   });
   }
-}

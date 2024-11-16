@@ -71,11 +71,34 @@ function buscarDados(idMaculado){
                             
 }
 
+function buscarContribuicoesMaisVotadas(idMaculado){
+    const instrucaoSql = `                        
+                                SELECT 
+                                    c.titulo AS "titulo", 
+                                    COUNT(v.idVoto) AS "totalVotos" 
+                                FROM 
+                                    Contribuicao c
+                                JOIN 
+                                    Voto v ON v.fkContribuicao = c.idContribuicao
+                                JOIN 
+                                    Maculado m ON m.idMaculado = v.fkMaculado
+                                WHERE 
+                                    m.idMaculado = ${idMaculado}
+                                GROUP BY 
+                                    c.idContribuicao, c.titulo
+                                ORDER BY 
+                                    "totalVotos" DESC
+                                LIMIT 5; 
+                        `
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     buscarMaculadoPorEmail,
     buscarMaculadoPorNome,
     buscarMaculadoPorEmailESenha,
-    buscarDados
+    buscarDados,
+    buscarContribuicoesMaisVotadas
 };

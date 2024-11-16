@@ -62,12 +62,23 @@ async function buscarDados(req, res){
         res.status(401).json({mensagem: "Id do maculado esta undefined"});
     }
     try{
-    const resposta = await maculadoModel.buscarDados(idMaculado);
-    console.log(resposta + idMaculado)
-        if(resposta.length > 0){
-            res.status(201).json(resposta);
+    const respostaUm = await maculadoModel.buscarDados(idMaculado);
+    console.log(respostaUm + idMaculado)
+        if(respostaUm.length > 0){
+            const respostaDois = await maculadoModel.buscarContribuicoesMaisVotadas(idMaculado);
+
+            if(respostaDois.length > 0){
+                return res.status(201).json({
+                    respostaUm,
+                    respostaDois
+                });
+            }
+            return res.status(201).json({
+                respostaUm,
+                respostaDois: []
+            });
         }else{
-            res.status(204).json([]);
+            return res.status(204).json([]);
         }
     }catch(erro){
         console.log("Houve um erro ao buscar os dados do maculado! Erro: ", erro);
