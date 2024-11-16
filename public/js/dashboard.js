@@ -191,9 +191,9 @@ async function carregarDashboard() {
 
  
   new Chart(graficoComentariosPorMeses, {
-    type: 'line',
+    type: 'pie',
     data: {
-      labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+      labels: ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
       datasets: [{
         label: 'Acertos',
         data: [2, 3, 5, 10, 15, 10, 5, 19, 20, 30],
