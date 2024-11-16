@@ -49,19 +49,21 @@
       <div class="conteudoDashboard">
           
         <h1> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-            </svg>
             <div class="container-dash-usuario">
-              Dashboard de <span id="containerNome"></span>
+              <p class="container-nome">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+                Dashboard de <span id="containerNome"></span>
+              </p>
               
               <div class="container-nivel">
                   <p>Nível</p>
                   <span id="spanNumeroNivel"></span>
               </div>
 
-              <div class="container-select-periodo">
+              <!-- <div class="container-select-periodo">
                 <label>Período</label>
                 <select id="selectPeriodo">
                   <option value="#">Selecione o período dos dados</option>
@@ -70,34 +72,32 @@
                   <option value="mensal">Mensal</option>
                   <option value="anual">Anual</option>
                 </select>
-              </div>
+              </div> -->
             </div>
           </h1>
 
           <div class="container-kpis">
-            <p class="kpi">
-               <span class="valorKpi" id="spanContribuicoesTotais">
-
-               </span>Contribuições totais!
-            </p>
-            <p class="kpi">
-              <span class="valorKpi" id="spanPerguntasFechadas">
-
-              </span>
-              Perguntas fechadas
-            </p>
-            <p class="kpi">
-              <span class="valorKpi" id="spanMenorTempo">
-
-              </span>
-              Menor tempo para fechar uma pegunta: 
-            </p>
-            <p class="kpi">
-              <span class="valorKpi" id="spanVotosAcumulados">
-
-              </span>
-              Votos acumulados 
-            </p>
+            
+               <p class="kpi">
+                <span class="valorKpi" id="spanContribuicoesTotais">
+                </span>
+                Contribuições totais!
+              </p>
+              <p class="kpi">
+                <span class="valorKpi" id="spanPerguntasFechadas">
+                </span>
+                Perguntas fechadas
+              </p>
+              <p class="kpi">
+                <span class="valorKpi" id="spanMenorTempo">
+                </span>
+                Menor tempo para fechar uma pegunta:
+              </p>
+              <p class="kpi">
+                <span class="valorKpi" id="spanVotosAcumulados">
+                </span>
+                Votos acumulados
+              </p>
           </div>
 
           <div class="container-graficos">

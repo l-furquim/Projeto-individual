@@ -31,8 +31,14 @@ async function carregarDashboard() {
 
       spanNumeroNivel.innerHTML =  (Number(dados.respostaUm[0].contribuicoes) * 0.25).toFixed(0);
       
+      const tempoMinimo = Number(dados.respostaUm[0].tempoMinimo);
+
+      if(tempoMinimo > 60){
+        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
+      }
+
       spanPerguntasFechadas.innerHTML = dados.respostaUm[0].contribuicoesFechadas;
-      spanMenorTempo.innerHTML = "12";
+
       spanVotosAcumulados.innerHTML = dados.respostaUm[0].votos;
 
       const dadosMeses = dados.respostaUm.map(d => d.mesContribuicao);

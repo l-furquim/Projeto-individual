@@ -31,7 +31,7 @@ input{
 } */
 
 .bodyCadastro {
-  background-image: url("../assets/images/image.png");
+  background-image: url("../assets/images/imagemArvoreShadow.png");
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0;
@@ -170,7 +170,7 @@ input{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .bodyLogin {
-  background-image: url("../assets/images/image.png");
+  background-image: url("../assets/images/imagemArvoreShadow.png");
   background-repeat: no-repeat;
   background-size:cover;
   background-position: 10% 0;

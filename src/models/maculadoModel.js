@@ -54,7 +54,16 @@ function buscarDados(idMaculado){
                                 FROM Voto v
                                 JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
                                 WHERE c.fkMaculado = m.idMaculado) AS votos,
-
+                                (SELECT 
+                                    TIMESTAMPDIFF(MINUTE, c.dtContribuicao, c.dtFechamento) AS "tempoMinimo"
+                                FROM 
+                                    Contribuicao c
+                                JOIN 
+                                    Maculado m ON c.fkMaculado = m.idMaculado
+                                WHERE 
+                                    c.contribuicaoFechada = TRUE
+                                    AND c.dtFechamento IS NOT NULL
+                                    AND m.idMaculado = ${idMaculado}) as tempoMinimo,
                                 DATE_FORMAT(c.dtContribuicao, '%Y-%m') AS mesContribuicao, 
                                 COUNT(*) AS qtdContribuicaoMes
                             FROM 
@@ -75,20 +84,21 @@ function buscarContribuicoesMaisVotadas(idMaculado){
     const instrucaoSql = `                        
                                 SELECT 
                                     c.titulo AS "titulo", 
-                                    COUNT(v.idVoto) AS "totalVotos" 
+                                    COUNT(DISTINCT v.idVoto) AS "totalVotos" 
                                 FROM 
                                     Contribuicao c
-                                JOIN 
+                                LEFT JOIN 
                                     Voto v ON v.fkContribuicao = c.idContribuicao
-                                JOIN 
-                                    Maculado m ON m.idMaculado = v.fkMaculado
+                                LEFT JOIN 
+                                    Maculado m ON c.fkMaculado = m.idMaculado
                                 WHERE 
                                     m.idMaculado = ${idMaculado}
                                 GROUP BY 
                                     c.idContribuicao, c.titulo
                                 ORDER BY 
-                                    "totalVotos" DESC
-                                LIMIT 5; 
+                                    COUNT(DISTINCT v.idVoto) DESC
+                                LIMIT 5;
+
                         `
     return database.executar(instrucaoSql);
 }
