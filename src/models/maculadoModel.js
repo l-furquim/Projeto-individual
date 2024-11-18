@@ -55,7 +55,7 @@ function buscarDados(idMaculado){
                                 JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
                                 WHERE c.fkMaculado = m.idMaculado) AS votos,
                                 (SELECT 
-                                    TIMESTAMPDIFF(MINUTE, c.dtContribuicao, c.dtFechamento) AS "tempoMinimo"
+                                    MIN(TIMESTAMPDIFF(MINUTE, c.dtContribuicao, c.dtFechamento)) AS "tempoMinimo"
                                 FROM 
                                     Contribuicao c
                                 JOIN 
@@ -101,6 +101,17 @@ function buscarContribuicoesMaisVotadas(idMaculado){
 
                         `
     return database.executar(instrucaoSql);
+}
+
+function buscarComentariosFechadosPorMeses(idMaculado){
+    var instrucaoSql = `
+                       SELECT COUNT(idComentario)
+                            (SELECT dtFechamento FROM Contribuicao
+                                WHERE fkComentarioResponsavel = idComentario)
+                                FROM Comentario
+                                WHERE fkMaculado = ${idMaculado}
+                                AND responsavelPorFechar = 1) AS contribuicoesFechadas;
+                        `
 }
 
 module.exports = {

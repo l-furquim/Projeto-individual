@@ -29,6 +29,20 @@ async function carregarDashboard() {
       
       spanContribuicoesTotais.innerHTML = dados.respostaUm[0].contribuicoes;
 
+
+        const porcentagem = (dados.respostaUm[0].contribuicoes / 4) * 100;
+        const circuloPorcentagem = document.querySelector('.progresso-circulo');
+        const texto = document.getElementById('porcentagemXp');
+        
+        const raio = 50;
+        const circunferencia = 2 * Math.PI * raio;
+        const offset = circunferencia - (porcentagem / 100) * circunferencia;
+        
+        circuloPorcentagem.style.strokeDashoffset = offset;
+        
+        texto.innerHTML = `${porcentagem / 100}  XP`;
+
+      
       spanNumeroNivel.innerHTML =  (Number(dados.respostaUm[0].contribuicoes) * 0.25).toFixed(0);
       
       const tempoMinimo = Number(dados.respostaUm[0].tempoMinimo);
