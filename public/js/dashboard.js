@@ -25,12 +25,14 @@ async function carregarDashboard() {
       
       console.log(dados);
     
-      containerNome.innerHTML = dados.respostaUm[0].nome;
+      const primeiroParametro = dados.respostaUm[0];
+
+      containerNome.innerHTML = primeiroParametro.nome;
       
-      spanContribuicoesTotais.innerHTML = dados.respostaUm[0].contribuicoes;
+      spanContribuicoesTotais.innerHTML = primeiroParametro.contribuicoes;
 
 
-        const porcentagem = (dados.respostaUm[0].contribuicoes / 4) * 100;
+        const porcentagem = (primeiroParametro.contribuicoes / 4) * 100;
         const circuloPorcentagem = document.querySelector('.progresso-circulo');
         const texto = document.getElementById('porcentagemXp');
         
@@ -43,17 +45,17 @@ async function carregarDashboard() {
         texto.innerHTML = `${porcentagem / 100}  XP`;
 
       
-      spanNumeroNivel.innerHTML =  (Number(dados.respostaUm[0].contribuicoes) * 0.25).toFixed(0);
+      spanNumeroNivel.innerHTML =  (Number(primeiroParametro.contribuicoes) * 0.25).toFixed(0);
       
-      const tempoMinimo = Number(dados.respostaUm[0].tempoMinimo);
+      const tempoMinimo = Number(primeiroParametro.tempoMinimo);
 
       if(tempoMinimo > 60){
         spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
       }
 
-      spanPerguntasFechadas.innerHTML = dados.respostaUm[0].contribuicoesFechadas;
+      spanPerguntasFechadas.innerHTML = primeiroParametro.contribuicoesFechadas;
 
-      spanVotosAcumulados.innerHTML = dados.respostaUm[0].votos;
+      spanVotosAcumulados.innerHTML = primeiroParametro.votos;
 
       const dadosMeses = dados.respostaUm.map(d => d.mesContribuicao);
       const dadosContribuicoes = dados.respostaUm.map(d => d.qtdContribuicaoMes);
@@ -158,6 +160,49 @@ async function carregarDashboard() {
         }
       });
 
+      new Chart(graficoEngajamentoPorTipo, {
+        type: 'pie',
+        data: {
+          labels: ["celebrar", "dica", "ajuda"],
+          datasets: [{
+            label: 'Votos',
+            data: [dados.respostaUm[0].votosCelebrar,dados.respostaUm[0].votosDica, dados.respostaUm[0].votosAjuda ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Engajamento por tipo de contribuição feita',
+              color: '#e7c274',
+              font: {
+                size: 24,
+                weight: 'bold',
+              },
+              padding: {
+                top: 10,
+                bottom: 30
+              },
+              align: 'center'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: '#e7c274'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#e7c274'
+              }
+            }
+          }
+        }
+      });
+
     }
 
   
@@ -210,46 +255,5 @@ async function carregarDashboard() {
   });
 
  
-  new Chart(graficoComentariosPorMeses, {
-    type: 'pie',
-    data: {
-      labels: ["Janeiro", "Fevereiro", "Março", "Abril","Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-      datasets: [{
-        label: 'Acertos',
-        data: [2, 3, 5, 10, 15, 10, 5, 19, 20, 30],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: 'Acertos nos ultimos 10 dias',
-          color: '#e7c274',
-          font: {
-            size: 24,
-            weight: 'bold',
-          },
-          padding: {
-            top: 10,
-            bottom: 30
-          },
-          align: 'center'
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: '#e7c274'
-          }
-        },
-        x: {
-          ticks: {
-            color: '#e7c274'
-          }
-        }
-      }
-    }
-  });
+  
   }

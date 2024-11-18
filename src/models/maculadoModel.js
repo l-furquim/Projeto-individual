@@ -43,20 +43,44 @@ async function buscarMaculadoPorEmailESenha(email, senha){
 function buscarDados(idMaculado){
     const instrucaoSql = `SELECT
                                 m.nome,
+
                                 (SELECT COUNT(idComentario)
                                 FROM Comentario
                                 WHERE fkMaculado = m.idMaculado
                                 AND responsavelPorFechar = 1) AS contribuicoesFechadas,
+
                                 (SELECT COUNT(*) 
                                 FROM Contribuicao 
                                 WHERE fkMaculado = m.idMaculado) AS contribuicoes,
+
                                 (SELECT COUNT(v.idVoto)
                                 FROM Voto v
                                 JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
                                 WHERE c.fkMaculado = m.idMaculado) AS votos,
+
+                                (
+                                    SELECT COALESCE(COUNT(v.idVoto), 0)
+                                    FROM Voto v
+                                    JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
+                                    WHERE c.fkMaculado = m.idMaculado AND c.tipo = 'ajuda'
+                                ) AS votosAjuda,
+                                (
+                                    SELECT COALESCE(COUNT(v.idVoto), 0)
+                                    FROM Voto v
+                                    JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
+                                    WHERE c.fkMaculado = m.idMaculado AND c.tipo = 'celebrar'
+                                ) AS votosCelebrar,
+                                (
+                                    SELECT COALESCE(COUNT(v.idVoto), 0)
+                                    FROM Voto v
+                                    JOIN Contribuicao c ON v.fkContribuicao = c.idContribuicao
+                                    WHERE c.fkMaculado = m.idMaculado AND c.tipo = 'dica'
+                                ) AS votosDica,
+
                                 (SELECT 
                                     MIN(TIMESTAMPDIFF(MINUTE, c.dtContribuicao, c.dtFechamento)) AS "tempoMinimo"
-                                FROM 
+                                
+                                    FROM 
                                     Contribuicao c
                                 JOIN 
                                     Maculado m ON c.fkMaculado = m.idMaculado
