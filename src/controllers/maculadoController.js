@@ -68,15 +68,29 @@ async function buscarDados(req, res){
             const respostaDois = await maculadoModel.buscarContribuicoesMaisVotadas(idMaculado);
 
             if(respostaDois.length > 0){
+
+                const respostaTres = await maculadoModel.buscarComentariosFechadosPorMeses(idMaculado);
+
+                if(respostaTres.length > 0){
+                    return res.status(201).json({
+                        respostaUm,
+                        respostaDois,
+                        respostaTres
+                    });
+                }else{
+                    return res.status(201).json({
+                        respostaUm,
+                        respostaDois,
+                        respostaTres: []
+                    });
+                }
+            }else{
                 return res.status(201).json({
                     respostaUm,
-                    respostaDois
+                    respostaDois: []
                 });
             }
-            return res.status(201).json({
-                respostaUm,
-                respostaDois: []
-            });
+            
         }else{
             return res.status(204).json([]);
         }

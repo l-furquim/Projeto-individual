@@ -32,13 +32,13 @@ async function carregarDashboard() {
       spanContribuicoesTotais.innerHTML = primeiroParametro.contribuicoes;
 
 
-        const porcentagem = (primeiroParametro.contribuicoes / 4) * 100;
-        const circuloPorcentagem = document.querySelector('.progresso-circulo');
-        const texto = document.getElementById('porcentagemXp');
-        
-        const raio = 50;
-        const circunferencia = 2 * Math.PI * raio;
-        const offset = circunferencia - (porcentagem / 100) * circunferencia;
+      const porcentagem = (primeiroParametro.contribuicoes / 4) * 100;
+      const circuloPorcentagem = document.querySelector('.progresso-circulo');
+      const texto = document.getElementById('porcentagemXp');
+      
+      const raio = 50;
+      const circunferencia = 2 * Math.PI * raio;
+      const offset = circunferencia - (porcentagem / 100) * circunferencia;
         
         circuloPorcentagem.style.strokeDashoffset = offset;
         
@@ -59,19 +59,35 @@ async function carregarDashboard() {
 
       const dadosMeses = dados.respostaUm.map(d => d.mesContribuicao);
       const dadosContribuicoes = dados.respostaUm.map(d => d.qtdContribuicaoMes);
+
+      const comentarios = dados.respostaTres.map(co =>  co.contribuicoesFechadasMes);
+      const datasComentarios = dados.respostaTres.map(co => co.dataComentario);
+    
+      // const labelsMesesComentarios = dados.respostaTres.map(d => d.dtComentario);
+      // const dadosComentarios = dados.respostaTres.map(d => d.contribuicoesFechadasMes);
+
       
+      console.log(comentarios)
+
       const dadosGraficoContribuicoesMeses = dadosMeses.map((m, index) => ({
         mes: m,
         quantidadeContribuicoes: dadosContribuicoes[index]
       }));
 
+      const dadosGraficoComentariosMeses = datasComentarios.map((c, index) => ({
+        mes: c,
+        quantidadeComentarios: comentarios[index]
+      }));
+
       const labelsMeses = dadosGraficoContribuicoesMeses.map(d => d.mes); 
       const quantidadeContribuicoes = dadosGraficoContribuicoesMeses.map(d => d.quantidadeContribuicoes);
 
+      const labelsMesesComentarios = dadosGraficoComentariosMeses.map(d => d.mes);
+      const quantidadeComentarios = dadosGraficoComentariosMeses.map(d => d.quantidadeComentarios);
+
+
       const labelsContribuicoes = dados.respostaDois.map((contribuicao) => contribuicao.titulo);
       const quantidadeVotos = dados.respostaDois.map((contribuicao) => contribuicao.totalVotos);
-
-
       console.log(labelsMeses, quantidadeContribuicoes);
 
       new Chart(graficoContribuicoesTotaisPorMeses, {
@@ -202,58 +218,54 @@ async function carregarDashboard() {
           }
         }
       });
+    
+      new Chart(graficoPerguntasFechadasPorMeses, {
+        type: 'line',
+        data: {
+          labels: labelsMesesComentarios,
+          datasets: [{
+            label: 'Comentarios',
+            data: quantidadeComentarios,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: 'Histórico de Comentários que fecharam alguma contribuição',
+              color: '#e7c274',
+              font: {
+                size: 24,
+                weight: 'bold',
+              },
+              padding: {
+                top: 10,
+                bottom: 30
+              },
+              align: 'center'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: '#e7c274'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#e7c274'
+              }
+            }
+          }
+        }
+      });
 
     }
 
   
 
-  new Chart(graficoPerguntasFechadasPorMeses, {
-    type: 'bar',
-    data: {
-      labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
-      datasets: [{
-        label: 'Temperatura média',
-        data: [22, 24, 27, 23, 20, 18],
-        borderWidth: 1
-      }, {
-        label: 'Umidade média',
-        data: [90, 89, 93, 87, 88, 82],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      plugins: {
-        title: {
-          display: true,
-          text: 'Vezes jogadas',
-          color: '#e7c274',
-          font: {
-            size: 24,
-            weight: 'bold',
-          },
-          padding: {
-            top: 10,
-            bottom: 30
-          },
-          align: 'center'
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: '#e7c274'
-          }
-        },
-        x: {
-          ticks: {
-            color: '#e7c274'
-          }
-        }
-      }
-    }
-  });
 
- 
   
   }

@@ -129,13 +129,21 @@ function buscarContribuicoesMaisVotadas(idMaculado){
 
 function buscarComentariosFechadosPorMeses(idMaculado){
     var instrucaoSql = `
-                       SELECT COUNT(idComentario)
-                            (SELECT dtFechamento FROM Contribuicao
-                                WHERE fkComentarioResponsavel = idComentario)
-                                FROM Comentario
-                                WHERE fkMaculado = ${idMaculado}
-                                AND responsavelPorFechar = 1) AS contribuicoesFechadas;
-                        `
+                        SELECT 
+							DATE_FORMAT(dtComentario, '%Y-%m') as dataComentario,
+                                    COUNT(DISTINCT c.idComentario) AS "contribuicoesFechadasMes" 
+                                FROM 
+                                    Comentario c
+                                LEFT JOIN 
+                                    Contribuicao co ON co.fkComentarioResponsavel = c.idComentario
+                                WHERE 
+                                    c.fkMaculado = ${idMaculado}
+                                GROUP BY 
+                                    dataComentario
+                                ORDER BY 
+                                    dataComentario;
+                        `;
+    return database.executar(instrucaoSql);                    
 }
 
 module.exports = {
@@ -145,5 +153,6 @@ module.exports = {
     buscarMaculadoPorNome,
     buscarMaculadoPorEmailESenha,
     buscarDados,
-    buscarContribuicoesMaisVotadas
+    buscarContribuicoesMaisVotadas,
+    buscarComentariosFechadosPorMeses
 };
