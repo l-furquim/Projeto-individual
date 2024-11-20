@@ -6,12 +6,13 @@
   <title>Início</title>
   <link rel="stylesheet" href="./styles/style.css">
   <script src="./js/inicio.js"></script>
+  <script src="./js/sessao.js"></script>
   <link rel="icon" href="./assets/logo3.svg.svg" type="image/svg">
 </head>
-<body class="bodyInicio">
+<body class="bodyInicio" onload="validarRedirecionamento('navInicio')">
   <div class="containerNav">
     <img onclick="location.replace(`/inicio.html`)" class="logo" src="./assets/images/logo3.svg.svg" alt="Logo Tarnished's Help">
-    <div class="conteudoNav">
+    <div id="navInicio" class="conteudoNav">
       <a href="./inicio.html" class="selected">Início</a>
       <a href="./cadastro.html">Cadastrar</a>
       <a href="./login.html">Login</a>

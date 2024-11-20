@@ -10,12 +10,13 @@
   <link rel="stylesheet" href="./styles/dashboard.css">
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="icon" href="./assets/logo.svg" type="image/svg">
+  <script src="./js/sessao.js"></script>
 </head>
-<body class="bodyDashboard" onload="carregarDashboard()">
+<body class="bodyDashboard" onload="carregarDashboard(); validarSessao(); validarRedirecionamento('navDashboard');">
 
   <div class="containerNav">
     <img onclick="location.replace(`/inicio.html`)" class="logo" src="./assets/images/logo3.svg.svg" alt="Logo Tarnished's Help">
-    <div class="conteudoNav">
+    <div id="navDashboard" class="conteudoNav">
       <a href="./inicio.html">Início</a>
       <a href="./home.html">Home</a>
       <a id="ancoraDash" href="./dashboard.html?id=" class="selected">Dashboard</a>
