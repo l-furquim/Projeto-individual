@@ -15,18 +15,21 @@ function validarRedirecionamento(idNav){
     if(nav.id == "navInicio"){
       nav.innerHTML = `
       <a href="/inicio.html" class="selected">Início</a>
+      <a href="/ranking.html">Ranking</a>
       <a href="/home.html">Home</a>
       <a id="ancoraDash">Dashboard</a>
       `
     }else if(nav.id == "navDashboard"){
       nav.innerHTML = `
       <a href="/inicio.html">Início</a>
+      <a href="/ranking.html">Ranking</a>
       <a href="/home.html">Home</a>
       <a id="ancoraDash" class="selected">Dashboard</a>
       `
     }else{
       nav.innerHTML = `
                       <a href="/inicio.html">Início</a>
+                      <a href="/ranking.html">Ranking</a>
                       <a href="/home.html" class="selected">Home</a>
                       <a id="ancoraDash">Dashboard</a>
                        `

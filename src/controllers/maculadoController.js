@@ -100,9 +100,23 @@ async function buscarDados(req, res){
     }
 }
 
+function buscarRanking(req ,res){
+    maculadoModel.buscarRanking().then(function (resposta){
+        if(resposta.length > 0){
+            res.status(200).json(resposta);
+        }else{
+            res.status(204).json([]);
+        }
+}).catch((erro) => {
+    console.log(erro);
+    res.status(500).json(erro);
+})
+}
+
 
 module.exports = {
     autenticar,
     cadastrar,
-    buscarDados
+    buscarDados,
+    buscarRanking
 };

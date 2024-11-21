@@ -146,6 +146,27 @@ function buscarComentariosFechadosPorMeses(idMaculado){
     return database.executar(instrucaoSql);                    
 }
 
+function buscarRanking(){
+    const instrucaoSql = `
+                            SELECT 
+                                m.idMaculado as idMaculado,
+                                m.nome as nome,
+                                COUNT(v.idVoto) AS votosAcumulados
+                            FROM 
+                                Maculado m
+                            JOIN 
+                                Contribuicao c ON m.idMaculado = c.fkMaculado
+                            JOIN 
+                                Voto v ON v.fkContribuicao = c.idContribuicao
+                            GROUP BY 
+                                m.idMaculado, m.nome
+                            ORDER BY 
+                                votosAcumulados DESC
+                            LIMIT 3;
+                        `
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -154,5 +175,6 @@ module.exports = {
     buscarMaculadoPorEmailESenha,
     buscarDados,
     buscarContribuicoesMaisVotadas,
-    buscarComentariosFechadosPorMeses
+    buscarComentariosFechadosPorMeses,
+    buscarRanking
 };

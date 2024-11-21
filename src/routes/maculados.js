@@ -15,6 +15,8 @@ router.get("/buscarDados/:idMaculado", function(req,res){
     maculadoController.buscarDados(req,res);
 });
 
-
+router.get("/ranking/buscar", (req, res) => {
+    maculadoController.buscarRanking(req,res);
+});
 
 module.exports = router;
