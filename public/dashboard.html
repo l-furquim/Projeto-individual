@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="icon" href="./assets/logo.svg" type="image/svg">
   <script src="./js/sessao.js"></script>
+  <script src="./js/modal.js"></script>
 </head>
 <body class="bodyDashboard" onload="carregarDashboard(); validarSessao(); validarRedirecionamento('navDashboard');">
 
@@ -58,22 +59,26 @@
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                 </svg>
                 Dashboard de <span id="containerNome"></span>
-              </p>
-              
+                              
               <div class="container-nivel">
-                  <p>Nível</p>
-                  <span id="spanNumeroNivel"></span>
+                <p>Nível</p>
+                <span id="spanNumeroNivel"></span>
 
-                  <div class="container-xp">
-                    <svg class="circulo-xp" width="120" height="120" viewBox="0 0 120 120">
-                      <circle class="bg-circulo" cx="60" cy="60" r="50"></circle>
-                      <circle class="progresso-circulo" cx="60" cy="60" r="50"></circle>
-                    </svg>
-                    <div class="texto-xp">
-                      <span id="porcentagemXp">0XP</span>
-                    </div>
+                <div class="container-xp">
+                  <svg class="circulo-xp" width="120" height="120" viewBox="0 0 120 120">
+                    <circle class="bg-circulo" cx="60" cy="60" r="50"></circle>
+                    <circle class="progresso-circulo" cx="60" cy="60" r="50"></circle>
+                  </svg>
+                  <div class="texto-xp">
+                    <span id="porcentagemXp">0XP</span>
                   </div>
-              </div>
+                </div>
+                </div>
+              
+              </p>
+              <!-- <div id="containerRank" class="container-rank">
+
+              </div> -->
 
               <!-- <div class="container-select-periodo">
                 <label>Período</label>
@@ -91,24 +96,24 @@
           <div class="container-kpis">
             
                <p class="kpi">
+                 Contribuições totais!
                 <span class="valorKpi" id="spanContribuicoesTotais">
                 </span>
-                Contribuições totais!
               </p>
               <p class="kpi">
+                Perguntas fechadas
                 <span class="valorKpi" id="spanPerguntasFechadas">
                 </span>
-                Perguntas fechadas
               </p>
               <p class="kpi">
+                Tempo recorde para fechar uma pegunta:
                 <span class="valorKpi" id="spanMenorTempo">
                 </span>
-                Menor tempo para fechar uma pegunta:
               </p>
               <p class="kpi">
+                Votos acumulados
                 <span class="valorKpi" id="spanVotosAcumulados">
                 </span>
-                Votos acumulados
               </p>
           </div>
 
@@ -119,11 +124,12 @@
             </div>
             <div class="segunda-linha">
                 <canvas id="graficoContribuicoesMaisVotadas"></canvas>
+                <canvas width="722" id="graficoEngajamentoPorTipo"></canvas>
             </div>
 
-            <div class="terceira-linha">
-              <canvas width="722" id="graficoEngajamentoPorTipo"></canvas>
-            </div>
+            <!-- <div class="terceira-linha">
+              
+            </div> -->
           </div>
       </div>
     </div>

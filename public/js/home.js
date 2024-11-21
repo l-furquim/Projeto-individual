@@ -168,7 +168,7 @@ async function adicionarComentario(idContribuicao) {
 
 
 
-    const resposta = await fetch("http://localhost:3333/comentarios/comentar", {
+    const resposta = await fetch("/comentarios/comentar", {
       method: "POST",
       body: JSON.stringify({
         conteudo: conteudo,
@@ -274,7 +274,7 @@ async function novaContribuicao() {
           </svg>`;
     const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
-    const resposta = await fetch("http://localhost:3333/contribuicao/cadastrar", {
+    const resposta = await fetch("/contribuicao/cadastrar", {
       method: "POST",
       body: JSON.stringify({
         titulo: titulo,
@@ -329,7 +329,7 @@ async function buscarContribuicoes() {
   abaUsuario.innerHTML += nome;
 
 
-  const contribuicoes = await fetch("http://localhost:3333/contribuicao/listar", {
+  const contribuicoes = await fetch("/contribuicao/listar", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -340,13 +340,13 @@ async function buscarContribuicoes() {
 
   if (contribuicoes.ok) {
 
-    const votos = await fetch(`http://localhost:3333/votos/maculado=${idMaculado}`, {
+    const votos = await fetch(`/votos/maculado=${idMaculado}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+    const comentarios = await fetch("/comentarios/listar", {
       method: "GET",
       headers: {
         "Content-Type": "application.json"
@@ -620,7 +620,7 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
   console.log(contribuicaoCurtidaPeloUsuario);
 
   if (curtidoPeloUsuario) {
-    const resposta = await fetch(`http://localhost:3333/votos/desvotar/idVoto=${idVoto}&fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
+    const resposta = await fetch(`/votos/desvotar/idVoto=${idVoto}&fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -634,7 +634,7 @@ async function votar(curtidoPeloUsuario, idContribuicao, idVoto, idMaculado, qtd
     console.log(resposta);
 
   } else {
-    const resposta = await fetch(`http://localhost:3333/votos/votar/fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
+    const resposta = await fetch(`/votos/votar/fkMculado=${idMaculado}&fkContribuicao=${idContribuicao}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -670,7 +670,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
   
 
   const contribuicoes = await fetch(
-    `http://localhost:3333/contribuicao/buscar/tipo=${filtros[0]}&tag=${filtros[1]}&conteudoTag=${filtros[2]}`, {
+    `/contribuicao/buscar/tipo=${filtros[0]}&tag=${filtros[1]}&conteudoTag=${filtros[2]}`, {
 
     method: "POST",
     headers: {
@@ -686,13 +686,13 @@ async function pesquisarContribuicao(conteudoPesquisa) {
   if (contribuicoes.ok && contribuicoes.status != 204) {
     const idMaculado = JSON.parse(sessionStorage.getItem("id"));
 
-    const votos = await fetch(`http://localhost:3333/votos/maculado=${idMaculado}`, {
+    const votos = await fetch(`/votos/maculado=${idMaculado}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
-    const comentarios = await fetch("http://localhost:3333/comentarios/listar", {
+    const comentarios = await fetch("/comentarios/listar", {
       method: "GET",
       headers: {
         "Content-Type": "application.json"
@@ -1010,7 +1010,7 @@ async function fecharContribuicao(idContribuicao){
   console.log(idComentario);
   document.getElementById(`comentario${idComentario}`).classList.add("comentario-responsavel");
 
-  fetch(`http://localhost:3333/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
+  fetch(`/contribuicao/fechar/contribuicao=${idContribuicao}&comentario=${idComentario}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
@@ -1018,14 +1018,16 @@ async function fecharContribuicao(idContribuicao){
   }).then((resposta)=> {
     if(resposta.ok){
       console.log("Contribuicao fechada");
-      fetch(`http://localhost:3333/comentarios/fechar/comentario=${idComentario}`, {
+      fetch(`/comentarios/fechar/comentario=${idComentario}`, {
         method : "PUT",
         headers: {
           "Content-Type": "application/json"
         }
       }).then((resposta)=> {
           if(resposta.ok){
-
+            document.getElementById(`contribuicao${idContribuicao}`).closest("div").querySelector("container-post").classList.add("container-post-fechado");
+          }else{
+            console.log(resposta);
           }
       });
     }

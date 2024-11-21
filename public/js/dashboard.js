@@ -13,7 +13,7 @@ async function carregarDashboard() {
   // abaUsuario.innerHTML = nome;
   // containerNome.innerHTML = nome;
 
-  const dadosMaculado = await fetch(`http://localhost:3333/maculados/buscarDados/${idUsuario}`, {
+  const dadosMaculado = await fetch(`/maculados/buscarDados/${idUsuario}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -40,12 +40,17 @@ async function carregarDashboard() {
       const circunferencia = 2 * Math.PI * raio;
       const offset = circunferencia - (porcentagem / 100) * circunferencia;
         
-        circuloPorcentagem.style.strokeDashoffset = offset;
-        
-        texto.innerHTML = `${porcentagem / 100}  XP`;
-
+      circuloPorcentagem.style.strokeDashoffset = offset;
       
-      spanNumeroNivel.innerHTML =  (Number(primeiroParametro.contribuicoes) * 0.25).toFixed(0);
+      texto.innerHTML = `${porcentagem / 100}  XP`;
+
+      const nivel = (Number(primeiroParametro.contribuicoes) * 0.25).toFixed(0);
+      
+      spanNumeroNivel.innerHTML = nivel;
+
+      // if(nivel >= 0 && nivel <= 10){
+      //   containerRank.innerHTML = `<img style="" src="../assets/images/rankMaculado.JPG" width=200 height=200>`
+      // }
       
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
 

@@ -28,7 +28,7 @@
   padding: 20px;
   align-items: center;
   justify-content: center;
-  height: 400vh;
+  height: 100%;
 }
 
 .conteudoDashboard {
@@ -36,6 +36,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
   color: #e7c274;
   background-color:#1e1e1e;
   justify-content: center;
@@ -63,7 +64,6 @@
   justify-content:center;
   width: 100%;
   color: #EEF7E6;
-  flex-direction: column;
 }
 
 .container-select-periodo{
@@ -76,7 +76,13 @@
 .container-nome{
   background-color: #c19d53 ;
   padding: 10px;
-  margin-right: 30px;
+  margin-right: auto;
+  display: flex;
+  width: 60%;
+  gap: 20px;
+  align-items: center;
+  justify-content: start;
+  font-weight: normal;
 }
 
 .container-select-periodo label {
@@ -101,11 +107,12 @@
 
 
 .container-kpis{
-  width: 80%;
+  width: 100%;
   justify-content: center;
   gap: 30px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   font-size: 20px;
 }
 .container-kpis p{
@@ -117,23 +124,35 @@
   gap: 20px;
   width: 300px;
   align-items: center;
+  flex-direction: column;
   background-color: #182b23;
   color: #EEF7E6;
+  height: 150px;
+  font-size: 22px;
 }
+/* 
+.descKpi {
+  display: flex;
+  width: ;
+} */
 
 .valorKpi{
   font-weight: bolder;
   color: #EEF7E6;
   background-color: #c19d53;
   padding: 10px;
+  display: flex;
+  margin-top: auto;
+  width: 50%;
+  justify-content: center;
 }
 
 .container-graficos{
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   width: 80%;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 50px;
   flex-direction: column;
   height: 100%;
@@ -141,18 +160,16 @@
 
 .primeira-linha{
   display: flex;
-  width: 80%;
+  width: 60%;
   justify-content: center;
   align-items: center;
   gap:50px;
-  height: 12%;
+  height: 20%;
 }
 #graficoContribuicoesTotaisPorMeses{
   background-color: #182b23;
   border-radius: 5px;
   padding: 10px;
-  height: 12%;
-  width: 100%;
 }
 #graficoPerguntasFechadasPorMeses{
   background-color: #182b23;
@@ -163,23 +180,23 @@
   background-color: #182b23;
   border-radius: 5px;
   padding: 10px;
+
 }
 #graficoEngajamentoPorTipo{
   background-color: #182b23;
   border-radius: 5px;
   padding: 10px;
-  width: 100%;
 }
 
 
 .segunda-linha{
   margin-top: 50px;
   display: flex;
-  width: 100%;
+  width: 60%;
   justify-content: center;
   align-items: center;
   gap:50px;
-  height: 12%;
+  height: 20%;
 }
 .container-terceiro-grafico{
   margin-bottom: 50px;
@@ -190,14 +207,16 @@
   font-size: 24px;
   align-items: center;
   gap: 10px;
-  background-color: #c19d53;
+  /* background-color: #c19d53; */
   padding: 5px;
   width: 300px;
   font-weight: bolder;
   justify-content: center;
-  margin-right: 30px;
+  margin-right: 80px;
 }
-
+#containerNome{
+  font-weight: bolder;
+}
 #spanNumeroNivel{
   display: flex;
 }

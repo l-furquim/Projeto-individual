@@ -1,5 +1,8 @@
 var graficoClasse = null;
 
+abaUsuario.innerHTML = JSON.parse(sessionStorage.getItem("nome"));
+
+
 async function buscarDadosRanking(){
   const idGrafico = document.getElementById("graficoRankings").getContext("2d");
   const topUsuariosId = [];

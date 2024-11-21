@@ -105,8 +105,3 @@ async function cadastrar(){
     console.log(resposta);
   }
 }
-
-
-  fetch(`/suarota/${id}`,{
-    method: "POST"
-  });
