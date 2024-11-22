@@ -53,9 +53,11 @@ async function carregarDashboard() {
       // }
       
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
-
       if(tempoMinimo > 60){
         spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
+      }
+      if(tempoMinimo == 0){
+        spanMenorTempo.innerHTML = "Ainda não registrado";
       }
 
       spanPerguntasFechadas.innerHTML = primeiroParametro.contribuicoesFechadas;
