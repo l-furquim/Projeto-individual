@@ -55,18 +55,24 @@ async function carregarDashboard() {
       // }
       
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
-      if(tempoMinimo > 60){
-        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
-      }
-      if(tempoMinimo > 120){
+
+      if(tempoMinimo > 0 && tempoMinimo < 60){
+        spanMenorTempo.innerHTML = `${tempoMinimo} Minutos!`;
+      }else if(tempoMinimo >= 60 && tempoMinimo < 1440){
         spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Horas!`;
       }
-      if(tempoMinimo > 2880){
-        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Dias!`;
+      else if(tempoMinimo >= 1440){
+        spanMenorTempo.innerHTML = `${((tempoMinimo / 60) / 24).toFixed(0)} Dias!`;
       }
-      if(tempoMinimo == 0){
+      else if(tempoMinimo == 0){
         spanMenorTempo.innerHTML = "Ainda não registrado";
       }
+      else if(tempoMinimo < 1){
+        spanMenorTempo.innerHTML = `${(tempoMinimo * 60).toFixed(0)} Segundos!`;
+      }
+
+      
+      
 
       spanPerguntasFechadas.innerHTML = primeiroParametro.contribuicoesFechadas;
 
