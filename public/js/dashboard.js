@@ -47,7 +47,18 @@ async function carregarDashboard() {
       texto.innerHTML = `${porcentagem / 100}  XP`;
 
       const nivel = (Number(primeiroParametro.contribuicoes) * 0.25).toFixed(0);
-      
+
+      if(primeiroParametro.contribuicoes >= 1 &&  primeiroParametro.contribuicoes <= 10){
+        containerBrasao.innerHTML += '<img src="./assets/images/brasaoMaculado.png" alt="" width="100" height="100">';
+      }else if(primeiroParametro.contribuicoes > 10 &&  primeiroParametro.contribuicoes <= 20){
+        containerBrasao.innerHTML += '<img src="./assets/images/brasaoLord.png" alt="" width="100" height="100">';
+      }else if(primeiroParametro.contribuicoes > 20 &&  primeiroParametro.contribuicoes <= 30){
+        containerBrasao.innerHTML += '<img src="./assets/images/brasaoSemiDeus.png" alt="" width="100" height="100">';
+      }else{
+        containerBrasao.innerHTML += "Sem liga no momento";
+      }
+
+
       spanNumeroNivel.innerHTML = nivel;
 
       // if(nivel >= 0 && nivel <= 10){

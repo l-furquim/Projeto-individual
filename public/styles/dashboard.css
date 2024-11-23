@@ -269,3 +269,25 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+.container-infos {
+  width: fit-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.container-brasao{
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-right: 80px;
+}
+.container-brasao h1{
+  font-size: 28px;
+  width: fit-content;
+  margin: 0;
+}
