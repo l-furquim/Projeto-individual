@@ -273,13 +273,13 @@
 .container-infos {
   width: fit-content;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 30px;
 }
 .container-brasao{
-  width: 300px;
+  width: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,4 +290,21 @@
   font-size: 28px;
   width: fit-content;
   margin: 0;
+}
+
+#conteudoBrasao{
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#conteudoBrasao p {
+  margin: 0;
+  padding: 0;
+  margin-top: 15px;
+  font-size: 20px;
+  color: #c19d53;
 }

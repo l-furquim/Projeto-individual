@@ -49,13 +49,13 @@ async function carregarDashboard() {
       const nivel = (Number(primeiroParametro.contribuicoes) * 0.25).toFixed(0);
 
       if(primeiroParametro.contribuicoes >= 1 &&  primeiroParametro.contribuicoes <= 10){
-        containerBrasao.innerHTML += '<img src="./assets/images/brasaoMaculado.png" alt="" width="100" height="100">';
+        conteudoBrasao.innerHTML += '<img src="./assets/images/brasaoMaculado.png" alt="" width="100" height="100"> <p>Maculado</p>'; 
       }else if(primeiroParametro.contribuicoes > 10 &&  primeiroParametro.contribuicoes <= 20){
-        containerBrasao.innerHTML += '<img src="./assets/images/brasaoLord.png" alt="" width="100" height="100">';
+        conteudoBrasao.innerHTML += '<img src="./assets/images/brasaoLord.png" alt="" width="100" height="100">  <p>Lord</p>';
       }else if(primeiroParametro.contribuicoes > 20 &&  primeiroParametro.contribuicoes <= 30){
-        containerBrasao.innerHTML += '<img src="./assets/images/brasaoSemiDeus.png" alt="" width="100" height="100">';
+        conteudoBrasao.innerHTML += '<img src="./assets/images/brasaoSemiDeus.png" alt="" width="100" height="100"> <p>Semi Deus</p>';
       }else{
-        containerBrasao.innerHTML += "Sem liga no momento";
+        conteudoBrasao.innerHTML += "Sem liga no momento";
       }
 
 
