@@ -816,6 +816,14 @@ hr {
   margin-top: 0;
 }
 
+.cabecalho-comentario a{
+  text-decoration: none;
+}
+
+.cabecalho-comentario a:visited{
+  text-decoration: none;
+}
+
 .comentario.comentario-responsavel{
   border: 1px solid #e7c274;
   background-color: #181717;

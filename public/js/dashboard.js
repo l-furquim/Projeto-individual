@@ -1,14 +1,16 @@
 async function carregarDashboard() {
-  const id = JSON.parse(sessionStorage.getItem("id"));
   const nomeUsuario = JSON.parse(sessionStorage.getItem("nome"));
-
 
   abaUsuario.innerHTML = nomeUsuario;  
 
   const parametros = new URLSearchParams(window.location.search);
   const idUsuario = parametros.get('id');
 
-  console.log(idUsuario)
+  console.log(idUsuario);
+
+  if(idUsuario == undefined || idUsuario == null || nomeUsuario == null){
+    location.replace("/login.html");
+  }
 
   // abaUsuario.innerHTML = nome;
   // containerNome.innerHTML = nome;
@@ -55,6 +57,12 @@ async function carregarDashboard() {
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
       if(tempoMinimo > 60){
         spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
+      }
+      if(tempoMinimo > 120){
+        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Horas!`;
+      }
+      if(tempoMinimo > 2880){
+        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Dias!`;
       }
       if(tempoMinimo == 0){
         spanMenorTempo.innerHTML = "Ainda não registrado";

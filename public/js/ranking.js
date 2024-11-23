@@ -1,11 +1,15 @@
 var graficoClasse = null;
 
-abaUsuario.innerHTML = JSON.parse(sessionStorage.getItem("nome"));
 
 
 async function buscarDadosRanking(){
   const idGrafico = document.getElementById("graficoRankings").getContext("2d");
   const topUsuariosId = [];
+
+    
+  abaUsuario.innerHTML = JSON.parse(sessionStorage.getItem("nome"));
+  const idUsuario = JSON.parse(sessionStorage.getItem("id"));
+  ancoraDash.href = `./dashboard.html?id=${idUsuario}`;
 
   try{
       const resposta = await fetch("/maculados/ranking/buscar", {

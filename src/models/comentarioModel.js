@@ -16,6 +16,7 @@ function listar() {
                         c.conteudo,
                         c.fkContribuicao,
                         m.nome as nome,
+                        m.idMaculado as idMaculado,
                         c.responsavelPorFechar,
                         c.qtdVotos,
                         c.dtComentario
