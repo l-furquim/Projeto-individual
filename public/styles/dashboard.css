@@ -9,9 +9,10 @@
 
 
 .bodyDashboard{
-  background-image: url("../assets/images/imagemArvore.png");
+  background-image: url("../assets/images/imagemEldenRing.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: auto;
+  background-position: 0 50%;
   padding: 0;
   margin: 0;
   display: flex;
