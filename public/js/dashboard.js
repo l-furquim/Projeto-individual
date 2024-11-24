@@ -23,10 +23,20 @@ async function carregarDashboard() {
   });
 
   if(dadosMaculado.ok){
-    const dados = await dadosMaculado.json();
-      
+
+      if(dadosMaculado.status == 204){
+        spanContribuicoesTotais.innerHTML = 0;
+        spanNumeroNivel.innerHTML = 0;
+        spanMenorTempo.innerHTML = "Ainda não registrado";
+        spanPerguntasFechadas.innerHTML = 0;
+        spanVotosAcumulados.innerHTML = 0;
+        conteudoBrasao.innerHTML += "Sem liga";
+      }else{
+
+      const dados = await dadosMaculado.json();
+        
       console.log(dados);
-    
+
       const primeiroParametro = dados.respostaUm[0];
 
       containerNome.innerHTML = primeiroParametro.nome;
@@ -68,21 +78,19 @@ async function carregarDashboard() {
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
 
       if(tempoMinimo > 0 && tempoMinimo < 60){
-        spanMenorTempo.innerHTML = `${tempoMinimo} Minutos!`;
-      }else if(tempoMinimo >= 60 && tempoMinimo < 1440){
-        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Horas!`;
+        spanMenorTempo.innerHTML = `${tempoMinimo} Segundos!`;
+      }else if(tempoMinimo >= 60 && tempoMinimo < 3600){
+        spanMenorTempo.innerHTML = `${(tempoMinimo / 60).toFixed(0)} Minutos!`;
       }
-      else if(tempoMinimo >= 1440){
-        spanMenorTempo.innerHTML = `${((tempoMinimo / 60) / 24).toFixed(0)} Dias!`;
-      }
-      else if(tempoMinimo == 0){
+      else if(tempoMinimo >= 3600 && tempoMinimo < 86400){
+        spanMenorTempo.innerHTML = `${(tempoMinimo / 3600).toFixed(0)} Horas!`;
+      }else if(tempoMinimo >= 86400){
+        spanMenorTempo.innerHTML = `${((tempoMinimo / 3600) / 24).toFixed(0)} Dias!`;
+      }else if(tempoMinimo == 0){
         spanMenorTempo.innerHTML = "Ainda não registrado";
-      }
-      else if(tempoMinimo < 1){
+      }else if(tempoMinimo < 1){
         spanMenorTempo.innerHTML = `${(tempoMinimo * 60).toFixed(0)} Segundos!`;
       }
-
-      
       
 
       spanPerguntasFechadas.innerHTML = primeiroParametro.contribuicoesFechadas;
@@ -293,7 +301,7 @@ async function carregarDashboard() {
           }
         }
       });
-
+    }
     }
 
   

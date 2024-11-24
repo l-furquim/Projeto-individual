@@ -78,21 +78,23 @@ function buscarDados(idMaculado){
                                 ) AS votosDica,
 
                                 (SELECT 
-                                    MIN(TIMESTAMPDIFF(MINUTE, c.dtContribuicao, c.dtFechamento)) AS "tempoMinimo"
+                                    MIN(TIMESTAMPDIFF(SECOND, c.dtContribuicao, c.dtFechamento)) AS "tempoMinimo"
                                 
                                     FROM 
                                     Contribuicao c
                                 JOIN 
-                                    Maculado m ON c.fkMaculado = m.idMaculado
+                                    Comentario co ON co.fkContribuicao = c.idContribuicao
                                 WHERE 
                                     c.contribuicaoFechada = TRUE
+                                    AND co.fkMaculado = ${idMaculado}
                                     AND c.dtFechamento IS NOT NULL
-                                    AND m.idMaculado = ${idMaculado}) as tempoMinimo,
+                                    AND co.responsavelPorFechar = 1
+                                    ) as tempoMinimo,
                                 DATE_FORMAT(c.dtContribuicao, '%Y-%m') AS mesContribuicao, 
                                 COUNT(*) AS qtdContribuicaoMes
                             FROM 
                                 Maculado m
-                            JOIN 
+							JOIN 
                                 Contribuicao c ON c.fkMaculado = m.idMaculado
                             WHERE 
                                 m.idMaculado = ${idMaculado}
