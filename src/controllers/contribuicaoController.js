@@ -90,7 +90,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);
@@ -102,7 +102,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);
@@ -114,7 +114,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);
@@ -137,7 +137,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);
@@ -148,7 +148,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);
@@ -159,7 +159,7 @@ function buscar(req, res){
       if(resposta.length != 0){
         return res.status(200).json(resposta);
       }
-      return res.status(404).json({contribuicoes: []});
+      return res.status(204).json({contribuicoes: []});
 
     }).catch((error) => {
       console.error(error);

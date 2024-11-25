@@ -412,7 +412,7 @@ async function buscarContribuicoes() {
 
           listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
+              <div id="containerContribuicao${contribuicao.idContribuicao}" class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   
@@ -459,7 +459,7 @@ async function buscarContribuicoes() {
                   <div id="conteudoModalFechar" class="conteudo-modal-fechar">
                   <h1> Quem ajudou sua contribuição ?</h1>
                       ${comentarioAtual}
-                      <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
+                      <button id="botaoFechar" onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
                   `
@@ -532,7 +532,7 @@ async function buscarContribuicoes() {
             
           listaContribuicoes.innerHTML += `
           <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-            <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
+            <div id="containerContribuicao${contribuicao.idContribuicao}" class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
               <div class="cabecalho-post">
                 <h1 id="nome-post">${contribuicao.titulo}</h1>
                 
@@ -579,7 +579,7 @@ async function buscarContribuicoes() {
                 <div id="conteudoModalFechar" class="conteudo-modal-fechar">
                 <h1> Quem ajudou sua contribuição ?</h1>
                     ${comentarioAtual}
-                    <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
+                    <button id="botaoFechar" onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                   </div>
                 </div>
                 `
@@ -761,7 +761,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
 
             listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
+              <div id="containerContribuicao${contribuicao.idContribuicao}" class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   
@@ -808,7 +808,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                   <div id="conteudoModalFechar" class="conteudo-modal-fechar">
                   <h1> Quem ajudou sua contribuição ?</h1>
                       ${comentarioAtual}
-                      <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
+                      <button id="botaoFechar" onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
                   `
@@ -852,7 +852,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
 
             listaContribuicoes.innerHTML += `
             <li class="liContribuicao" id=contribuicao${contribuicao.idContribuicao}>
-              <div class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
+              <div id="containerContribuicao${contribuicao.idContribuicao}" class="container-post ${contribuicao.contribuicaoFechada == 1 ? "container-post-fechado" : ""}">
                 <div class="cabecalho-post">
                   <h1 id="nome-post">${contribuicao.titulo}</h1>
                   
@@ -899,7 +899,7 @@ async function pesquisarContribuicao(conteudoPesquisa) {
                   <div id="conteudoModalFechar" class="conteudo-modal-fechar">
                   <h1> Quem ajudou sua contribuição ?</h1>
                       ${comentarioAtual}
-                      <button onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
+                      <button id="botaoFechar" onclick="fecharContribuicao(${contribuicao.idContribuicao})">Fechar</button>
                     </div>
                   </div>
                   `
@@ -1029,7 +1029,20 @@ async function fecharContribuicao(idContribuicao){
         }
       }).then((resposta)=> {
           if(resposta.ok){
-            document.getElementById(`contribuicao${idContribuicao}`).closest("div").querySelector("container-post").classList.add("container-post-fechado");
+            var container = document.getElementById(`containerContribuicao${idContribuicao}`);
+            console.log(container);
+
+            container.classList.remove(".container-post");
+            container.classList.add("container-post-fechado");
+
+     /*        container.closest("button").querySelector("#botaoFechar").innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+              </svg>
+            `;   */
+
+            document.getElementById(`containerModalFechar${idContribuicao}`).style.display = "none";
+
           }else{
             console.log(resposta);
           }
