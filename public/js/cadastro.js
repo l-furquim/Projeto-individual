@@ -95,8 +95,8 @@ async function cadastrar(){
 
       if(resposta == "Cadastro realizado com sucesso!"){
         setTimeout(()=> {
-          divMensagem.innerHTML += "<br> redirecionando para a pagina de login..."
-            location.replace("/login.html")
+          erroSenha.innerHTML += "<br> redirecionando para a pagina de login..."
+            location.replace("/login.html");
         }, 1000)
       }
 
