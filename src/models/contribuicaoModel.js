@@ -214,7 +214,7 @@ function buscarApenasPorTagETipo(tag, tipo){
   m.nome,
   m.idMaculado
   FROM Contribuicao AS c
-  JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}  ORDER BY c.contribuicaoFechada, ASC c.votos DESC'`;
+  JOIN Maculado AS m ON c.fkMaculado = m.idMaculado WHERE c.tag = '${tag}' AND c.tipo = '${tipo}'  ORDER BY c.contribuicaoFechada ASC,c.votos DESC`;
 
   return database.executar(instrucaoSql);
 }
