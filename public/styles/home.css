@@ -191,9 +191,10 @@ select, input, textarea {
   align-items: center;
 }
 
-.cabecalho-usuario a{
+
+a, a:visited{
   text-decoration: none;
-  color: #e7c274;
+  color: inherit;
 }
 
 .cabecalho-usuario h1 {
