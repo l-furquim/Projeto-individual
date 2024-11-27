@@ -1,5 +1,7 @@
 async function carregarDashboard() {
   const nomeUsuario = JSON.parse(sessionStorage.getItem("nome"));
+  let dadosContribuicoes = [0,0,0,0,0,0,0,0,0,0,0,0];
+  
 
   abaUsuario.innerHTML = nomeUsuario;  
 
@@ -11,9 +13,6 @@ async function carregarDashboard() {
   if(idUsuario == undefined || idUsuario == null || nomeUsuario == null){
     location.replace("/login.html");
   }
-
-  // abaUsuario.innerHTML = nome;
-  // containerNome.innerHTML = nome;
 
   const dadosMaculado = await fetch(`/maculados/buscarDados/${idUsuario}`, {
     method: "GET",
@@ -67,13 +66,7 @@ async function carregarDashboard() {
       }else{
         conteudoBrasao.innerHTML += "Sem liga no momento";
       }
-
-
       spanNumeroNivel.innerHTML = nivel;
-
-      // if(nivel >= 0 && nivel <= 10){
-      //   containerRank.innerHTML = `<img style="" src="../assets/images/rankMaculado.JPG" width=200 height=200>`
-      // }
       
       const tempoMinimo = Number(primeiroParametro.tempoMinimo);
 
@@ -97,54 +90,43 @@ async function carregarDashboard() {
 
       spanVotosAcumulados.innerHTML = primeiroParametro.votos;
 
-      const dadosMeses = dados.respostaUm.map(d => d.mesContribuicao);
-      const dadosContribuicoes = dados.respostaUm.map(d => d.qtdContribuicaoMes);
-
+      dados.respostaUm.forEach(d => {
+        dadosContribuicoes[Number(d.mesContribuicao.substr(5,6)) -1] = d.qtdContribuicaoMes
+      });
+2
       const comentarios = dados.respostaTres.map(co =>  co.contribuicoesFechadasMes);
-      const datasComentarios = dados.respostaTres.map(co => co.dataComentario);
-    
-      // const labelsMesesComentarios = dados.respostaTres.map(d => d.dtComentario);
-      // const dadosComentarios = dados.respostaTres.map(d => d.contribuicoesFechadasMes);
-
-      
+      const datasComentarios = dados.respostaTres.map(co => co.dataComentario);      
       console.log(comentarios)
-
-      const dadosGraficoContribuicoesMeses = dadosMeses.map((m, index) => ({
-        mes: m,
-        quantidadeContribuicoes: dadosContribuicoes[index]
-      }));
 
       const dadosGraficoComentariosMeses = datasComentarios.map((c, index) => ({
         mes: c,
         quantidadeComentarios: comentarios[index]
       }));
 
-      const labelsMeses = dadosGraficoContribuicoesMeses.map(d => d.mes); 
-      const quantidadeContribuicoes = dadosGraficoContribuicoesMeses.map(d => d.quantidadeContribuicoes);
-
       const labelsMesesComentarios = dadosGraficoComentariosMeses.map(d => d.mes);
       const quantidadeComentarios = dadosGraficoComentariosMeses.map(d => d.quantidadeComentarios);
 
-
+      console.log(dados.respostaUm[0].mesContribuicao.substr(5,6));
+      
       const labelsContribuicoes = dados.respostaDois.map((contribuicao) => contribuicao.titulo);
       const quantidadeVotos = dados.respostaDois.map((contribuicao) => contribuicao.totalVotos);
-      console.log(labelsMeses, quantidadeContribuicoes);
 
       new Chart(graficoContribuicoesTotaisPorMeses, {
-        type: 'line',
+        type: 'bar',
         data: {
-          labels: labelsMeses,
+          labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
           datasets: [{
             label: 'Contribuições',
-            data: quantidadeContribuicoes,
-            borderWidth: 1
+            data: dadosContribuicoes,
+            borderWidth: 1,
+            color: "#FFFF"
           }]
         },
         options: {
           plugins: {
             title: {
               display: true,
-              text: 'Histórico de contribuições',
+              text: 'Histórico de contribuições do ano atual.',
               color: '#e7c274',
               font: {
                 size: 24,

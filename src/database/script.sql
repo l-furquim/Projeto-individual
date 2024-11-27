@@ -1,3 +1,4 @@
+DROP DATABASE TarnishedsHelp;
 CREATE DATABASE TarnishedsHelp;
 
 USE TarnishedsHelp;
@@ -128,7 +129,7 @@ INSERT INTO Contribuicao (titulo, conteudo, dtContribuicao, contribuicaoFechada,
 ('Segredo do Castelo de Stormveil', 'Encontrei uma porta trancada em Stormveil. Alguém sabe como abrir?', '2023-12-01 09:30:00', TRUE, NULL, 30, 9, 'ajuda', 'Bosses', 'Stormveil', '2023-12-02 18:00:00', 20),
 ('Dicas para derrotar o Radagon', 'Radagon pode ser derrotado se você focar na evasão e usar magias de longo alcance...', '2024-11-23 10:00:00', FALSE, NULL, 15, 3, 'ajuda', 'Bosses', 'Radagon', NULL, 1),
 ('Como conseguir a Espada do Elden', 'A espada do Elden pode ser obtida na caverna escondida...', '2024-11-22 12:30:00', FALSE, NULL, 25, 10, 'dica', 'Armas', 'Espada do Elden', NULL, 2),
-('Vitoria sobre a Malenia', 'Se você conseguir evitar os ataques de Malenia durante a fase 2...', '2024-11-21 08:15:00', TRUE, 2, 50, 5, 'celebrar', 'Bosses', 'Malenia', '2024-11-23 14:00:00', 3);
+('Vitoria sobre a Malenia', 'Se você conseguir evitar os ataques de Malenia durante a fase 2...', '2024-11-21 08:15:00', TRUE, NULL, 50, 5, 'celebrar', 'Bosses', 'Malenia', '2024-11-23 14:00:00', 3);
 
 
 
