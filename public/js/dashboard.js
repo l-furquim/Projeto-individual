@@ -118,8 +118,7 @@ async function carregarDashboard() {
           datasets: [{
             label: 'Contribuições',
             data: dadosContribuicoes,
-            borderWidth: 1,
-            color: "#FFFF"
+            borderWidth: 1
           }]
         },
         options: {

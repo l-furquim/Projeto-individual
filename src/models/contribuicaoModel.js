@@ -23,7 +23,7 @@ function listar() {
                         m.nome,
                         m.idMaculado
                         FROM Contribuicao AS c
-                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.contribuicaoFechada ASC, c.votos DESC;
+                        JOIN Maculado AS m ON c.fkMaculado = m.idMaculado ORDER BY c.contribuicaoFechada ASC, c.dtContribuicao DESC, votos DESC;
                    `;
 
   return database.executar(instrucaoSql);
